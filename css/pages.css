@@ -1,0 +1,3467 @@
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    color: #e2e8f0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* States Section */
+.states-section {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.states-filter {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 2px solid #e2e8f0;
+    background: white;
+    color: #64748b;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #1e40af;
+    color: white;
+    border-color: #1e40af;
+}
+
+.all-states-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.state-card-detailed {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.state-card-detailed:hover {
+    transform: translateY(-5px);
+}
+
+.state-flag {
+    flex-shrink: 0;
+}
+
+.flag-placeholder {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ff6b35, #f59e0b);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.state-info {
+    flex: 1;
+}
+
+.state-info h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.state-status.upcoming {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.state-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+}
+
+.metric-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* State Analysis Page Styles */
+.analysis-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 1rem;
+    padding: 100px 0 80px;
+    min-height: 100vh;
+    max-width: 100%;
+    transition: grid-template-columns 0.3s ease;
+}
+
+.analysis-layout.sidebar-collapsed {
+    grid-template-columns: 60px 1fr;
+}
+
+.sidebar {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 280px;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #f1f5f9;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+}
+
+.sidebar-header h3 {
+    color: #1e293b;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-header h3 {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar-toggle {
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.sidebar-toggle:hover {
+    background: #1d4ed8;
+    transform: scale(1.1);
+}
+
+.sidebar.collapsed .sidebar-toggle i {
+    transform: rotate(180deg);
+}
+
+.sidebar-content {
+    padding: 1.5rem 2rem 2rem;
+    transition: padding 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-content {
+    padding: 1rem 0.5rem;
+}
+
+.state-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.state-nav li {
+    margin-bottom: 0.8rem;
+}
+
+.state-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 12px 15px;
+    color: #64748b;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.state-nav a:hover {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #1e40af;
+    transform: translateX(2px);
+}
+
+.state-nav a.active {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    border-color: #1e40af;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.state-nav a i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.state-name {
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .state-name,
+.sidebar.collapsed .note-title,
+.sidebar.collapsed .note-text {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.collapsed .state-nav a {
+    justify-content: center;
+    padding: 12px 8px;
+}
+
+.sidebar.collapsed .state-nav a i {
+    margin: 0;
+}
+
+.main-content {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.analysis-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.analysis-title h1 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.analysis-title p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.analysis-meta {
+    text-align: right;
+}
+
+.last-updated {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.confidence-score {
+    background: #dcfce7;
+    color: #166534;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.analysis-sections {
+    display: grid;
+    gap: 2rem;
+}
+
+.section-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 2rem;
+    border-left: 4px solid #1e40af;
+}
+
+.section-card h2 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-card h2 i {
+    color: #1e40af;
+}
+
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.method-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.method-item h4 {
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+}
+
+.method-item p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.constituency-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.constituency-table th,
+.constituency-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.constituency-table th {
+    background: #1e40af;
+    color: white;
+    font-weight: 600;
+}
+
+.constituency-table tr:hover {
+    background: #f8fafc;
+}
+
+.prediction-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.prediction-badge.bjp {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.prediction-badge.congress {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.prediction-badge.regional {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.chart-placeholder {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    border: 2px dashed #e2e8f0;
+}
+
+@media (max-width: 1024px) {
+    .analysis-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .analysis-layout.sidebar-collapsed {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        position: static;
+        order: 2;
+        width: 100%;
+        max-width: none;
+    }
+    
+    .sidebar.collapsed {
+        width: 100%;
+    }
+    
+    .sidebar.collapsed .sidebar-content {
+        padding: 1rem 2rem;
+    }
+    
+    .sidebar.collapsed .state-name,
+    .sidebar.collapsed .note-title,
+    .sidebar.collapsed .note-text {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .sidebar.collapsed .sidebar-note {
+        opacity: 1;
+        pointer-events: auto;
+        margin-top: 2rem;
+        padding: 1.2rem;
+    }
+    
+    .main-content {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    /* States page mobile responsiveness */
+    .page-header {
+        padding: 80px 0 60px;
+    }
+    
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .page-header p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .states-section {
+        padding: 60px 0;
+    }
+    
+    .states-filter {
+        margin-bottom: 2rem;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+    }
+    
+    .filter-btn {
+        width: 200px;
+        text-align: center;
+    }
+    
+    .all-states-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .state-card-detailed {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    
+    .state-flag {
+        align-self: center;
+    }
+    
+    .flag-placeholder {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+    
+    .state-info h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .state-status {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+    
+    .state-metrics {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+        margin: 1rem 0;
+    }
+    
+    .metric-label {
+        font-size: 0.75rem;
+    }
+    
+    .metric-value {
+        font-size: 1rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    /* Coming soon section mobile */
+    .coming-soon-section {
+        margin-top: 3rem;
+        padding: 2rem 0;
+    }
+    
+    .coming-soon-content {
+        padding: 0 1rem;
+    }
+    
+    .coming-soon-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .coming-soon-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .coming-soon-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .coming-soon-content p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .features-list {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .feature-item {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .feature-item i {
+        font-size: 1rem;
+    }
+    
+    /* Analysis page mobile adjustments */
+    .analysis-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .methodology-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* 
+Election Survey Data Styles */
+
+/* Prediction Summary Cards */
+.prediction-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+}
+
+.summary-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-top: 4px solid;
+}
+
+.summary-card.bjp-card { border-top-color: #ff6b35; }
+.summary-card.sp-card { border-top-color: #10b981; }
+.summary-card.congress-card { border-top-color: #3b82f6; }
+.summary-card.others-card { border-top-color: #8b5cf6; }
+
+.party-icon {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.seat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.estimated, .calculated, .actual {
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.estimated {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.calculated {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.actual {
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+    margin: 2rem 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-table, .agency-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.prediction-table th,
+.prediction-table td,
+.agency-table th,
+.agency-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.prediction-table th,
+.agency-table th {
+    background: #1e40af;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.prediction-table th small,
+.agency-table th small {
+    display: block;
+    font-weight: 400;
+    opacity: 0.8;
+    font-size: 0.8rem;
+}
+
+.prediction-table tr:hover,
+.agency-table tr:hover {
+    background: #f8fafc;
+}
+
+.actual-row {
+    background: #f0f9ff !important;
+    font-weight: 600;
+}
+
+.actual-cell {
+    color: #1e40af;
+}
+
+.our-prediction {
+    background: #f0fdf4 !important;
+}
+
+/* Party Badges */
+.party-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.party-badge.bjp {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.party-badge.sp {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.party-badge.congress {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.party-badge.bsp {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.party-badge.others {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+/* Accuracy Indicators */
+.accuracy {
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.accuracy.high {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.accuracy.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.accuracy.low {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Chart Styles */
+.chart-section {
+    margin: 2rem 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chart-section h4 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.bar-chart {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.chart-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    height: 300px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bar-group .bar {
+    width: 25px;
+    margin: 0 2px;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.bar.estimated {
+    background: #fbbf24;
+}
+
+.bar.calculated {
+    background: #3b82f6;
+}
+
+.bar.actual {
+    background: #10b981;
+}
+
+.bar-group label {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.9rem;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.legend-color.estimated {
+    background: #fbbf24;
+}
+
+.legend-color.calculated {
+    background: #3b82f6;
+}
+
+.legend-color.actual {
+    background: #10b981;
+}
+
+/* Constituency Stats */
+.constituency-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #1e40af;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Vote Difference Styling */
+.positive {
+    color: #166534;
+    font-weight: 600;
+}
+
+.negative {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Status Indicators */
+.status {
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status.correct {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status.wrong {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Accuracy Chart */
+.accuracy-chart {
+    margin: 2rem 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.accuracy-chart h4 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.region-accuracy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.region-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.region-name {
+    min-width: 120px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.accuracy-bar {
+    flex: 1;
+    height: 30px;
+    background: #f1f5f9;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.accuracy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #059669);
+    border-radius: 15px;
+    transition: width 0.8s ease;
+}
+
+.accuracy-text {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.9rem;
+}
+
+/* Agency Performance */
+.agency-performance {
+    margin: 2rem 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.agency-performance h4 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.performance-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.performance-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.agency-label {
+    min-width: 180px;
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.9rem;
+}
+
+.performance-bar {
+    flex: 1;
+    height: 35px;
+    background: #f1f5f9;
+    border-radius: 17px;
+    position: relative;
+    overflow: hidden;
+}
+
+.performance-fill {
+    height: 100%;
+    border-radius: 17px;
+    transition: width 0.8s ease;
+}
+
+.performance-fill.ppa {
+    background: linear-gradient(90deg, #1e40af, #1d4ed8);
+}
+
+.performance-fill.good {
+    background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.performance-fill.medium {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.performance-fill.low {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.performance-text {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Agency Name Styling */
+.agency-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.agency-name.ppa {
+    color: #1e40af;
+    font-weight: 700;
+}
+
+/* Insights Grid */
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.insight-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-top: 4px solid #1e40af;
+}
+
+.insight-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.insight-card h4 {
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.insight-card p {
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .prediction-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .constituency-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-bars {
+        height: 200px;
+    }
+    
+    .bar-group .bar {
+        width: 20px;
+    }
+    
+    .chart-legend {
+        gap: 1rem;
+    }
+    
+    .region-bar,
+    .performance-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .region-name,
+    .agency-label {
+        min-width: auto;
+    }
+    
+    .accuracy-bar,
+    .performance-bar {
+        width: 100%;
+    }
+    
+    .table-container {
+        font-size: 0.8rem;
+    }
+    
+    .prediction-table th,
+    .prediction-table td,
+    .agency-table th,
+    .agency-table td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .prediction-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .constituency-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-legend {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+* Andhra Pradesh Specific Styles */
+
+/* Party-specific color schemes */
+.ysrcp-card { border-top-color: #10b981; }
+.tdp-card { border-top-color: #f59e0b; }
+.jsp-card { border-top-color: #ef4444; }
+.bjp-card { border-top-color: #ff6b35; }
+
+.party-badge.ysrcp {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.party-badge.tdp {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.party-badge.jsp {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.party-badge.bjp {
+    background: #fed7aa;
+    color: #c2410c;
+}
+
+/* Accuracy indicators in summary cards */
+.accuracy-indicator {
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.accuracy-indicator.high {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.accuracy-indicator.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.accuracy-indicator.low {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Comparison chart styles */
+.comparison-chart {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.comparison-chart .chart-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    height: 350px;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.comparison-chart .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comparison-chart .bar-group .bar {
+    width: 35px;
+    margin: 0 3px;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.comparison-chart .bar.predicted {
+    background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+    opacity: 0.8;
+}
+
+.comparison-chart .bar.actual {
+    background: linear-gradient(180deg, #10b981, #059669);
+}
+
+/* Regional Performance */
+.regional-performance {
+    margin: 2rem 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.regional-performance h4 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.region-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.region-card {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+}
+
+.region-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+}
+
+.region-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.accuracy-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(#10b981 0deg, #10b981 var(--accuracy, 0deg), #e5e7eb var(--accuracy, 0deg) 360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.accuracy-circle::before {
+    content: '';
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.accuracy-circle span {
+    position: relative;
+    z-index: 1;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.region-details {
+    text-align: left;
+}
+
+.region-details div {
+    margin-bottom: 0.5rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Vote Share Analysis */
+.vote-share-section {
+    margin: 2rem 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.vote-share-section h4 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.vote-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.vote-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 4px solid;
+}
+
+.vote-card.ysrcp-vote { border-left-color: #10b981; }
+.vote-card.tdp-vote { border-left-color: #f59e0b; }
+.vote-card.jsp-vote { border-left-color: #ef4444; }
+.vote-card.bjp-vote { border-left-color: #ff6b35; }
+
+.party-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.vote-trend {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+}
+
+.vote-trend.up {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.vote-trend.down {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.vote-trend.stable {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.vote-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.vote-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vote-item .label {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.vote-item .value {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.vote-item .value.positive {
+    color: #166534;
+}
+
+.vote-item .value.negative {
+    color: #dc2626;
+}
+
+/* Methodology Note */
+.methodology-note {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.methodology-note h4 {
+    color: #0c4a6e;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.methodology-note p {
+    color: #0f172a;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.methodology-note p:last-child {
+    margin-bottom: 0;
+}
+
+/* Total row styling */
+.total-row {
+    background: #f0f9ff !important;
+    border-top: 2px solid #1e40af;
+}
+
+.total-row td {
+    font-weight: 600;
+    color: #1e40af;
+}
+
+/* Responsive adjustments for Andhra Pradesh page */
+@media (max-width: 768px) {
+    .vote-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .region-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .region-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .accuracy-circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .accuracy-circle::before {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .accuracy-circle span {
+        font-size: 1rem;
+    }
+    
+    .comparison-chart .bar-group .bar {
+        width: 25px;
+    }
+    
+    .comparison-chart .chart-bars {
+        height: 250px;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .party-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .vote-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+    }
+    
+    .methodology-note {
+        padding: 1rem;
+    }
+}/* S
+idebar Note Styling */
+.sidebar-note {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #1e40af;
+}
+
+.sidebar-note h4 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-note p {
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+}
+
+.sidebar-note p:last-child {
+    margin-bottom: 0;
+}
+
+.coming-soon {
+    font-style: italic;
+    color: #f59e0b !important;
+    font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+    .sidebar-note {
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+    
+    .sidebar-note h4 {
+        font-size: 0.9rem;
+    }
+    
+    .sidebar-note p {
+        font-size: 0.8rem;
+    }
+}/* C
+oming Soon Section */
+.coming-soon-section {
+    margin-top: 4rem;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 16px;
+    text-align: center;
+}
+
+.coming-soon-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.coming-soon-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+}
+
+.coming-soon-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.coming-soon-content h3 {
+    font-size: 2rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.coming-soon-content p {
+    font-size: 1.1rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.feature-item i {
+    color: #10b981;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.feature-item span {
+    color: #374151;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .coming-soon-section {
+        margin-top: 2rem;
+        padding: 2rem 0;
+    }
+    
+    .coming-soon-content {
+        padding: 0 1rem;
+    }
+    
+    .coming-soon-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .coming-soon-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .coming-soon-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .coming-soon-content p {
+        font-size: 1rem;
+    }
+    
+    .features-list {
+        grid-template-columns: 1fr;
+    }
+}/* Andhra 
+Pradesh Specific Styles */
+.page-header-ap {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(30, 64, 175, 0.2);
+}
+
+.page-header-ap h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.survey-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* AP Prediction Table */
+.ap-prediction-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+.ap-prediction-table th {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    padding: 1.2rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 2px solid #1d4ed8;
+}
+
+.ap-prediction-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.ap-prediction-table tbody tr:hover {
+    background: #f8fafc;
+    transition: background-color 0.2s ease;
+}
+
+/* Party-specific row styling */
+.ysrcp-row {
+    border-left: 4px solid #10b981;
+}
+
+.tdp-row {
+    border-left: 4px solid #f59e0b;
+}
+
+.jsp-row {
+    border-left: 4px solid #ef4444;
+}
+
+.bjp-row {
+    border-left: 4px solid #ff6b35;
+}
+
+.total-row {
+    background: #f0f9ff;
+    border-left: 4px solid #1e40af;
+    font-weight: 600;
+}
+
+.total-row td {
+    color: #1e40af;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+/* Party badges for AP */
+.party-badge.ysrcp {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    color: #166534;
+    border: 1px solid #10b981;
+}
+
+.party-badge.tdp {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    border: 1px solid #f59e0b;
+}
+
+.party-badge.jsp {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #dc2626;
+    border: 1px solid #ef4444;
+}
+
+.party-badge.bjp {
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #c2410c;
+    border: 1px solid #ff6b35;
+}
+
+/* Difference indicators */
+.positive {
+    color: #166534;
+    font-weight: 700;
+}
+
+.negative {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+/* Responsive design for AP page */
+@media (max-width: 768px) {
+    .page-header-ap {
+        padding: 2rem 1rem;
+    }
+    
+    .page-header-ap h1 {
+        font-size: 1.8rem;
+    }
+    
+    .survey-subtitle {
+        font-size: 1rem;
+    }
+    
+    .ap-prediction-table {
+        font-size: 0.9rem;
+    }
+    
+    .ap-prediction-table th,
+    .ap-prediction-table td {
+        padding: 0.8rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header-ap h1 {
+        font-size: 1.5rem;
+    }
+    
+    .ap-prediction-table {
+        font-size: 0.8rem;
+    }
+    
+    .ap-prediction-table th,
+    .ap-prediction-table td {
+        padding: 0.6rem 0.4rem;
+    }
+}/* 
+Neutral difference indicator */
+.neutral {
+    color: #64748b;
+    font-weight: 700;
+    text-align: center;
+}/*
+ Centered table styling */
+.centered-table td:not(:first-child):not(:nth-child(2)) {
+    text-align: center;
+}
+
+.centered-table th {
+    text-align: center;
+}
+
+.centered-table td:first-child,
+.centered-table td:nth-child(2) {
+    text-align: left;
+}
+
+/* Charts Section */
+.charts-section {
+    margin: 3rem 0;
+    display: grid;
+    gap: 3rem;
+}
+
+/* Pie Charts Container */
+.pie-charts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    max-width: 100%;
+}
+
+.pie-chart-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.pie-chart-section h4 {
+    margin-bottom: 2rem;
+    color: #1e293b;
+    font-size: 1.2rem;
+}
+
+.pie-chart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.pie-chart canvas {
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.pie-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+}
+
+.pie-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.pie-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.pie-color.ysrcp-color {
+    background: #10b981;
+}
+
+.pie-color.tdp-color {
+    background: #f59e0b;
+}
+
+.pie-color.jsp-color {
+    background: #ef4444;
+}
+
+.pie-color.bjp-color {
+    background: #ff6b35;
+}
+
+.pie-color.sp-color {
+    background: #10b981;
+}
+
+.pie-color.bsp-color {
+    background: #6366f1;
+}
+
+.pie-color.congress-color {
+    background: #3b82f6;
+}
+
+.pie-color.others-color {
+    background: #8b5cf6;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.top-pagination-controls {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.bottom-pagination-controls {
+    justify-content: center;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.records-per-page-select {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.records-per-page-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.page-navigation {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 5px;
+}
+
+.pagination-btn {
+    background: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 40px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.pagination-btn:disabled {
+    background: #f9fafb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    border-color: #e5e7eb;
+}
+
+.pagination-btn.active {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.pagination-btn.active:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.page-info {
+    margin-left: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+/* Responsive Table Styles */
+.constituency-data-table {
+    width: 100%;
+    overflow: visible;
+    max-width: 100%;
+}
+
+.table-container {
+    overflow-x: visible !important;
+    width: 100%;
+}
+
+.constituency-table {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.constituency-table th,
+.constituency-table td {
+    padding: 8px 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    vertical-align: top;
+}
+
+/* Column width distribution */
+.constituency-table th:nth-child(1), /* S.No. */
+.constituency-table td:nth-child(1) {
+    width: 6%;
+    min-width: 40px;
+}
+
+.constituency-table th:nth-child(2), /* District Name */
+.constituency-table td:nth-child(2) {
+    width: 14%;
+    min-width: 100px;
+}
+
+.constituency-table th:nth-child(3), /* Assembly Name */
+.constituency-table td:nth-child(3) {
+    width: 16%;
+    min-width: 120px;
+}
+
+.constituency-table th:nth-child(4), /* Party */
+.constituency-table td:nth-child(4) {
+    width: 12%;
+    min-width: 80px;
+    text-align: center;
+}
+
+.constituency-table th:nth-child(5), /* Estimated Votes */
+.constituency-table td:nth-child(5) {
+    width: 18%;
+    min-width: 100px;
+}
+
+.constituency-table th:nth-child(6), /* Actual Votes */
+.constituency-table td:nth-child(6) {
+    width: 18%;
+    min-width: 100px;
+}
+
+.constituency-table th:nth-child(7), /* Difference */
+.constituency-table td:nth-child(7) {
+    width: 16%;
+    min-width: 90px;
+}
+
+/* Shorter column headers */
+.constituency-table th {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 10px 6px;
+}
+
+/* Responsive pagination */
+@media (max-width: 768px) {
+    .top-pagination-controls {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .page-navigation {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .page-info {
+        margin-left: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Mobile table adjustments */
+    .constituency-table th,
+    .constituency-table td {
+        padding: 6px 4px;
+        font-size: 11px;
+    }
+
+    .constituency-table th {
+        font-size: 10px;
+        line-height: 1.1;
+    }
+}
+
+/* Comparison Chart Enhancements */
+.comparison-chart .bar.predicted {
+    background: linear-gradient(180deg, #f59e0b, #d97706);
+    opacity: 0.9;
+    min-height: 20px;
+}
+
+.comparison-chart .bar.actual {
+    background: linear-gradient(180deg, #1e40af, #1d4ed8);
+    min-height: 20px;
+}
+
+.legend-color.predicted {
+    background: #64748b;
+}
+
+.legend-color.actual {
+    background: #1e40af;
+}
+
+/* Responsive adjustments for charts */
+@media (max-width: 768px) {
+    .pie-charts-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .pie-chart canvas {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .charts-section {
+        gap: 2rem;
+    }
+    
+    .pie-chart-section {
+        padding: 1.5rem;
+    }
+    
+    .comparison-chart .chart-bars {
+        height: 250px;
+        padding: 1rem;
+    }
+    
+    .comparison-chart .bar-group .bar {
+        width: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pie-legend {
+        align-items: center;
+    }
+    
+    .pie-legend-item {
+        font-size: 0.8rem;
+    }
+    
+    .pie-color {
+        width: 12px;
+        height: 12px;
+    }
+}/* Enha
+nced bar chart styling */
+.comparison-chart .chart-bars {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 2rem;
+    min-height: 350px;
+}
+
+.comparison-chart .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 80px;
+}
+
+.comparison-chart .bar {
+    width: 35px;
+    margin: 0 5px;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-chart .bar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure bars are always visible */
+.comparison-chart .bar[style*="height: 3%"] {
+    min-height: 25px !important;
+}
+
+.comparison-chart .bar[style*="height: 6%"] {
+    min-height: 30px !important;
+}
+
+/* Legend styling improvements */
+.legend-color.predicted {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.legend-color.actual {
+    background: linear-gradient(135deg, #1e40af, #1d4ed8);
+}
+
+/* Side by side pie charts on larger screens */
+@media (min-width: 769px) {
+    .pie-charts-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+    
+    .pie-chart-section {
+        max-width: none;
+    }
+}
+
+/* Improved difference indicators */
+.accuracy-indicator.high {
+    background: #dcfce7;
+    color: #166534;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.accuracy-indicator.medium {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.accuracy-indicator.low {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}/* Simple
+ difference styling without color coding */
+.difference {
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: #f8fafc;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+}
+
+/* Remove color coding from table differences */
+.centered-table td:last-child {
+    color: #374151;
+    font-weight: 600;
+}
+
+/* Remove party-specific row colors for cleaner look */
+.ysrcp-row,
+.tdp-row,
+.jsp-row,
+.bjp-row {
+    border-left: none;
+}
+
+/* Simplified summary cards */
+.summary-card {
+    border-top: 4px solid #e5e7eb;
+}
+
+.summary-card.ysrcp-card,
+.summary-card.tdp-card,
+.summary-card.jsp-card,
+.summary-card.bjp-card {
+    border-top-color: #e5e7eb;
+}/* 
+Constituency Data Table Styling */
+.constituency-data-table {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: #1e40af #f1f5f9;
+}
+
+.constituency-data-table::-webkit-scrollbar {
+    height: 8px;
+}
+
+.constituency-data-table::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.constituency-data-table::-webkit-scrollbar-thumb {
+    background: #1e40af;
+    border-radius: 4px;
+}
+
+.constituency-data-table::-webkit-scrollbar-thumb:hover {
+    background: #1d4ed8;
+}
+
+.constituency-data-table .constituency-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 0.75rem;
+}
+
+.constituency-data-table .constituency-table th {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    padding: 0.8rem 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border: 1px solid #1d4ed8;
+    vertical-align: middle;
+}
+
+.constituency-data-table .constituency-table td {
+    padding: 0.6rem 0.4rem;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 0.8rem;
+    vertical-align: middle;
+}
+
+.constituency-data-table .constituency-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.constituency-data-table .constituency-table tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.constituency-data-table .constituency-table tbody tr:nth-child(even):hover {
+    background: #f1f5f9;
+}
+
+/* Constituency name column - left aligned */
+.constituency-data-table .constituency-table td:nth-child(2),
+.constituency-data-table .constituency-table td:nth-child(22) {
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Highlight winning candidate names */
+.constituency-data-table .constituency-table td:nth-child(22) {
+    font-weight: 600;
+    color: #1e40af;
+}
+
+/* Data Summary Note */
+.data-note {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.data-note h4 {
+    color: #0c4a6e;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.data-note p {
+    color: #0f172a;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.data-note ul {
+    color: #0f172a;
+    margin-left: 1.5rem;
+    line-height: 1.6;
+}
+
+.data-note li {
+    margin-bottom: 0.5rem;
+}
+
+.data-note strong {
+    color: #0c4a6e;
+}
+
+/* Responsive adjustments for constituency table */
+@media (max-width: 1200px) {
+    .constituency-data-table .constituency-table {
+        font-size: 0.75rem;
+    }
+    
+    .constituency-data-table .constituency-table th,
+    .constituency-data-table .constituency-table td {
+        padding: 0.5rem 0.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .constituency-data-table {
+        margin: 1rem -1rem; /* Extend to screen edges on mobile */
+        border-radius: 0;
+    }
+    
+    .constituency-data-table .constituency-table {
+        font-size: 0.7rem;
+        min-width: 1800px;
+    }
+    
+    .constituency-data-table .constituency-table th,
+    .constituency-data-table .constituency-table td {
+        padding: 0.4rem 0.2rem;
+    }
+    
+    .data-note {
+        margin: 1rem 0;
+        padding: 1.5rem;
+    }
+    
+    .data-note h4 {
+        font-size: 1rem;
+    }
+}
+
+/* Sticky first two columns for better navigation */
+.constituency-data-table .constituency-table th:nth-child(1),
+.constituency-data-table .constituency-table th:nth-child(2),
+.constituency-data-table .constituency-table td:nth-child(1),
+.constituency-data-table .constituency-table td:nth-child(2) {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.constituency-data-table .constituency-table th:nth-child(1),
+.constituency-data-table .constituency-table td:nth-child(1) {
+    left: 0;
+    min-width: 60px;
+}
+
+.constituency-data-table .constituency-table th:nth-child(2),
+.constituency-data-table .constituency-table td:nth-child(2) {
+    left: 60px;
+    min-width: 150px;
+}
+
+/* Header styling for sticky columns */
+.constituency-data-table .constituency-table th:nth-child(1),
+.constituency-data-table .constituency-table th:nth-child(2) {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    z-index: 11;
+}
+
+/* Alternating row colors for sticky columns */
+.constituency-data-table .constituency-table tbody tr:nth-child(even) td:nth-child(1),
+.constituency-data-table .constituency-table tbody tr:nth-child(even) td:nth-child(2) {
+    background: #fafbfc;
+}
+
+.constituency-data-table .constituency-table tbody tr:hover td:nth-child(1),
+.constituency-data-table .constituency-table tbody tr:hover td:nth-child(2) {
+    background: #f8fafc;
+}
+
+.constituency-data-table .constituency-table tbody tr:nth-child(even):hover td:nth-child(1),
+.constituency-data-table .constituency-table tbody tr:nth-child(even):hover td:nth-child(2) {
+    background: #f1f5f9;
+}/* Layo
+ut optimizations for better space utilization */
+.main-content {
+    padding: 1rem;
+    margin: 0;
+    max-width: 100%;
+    overflow-x: visible;
+}
+
+.section-card {
+    margin-bottom: 1rem;
+    padding: 1.2rem;
+    max-width: 100%;
+    overflow-x: visible;
+}
+
+/* Optimize table column widths */
+.constituency-data-table .constituency-table th,
+.constituency-data-table .constituency-table td {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+/* Make party badges smaller in constituency table */
+.constituency-data-table .party-badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+    border-radius: 10px;
+}
+
+/* Sidebar note styling */
+.sidebar-note {
+    margin-top: 2rem;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-radius: 10px;
+    border-left: 4px solid #1e40af;
+    transition: all 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-note {
+    opacity: 0;
+    pointer-events: none;
+    margin-top: 0;
+    padding: 0;
+}
+
+.sidebar-note h4 {
+    color: #1e40af;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-note p {
+    color: #475569;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive breakpoints for sidebar */
+@media (min-width: 1025px) {
+    .analysis-layout {
+        grid-template-columns: 300px 1fr;
+    }
+    
+    .sidebar {
+        width: 300px;
+    }
+    
+    .analysis-layout.sidebar-collapsed {
+        grid-template-columns: 60px 1fr;
+    }
+}
+
+/* Full width layout for very large screens */
+@media (min-width: 1400px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .analysis-layout {
+        grid-template-columns: 320px 1fr;
+    }
+    
+    .sidebar {
+        width: 320px;
+    }
+    
+    .constituency-data-table .constituency-table {
+        min-width: 1400px;
+        font-size: 0.8rem;
+    }
+    
+    .constituency-data-table .constituency-table th,
+    .constituency-data-table .constituency-table td {
+        padding: 0.6rem 0.4rem;
+    }
+}
+
+/* Optimize navigation for full width */
+.nav-container {
+    padding: 0 10px;
+}
+
+/* Remove excessive margins from page header */
+.page-header-ap {
+    margin-bottom: 1rem;
+    padding: 2rem 1rem;
+}
+
+/* Optimize prediction summary cards */
+.prediction-summary {
+    margin: 1.5rem 0;
+}
+
+/* Optimize pie charts container */
+.pie-charts-container {
+    gap: 1.5rem;
+}
+
+/* Reduce constituency stats spacing */
+.constituency-stats {
+    margin: 1.5rem 0;
+    gap: 1rem;
+}/* Enh
+anced mobile responsiveness for states page */
+
+/* Tablet landscape (1024px and below) */
+@media (max-width: 1024px) {
+    .states-section {
+        padding: 70px 0;
+    }
+    
+    .all-states-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .state-card-detailed {
+        padding: 1.8rem;
+    }
+    
+    .filter-buttons {
+        gap: 0.8rem;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small tablets (768px and below) - already covered above */
+
+/* Large mobile phones (480px and below) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .page-header {
+        padding: 70px 0 50px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+    
+    .page-header p {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+    }
+    
+    .states-section {
+        padding: 40px 0;
+    }
+    
+    .states-filter {
+        margin-bottom: 1.5rem;
+    }
+    
+    .filter-buttons {
+        gap: 0.6rem;
+    }
+    
+    .filter-btn {
+        width: 180px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .all-states-grid {
+        gap: 1rem;
+    }
+    
+    .state-card-detailed {
+        padding: 1.2rem;
+        border-radius: 8px;
+    }
+    
+    .flag-placeholder {
+        width: 45px;
+        height: 45px;
+        font-size: 0.9rem;
+    }
+    
+    .state-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .state-status {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    
+    .state-metrics {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+        text-align: left;
+    }
+    
+    .metric {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .metric:last-child {
+        border-bottom: none;
+    }
+    
+    .metric-label {
+        font-size: 0.8rem;
+        color: #64748b;
+    }
+    
+    .metric-value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e40af;
+    }
+    
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        width: 100%;
+        max-width: 180px;
+    }
+    
+    /* Coming soon section small mobile */
+    .coming-soon-section {
+        margin-top: 2rem;
+        padding: 1.5rem 0;
+    }
+    
+    .coming-soon-content {
+        padding: 0 0.5rem;
+    }
+    
+    .coming-soon-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1rem;
+    }
+    
+    .coming-soon-icon i {
+        font-size: 1.2rem;
+    }
+    
+    .coming-soon-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .coming-soon-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.5;
+    }
+    
+    .features-list {
+        gap: 0.6rem;
+    }
+    
+    .feature-item {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+        border-radius: 6px;
+    }
+    
+    .feature-item i {
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small devices (360px and below) */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .filter-btn {
+        width: 160px;
+        font-size: 0.8rem;
+    }
+    
+    .state-card-detailed {
+        padding: 1rem;
+    }
+    
+    .state-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .coming-soon-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .feature-item {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .page-header {
+        padding: 60px 0 40px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .states-section {
+        padding: 30px 0;
+    }
+    
+    .coming-soon-section {
+        padding: 1rem 0;
+    }
+    
+    .all-states-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .state-card-detailed {
+        flex-direction: row;
+        text-align: left;
+        padding: 1rem;
+    }
+    
+    .state-metrics {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .filter-btn {
+        min-height: 44px; /* Minimum touch target size */
+        padding: 10px 16px;
+    }
+    
+    .btn {
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+    
+    .state-card-detailed {
+        transition: none; /* Remove hover effects on touch devices */
+    }
+    
+    .state-card-detailed:hover {
+        transform: none;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .flag-placeholder {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .state-card-detailed {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+}/* Anim
+ation classes for enhanced mobile experience */
+.animate-in {
+    animation: slideInUp 0.6s ease forwards;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading states for better UX */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Enhanced focus states for accessibility */
+.filter-btn:focus {
+    outline: 2px solid #1e40af;
+    outline-offset: 2px;
+}
+
+.btn:focus {
+    outline: 2px solid #1e40af;
+    outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+.filter-btn,
+.state-card-detailed,
+.btn {
+    transition: all 0.3s ease;
+}
+
+/* Prevent layout shift during animations */
+.all-states-grid {
+    min-height: 200px;
+}
+
+/* Optimize for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .state-card-detailed,
+    .filter-btn,
+    .btn,
+    .animate-in {
+        animation: none;
+        transition: none;
+    }
+    
+    .state-card-detailed:hover {
+        transform: none;
+    }
+}
+
+/* Dark mode support (if needed in future) */
+@media (prefers-color-scheme: dark) {
+    .state-card-detailed {
+        background: #1e293b;
+        color: #f1f5f9;
+    }
+    
+    .state-status {
+        background: #334155;
+        color: #e2e8f0;
+    }
+    
+    .metric-label {
+        color: #94a3b8;
+    }
+}/*
+ Screen width optimization for Andhra Pradesh page */
+.analysis-layout {
+    max-width: 100vw;
+    overflow-x: hidden; /* Prevent horizontal scroll on main layout */
+}
+
+.main-content {
+    max-width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll on main content */
+}
+
+/* Ensure all sections except constituency table fit within screen */
+.section-card:not(.constituency-section) {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Page header optimization */
+.page-header-ap {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
+    max-width: 100%;
+}
+
+.page-header-ap h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    line-height: 1.2;
+    word-wrap: break-word;
+}
+
+.survey-subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+}
+
+/* Compact prediction summary for screen fit */
+.prediction-summary {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem;
+    margin: 1rem 0;
+}
+
+.summary-card {
+    padding: 1rem;
+    min-height: auto;
+}
+
+.party-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.seat-info {
+    gap: 0.4rem;
+}
+
+.estimated, .actual, .difference {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+/* Compact table styling */
+.table-container:not(.constituency-data-table) {
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.ap-prediction-table {
+    width: 100%;
+    min-width: auto; /* Allow table to fit within container */
+    font-size: 0.85rem;
+}
+
+.ap-prediction-table th,
+.ap-prediction-table td {
+    padding: 0.8rem 0.5rem;
+    white-space: nowrap;
+}
+
+/* Pie charts optimization */
+.pie-charts-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin: 1rem 0;
+}
+
+.pie-chart-section {
+    padding: 1.2rem;
+}
+
+.pie-chart canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Constituency stats optimization */
+.constituency-stats {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.8rem;
+    margin: 1rem 0;
+}
+
+.stat-card {
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+}
+
+/* Scroll indicator removed - table is now fully responsive */
+
+/* Data note optimization */
+.data-note {
+    padding: 1.2rem;
+    margin: 1rem 0;
+    max-width: 100%;
+}
+
+.data-note h4 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.data-note p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+}
+
+.data-note ul {
+    margin-left: 1rem;
+}
+
+.data-note li {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Mobile specific optimizations */
+@media (max-width: 768px) {
+    .analysis-layout {
+        grid-template-columns: 1fr;
+        padding: 80px 0 60px;
+    }
+    
+    .main-content {
+        padding: 0.8rem;
+    }
+    
+    .section-card {
+        padding: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .page-header-ap {
+        padding: 1rem 0.5rem;
+    }
+    
+    .prediction-summary {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+    
+    .pie-charts-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .constituency-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+    
+    .constituency-data-table {
+        margin: 1rem -0.8rem; /* Extend to edges on mobile */
+        border-radius: 0;
+    }
+    
+    /* Scroll indicator removed for mobile too */
+}
+
+@media (max-width: 480px) {
+    .prediction-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .constituency-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-card {
+        padding: 0.8rem;
+    }
+    
+    .stat-card {
+        padding: 0.8rem;
+    }
+}
+
+/* Andhra Pradesh specific table styles - needs horizontal scroll due to complexity */
+.ap-constituency-table {
+    overflow-x: scroll !important;
+    overflow-y: visible;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ap-constituency-table::before {
+    content: "← Scroll horizontally to view all data →";
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    background: #f0f9ff;
+    color: #1e40af;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 6px 6px 0 0;
+    border-bottom: 1px solid #bae6fd;
+    margin: 0;
+}
+
+.ap-constituency-table .constituency-table {
+    width: 100%;
+    min-width: 3200px; /* Increased width to accommodate all columns */
+    border-collapse: collapse;
+    background: white;
+    margin: 0;
+    display: table;
+    table-layout: auto;
+}
+
+.ap-constituency-table .constituency-table th,
+.ap-constituency-table .constituency-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+    line-height: 1.3;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 100px;
+    max-width: none;
+}
+
+.ap-constituency-table .constituency-table th {
+    background: #1e40af;
+    color: white;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* First two columns sticky for better navigation */
+.ap-constituency-table .constituency-table th:nth-child(1),
+.ap-constituency-table .constituency-table th:nth-child(2) {
+    position: sticky;
+    background: #1e40af;
+    z-index: 15;
+    border-right: 2px solid #1e3a8a;
+}
+
+.ap-constituency-table .constituency-table td:nth-child(1),
+.ap-constituency-table .constituency-table td:nth-child(2) {
+    position: sticky;
+    background: white;
+    z-index: 5;
+    border-right: 2px solid #3b82f6;
+}
+
+.ap-constituency-table .constituency-table th:nth-child(1),
+.ap-constituency-table .constituency-table td:nth-child(1) {
+    left: 0;
+    min-width: 60px;
+}
+
+.ap-constituency-table .constituency-table th:nth-child(2),
+.ap-constituency-table .constituency-table td:nth-child(2) {
+    left: 60px;
+    min-width: 120px;
+    text-align: left;
+}
+
+/* Specific column widths to ensure all columns are visible */
+.ap-constituency-table .constituency-table th:nth-child(1),
+.ap-constituency-table .constituency-table td:nth-child(1) {
+    min-width: 80px; /* Constituency No. */
+}
+
+.ap-constituency-table .constituency-table th:nth-child(2),
+.ap-constituency-table .constituency-table td:nth-child(2) {
+    min-width: 150px; /* Constituency Name */
+}
+
+/* 2019 Election Data columns */
+.ap-constituency-table .constituency-table th:nth-child(3),
+.ap-constituency-table .constituency-table th:nth-child(4),
+.ap-constituency-table .constituency-table th:nth-child(5),
+.ap-constituency-table .constituency-table td:nth-child(3),
+.ap-constituency-table .constituency-table td:nth-child(4),
+.ap-constituency-table .constituency-table td:nth-child(5) {
+    min-width: 110px;
+}
+
+/* 2024 Election Data columns */
+.ap-constituency-table .constituency-table th:nth-child(6),
+.ap-constituency-table .constituency-table th:nth-child(7),
+.ap-constituency-table .constituency-table th:nth-child(8),
+.ap-constituency-table .constituency-table td:nth-child(6),
+.ap-constituency-table .constituency-table td:nth-child(7),
+.ap-constituency-table .constituency-table td:nth-child(8) {
+    min-width: 110px;
+}
+
+/* Survey Data columns */
+.ap-constituency-table .constituency-table th:nth-child(n+9):nth-child(-n+14),
+.ap-constituency-table .constituency-table td:nth-child(n+9):nth-child(-n+14) {
+    min-width: 100px;
+}
+
+/* Party-wise data columns */
+.ap-constituency-table .constituency-table th:nth-child(n+15):nth-child(-n+24),
+.ap-constituency-table .constituency-table td:nth-child(n+15):nth-child(-n+24) {
+    min-width: 90px;
+}
+
+/* Final columns */
+.ap-constituency-table .constituency-table th:nth-child(n+25),
+.ap-constituency-table .constituency-table td:nth-child(n+25) {
+    min-width: 120px;
+}
+
+/* Party badges in AP table */
+.ap-constituency-table .party-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Mobile adjustments for AP table */
+@media (max-width: 768px) {
+    .ap-constituency-table::before {
+        font-size: 0.7rem;
+        padding: 0.4rem;
+    }
+    
+    .ap-constituency-table .constituency-table th,
+    .ap-constituency-table .constituency-table td {
+        padding: 6px 8px;
+        font-size: 10px;
+        min-width: 70px;
+    }
+    
+    .ap-constituency-table .constituency-table th:nth-child(2),
+    .ap-constituency-table .constituency-table td:nth-child(2) {
+        min-width: 100px;
+    }
+}

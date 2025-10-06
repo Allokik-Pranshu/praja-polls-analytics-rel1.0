@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uttar Pradesh Analysis - Praja Polls Analytics</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body data-page="states" data-page-type="state" data-current-state="uttar-pradesh">
+    <!-- Header will be loaded here -->
+    <div id="header-placeholder"></div>
+
+    <!-- Analysis Layout -->
+    <div class="container">
+        <div class="analysis-layout">
+            <!-- Sidebar will be loaded here -->
+            <div id="sidebar-placeholder"></div>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Analysis Header -->
+                <div class="analysis-header">
+                    <div class="analysis-title">
+                        <h1>UP Assembly General Election 2017</h1>
+                        <p>Survey Date: 11-03-2017</p>
+                    </div>
+                    <div class="analysis-meta">
+                        <div class="last-updated">Survey completed: 11-03-2017</div>
+                        <div class="confidence-score">Election Results</div>
+                    </div>
+                </div>
+
+                <!-- Analysis Sections -->
+                <div class="analysis-sections">
+                    <!-- Section 1: Poll Predictions/Estimates at Party Level -->
+                    <div class="section-card">
+                        <h2><i class="fas fa-chart-line"></i> Poll Predictions/Estimates at Party Level</h2>
+                        <p>Comprehensive seat predictions with pre-election estimates, calculations, and actual results
+                            comparison.</p>
+
+                        <!-- Visual Summary Cards -->
+                        <div class="prediction-summary">
+                            <div class="summary-card bjp-card">
+                                <div class="party-icon">BJP</div>
+                                <div class="seat-info">
+                                    <div class="estimated">Predicted: 300</div>
+                                    <div class="actual">Actual: 312</div>
+                                    <div class="difference">Difference: +12</div>
+                                </div>
+                            </div>
+                            <div class="summary-card sp-card">
+                                <div class="party-icon">SP</div>
+                                <div class="seat-info">
+                                    <div class="estimated">Predicted: 45</div>
+                                    <div class="actual">Actual: 47</div>
+                                    <div class="difference">Difference: +2</div>
+                                </div>
+                            </div>
+                            <div class="summary-card bsp-card">
+                                <div class="party-icon">BSP</div>
+                                <div class="seat-info">
+                                    <div class="estimated">Predicted: 30</div>
+                                    <div class="actual">Actual: 19</div>
+                                    <div class="difference">Difference: -11</div>
+                                </div>
+                            </div>
+                            <div class="summary-card congress-card">
+                                <div class="party-icon">INC</div>
+                                <div class="seat-info">
+                                    <div class="estimated">Predicted: 10</div>
+                                    <div class="actual">Actual: 7</div>
+                                    <div class="difference">Difference: -3</div>
+                                </div>
+                            </div>
+                            <div class="summary-card others-card">
+                                <div class="party-icon">Others</div>
+                                <div class="seat-info">
+                                    <div class="estimated">Predicted: 18</div>
+                                    <div class="actual">Actual: 18</div>
+                                    <div class="difference">Difference: 0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Table -->
+                        <div class="table-container">
+                            <table class="prediction-table centered-table">
+                                <thead>
+                                    <tr>
+                                        <th>Party Name</th>
+                                        <th>Estimated Seats before 09-03-2017</th>
+                                        <th>Estimated plus minus</th>
+                                        <th>Estimates on 09-03-2017 after calculations</th>
+                                        <th>Actual seats received on 11-03-2017</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bjp-row">
+                                        <td><span class="party-badge bjp">BJP</span></td>
+                                        <td>275</td>
+                                        <td>(+-)25</td>
+                                        <td>300</td>
+                                        <td><strong>312</strong></td>
+                                    </tr>
+                                    <tr class="bsp-row">
+                                        <td><span class="party-badge bsp">BSP</span></td>
+                                        <td>40</td>
+                                        <td>(+-)10</td>
+                                        <td>30</td>
+                                        <td><strong>19</strong></td>
+                                    </tr>
+                                    <tr class="sp-row">
+                                        <td><span class="party-badge sp">SP</span></td>
+                                        <td>55</td>
+                                        <td>(+-)10</td>
+                                        <td>45</td>
+                                        <td><strong>47</strong></td>
+                                    </tr>
+                                    <tr class="congress-row">
+                                        <td><span class="party-badge congress">Congress</span></td>
+                                        <td>15</td>
+                                        <td>(+-)05</td>
+                                        <td>10</td>
+                                        <td><strong>07</strong></td>
+                                    </tr>
+                                    <tr class="others-row">
+                                        <td><span class="party-badge others">Others</span></td>
+                                        <td>18</td>
+                                        <td>(+-)05</td>
+                                        <td>18</td>
+                                        <td><strong>18</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Visual Charts Section -->
+                        <div class="charts-section">
+                            <!-- Pie Charts -->
+                            <div class="pie-charts-container">
+                                <div class="pie-chart-section">
+                                    <h4>Predicted Distribution (09-03-2017)</h4>
+                                    <div class="pie-chart" id="up-predicted-pie">
+                                        <canvas width="200" height="200"></canvas>
+                                        <div class="pie-legend">
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color bjp-color"></div>
+                                                <span>BJP (300 - 74%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color sp-color"></div>
+                                                <span>SP (45 - 11%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color bsp-color"></div>
+                                                <span>BSP (30 - 7%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color congress-color"></div>
+                                                <span>Congress (10 - 2%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color others-color"></div>
+                                                <span>Others (18 - 4%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pie-chart-section">
+                                    <h4>Actual Results (11-03-2017)</h4>
+                                    <div class="pie-chart" id="up-actual-pie">
+                                        <canvas width="200" height="200"></canvas>
+                                        <div class="pie-legend">
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color bjp-color"></div>
+                                                <span>BJP (312 - 77%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color sp-color"></div>
+                                                <span>SP (47 - 12%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color bsp-color"></div>
+                                                <span>BSP (19 - 5%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color congress-color"></div>
+                                                <span>Congress (7 - 2%)</span>
+                                            </div>
+                                            <div class="pie-legend-item">
+                                                <div class="pie-color others-color"></div>
+                                                <span>Others (18 - 4%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Section 2: Constituency wise Survey Report -->
+                    <div class="section-card">
+                        <h2><i class="fas fa-map-marked-alt"></i> Constituency wise Survey Report</h2>
+                        <p>We have conducted our survey in 155 constituencies in UP assembly election in 2017. Out of
+                            155 constituencies our survey projection was proved correct in 105. In some constituency our
+                            projections were closer to actual results with the difference of 1000 votes or even lesser.
+                        </p>
+
+                        <!-- Constituency Data Table -->
+                        <div class="table-container constituency-data-table">
+                            <table class="constituency-table centered-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>District</th>
+                                        <th>Assembly</th>
+                                        <th>Party</th>
+                                        <th>Estimated Votes<br><small>(09-03-2017)</small></th>
+                                        <th>Actual Votes<br><small>(11-03-2017)</small></th>
+                                        <th>Difference</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="loading-row">
+                                        <td colspan="7" style="text-align: center; padding: 40px;">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading constituency data...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Accuracy Analysis -->
+                        <div class="accuracy-analysis">
+                            <h4>Prediction Accuracy Analysis</h4>
+                            <div class="accuracy-metrics">
+                                <div class="metric-card">
+                                    <div class="metric-title">Highly Accurate (±500 votes)</div>
+                                    <div class="metric-value">18 constituencies</div>
+                                    <div class="metric-percentage">11.6%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-title">Close Predictions (±1000 votes)</div>
+                                    <div class="metric-value">32 constituencies</div>
+                                    <div class="metric-percentage">20.6%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-title">Accurate Projections (Winner Correct)</div>
+                                    <div class="metric-value">105 constituencies</div>
+                                    <div class="metric-percentage">67.7%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-title">Average Vote Difference</div>
+                                    <div class="metric-value">4,247 votes</div>
+                                    <div class="metric-percentage">±5.2%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../js/components.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/up-data.js"></script>
+    <script src="../js/states.js"></script>
+    <script src="../js/charts.js"></script>
+</body>
+
+</html>
