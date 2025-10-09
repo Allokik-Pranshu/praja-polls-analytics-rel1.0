@@ -1,26 +1,73 @@
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <h3>Select State</h3>
-        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-    </div>
-    <div class="sidebar-content">
-        <ul class="state-nav">
-            <li><a href="uttar-pradesh.html" data-state="uttar-pradesh">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span class="state-name">Uttar Pradesh</span>
-                </a></li>
-            <li><a href="andhra-pradesh.html" data-state="andhra-pradesh">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span class="state-name">Andhra Pradesh</span>
-                </a></li>
-        </ul>
-
-        <div class="sidebar-note">
-            <h4><i class="fas fa-info-circle"></i> <span class="note-title">Quick Navigation</span></h4>
-            <p class="note-text">Select a state to view detailed election analysis and predictions.</p>
+<!-- Modern Collapsible Sidebar -->
+<aside class="modern-sidebar" id="modernSidebar">
+    <!-- Toggle Button -->
+    <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Sidebar Content -->
+    <div class="sidebar-wrapper">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <i class="fas fa-chart-line"></i>
+                <span class="brand-text">Analytics</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">
+                    <i class="fas fa-map"></i>
+                    <span class="section-text">States</span>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="uttar-pradesh.html" class="nav-link" data-state="uttar-pradesh">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="link-text">Uttar Pradesh</span>
+                            <span class="state-badge">2017</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="andhra-pradesh.html" class="nav-link" data-state="andhra-pradesh">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="link-text">Andhra Pradesh</span>
+                            <span class="state-badge">2024</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">
+                    <i class="fas fa-tools"></i>
+                    <span class="section-text">Tools</span>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="../pages/states.html" class="nav-link">
+                            <i class="fas fa-list"></i>
+                            <span class="link-text">All States</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../pages/about.html" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="link-text">About</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="footer-info">
+                <i class="fas fa-lightbulb"></i>
+                <span class="footer-text">Quick Navigation</span>
+            </div>
         </div>
     </div>
+    
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 </aside>

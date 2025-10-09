@@ -8,7 +8,7 @@ class PieChart {
         this.centerX = canvas.width / 2;
         this.centerY = canvas.height / 2;
         this.radius = Math.min(canvas.width, canvas.height) / 2 - 25;
-        
+
         // Set canvas size for better quality
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
@@ -17,7 +17,7 @@ class PieChart {
         this.ctx.scale(dpr, dpr);
         canvas.style.width = rect.width + 'px';
         canvas.style.height = rect.height + 'px';
-        
+
         this.centerX = rect.width / 2;
         this.centerY = rect.height / 2;
         this.radius = Math.min(rect.width, rect.height) / 2 - 25;
@@ -32,7 +32,7 @@ class PieChart {
 
         this.data.forEach((item, index) => {
             const sliceAngle = (item.value / total) * 2 * Math.PI;
-            
+
             // Create gradient for each slice
             const gradient = this.ctx.createRadialGradient(
                 this.centerX, this.centerY, 0,
@@ -40,23 +40,23 @@ class PieChart {
             );
             gradient.addColorStop(0, this.colors[index]);
             gradient.addColorStop(1, this.adjustBrightness(this.colors[index], -20));
-            
+
             // Draw slice with shadow
             this.ctx.save();
             this.ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
             this.ctx.shadowBlur = 8;
             this.ctx.shadowOffsetX = 2;
             this.ctx.shadowOffsetY = 2;
-            
+
             this.ctx.beginPath();
             this.ctx.moveTo(this.centerX, this.centerY);
             this.ctx.arc(this.centerX, this.centerY, this.radius, currentAngle, currentAngle + sliceAngle);
             this.ctx.closePath();
             this.ctx.fillStyle = gradient;
             this.ctx.fill();
-            
+
             this.ctx.restore();
-            
+
             // Add white stroke
             this.ctx.beginPath();
             this.ctx.moveTo(this.centerX, this.centerY);
@@ -69,7 +69,7 @@ class PieChart {
             currentAngle += sliceAngle;
         });
     }
-    
+
     adjustBrightness(color, amount) {
         const usePound = color[0] === '#';
         const col = usePound ? color.slice(1) : color;
@@ -85,7 +85,7 @@ class PieChart {
 }
 
 // Initialize charts when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Add a small delay to ensure all elements are rendered
     setTimeout(() => {
         // Check if we're on the Andhra Pradesh page

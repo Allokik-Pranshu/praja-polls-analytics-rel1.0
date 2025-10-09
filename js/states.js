@@ -261,11 +261,11 @@ function createTopPaginationControls() {
     // Left side - Records per page selector
     const leftControls = document.createElement('div');
     leftControls.style.cssText = 'display: flex; align-items: center; gap: 10px;';
-    
+
     const recordsLabel = document.createElement('span');
     recordsLabel.textContent = 'Show:';
     recordsLabel.style.cssText = 'font-weight: 500; color: #374151;';
-    
+
     const recordsSelect = document.createElement('select');
     recordsSelect.className = 'records-per-page-select';
     recordsSelect.innerHTML = `
@@ -336,10 +336,10 @@ function createBottomPaginationControls() {
 // Function to update pagination controls
 function updatePaginationControls() {
     const totalPages = Math.ceil(allConstituencyData.length / recordsPerPage);
-    
+
     // Update both top and bottom navigation
     const pageNavigations = document.querySelectorAll('.page-navigation');
-    
+
     pageNavigations.forEach(nav => {
         nav.innerHTML = '';
 
@@ -442,11 +442,11 @@ function createConstituencyRow(record, serialNo) {
     // Determine party badge class
     const getPartyBadge = (party) => {
         const partyLower = party.toLowerCase();
-        if (partyLower.includes('bjp')) return 'bjp';
+        if (partyLower.includes('bjp')) return 'bjp'; // This covers both "BJP" and "BJP-Apana Dal"
         if (partyLower.includes('sp')) return 'sp';
         if (partyLower.includes('bsp')) return 'bsp';
         if (partyLower.includes('congress')) return 'congress';
-        if (partyLower.includes('rld')) return 'others';
+        if (partyLower.includes('rld')) return 'rld';
         return 'others';
     };
 

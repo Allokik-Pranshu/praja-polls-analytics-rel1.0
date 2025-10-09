@@ -5,6 +5,32 @@
     box-sizing: border-box;
 }
 
+/* Remove all default focus outlines and ensure consistent behavior */
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ensure buttons and links have consistent styling */
+button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none !important;
+    border: none;
+}
+
+/* Remove any browser-specific focus rings */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
@@ -15,7 +41,7 @@ body {
 .container {
     max-width: 100%;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 /* Navigation */
@@ -32,7 +58,7 @@ body {
 .nav-container {
     max-width: 100%;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,30 +101,54 @@ body {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1rem;
+}
+
+.nav-item {
+    position: relative;
 }
 
 .nav-link {
     text-decoration: none;
     color: #64748b;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     position: relative;
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none !important;
+    border: none !important;
+    background: transparent;
+    box-shadow: none !important;
 }
 
 .nav-link:hover,
 .nav-link.active {
     color: #1e40af;
+    background: rgba(30, 64, 175, 0.05);
+}
+
+.nav-link:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background: rgba(30, 64, 175, 0.05);
+}
+
+.nav-link:active {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .nav-link.active::after {
     content: '';
     position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
     height: 2px;
     background: #1e40af;
+    border-radius: 1px;
 }
 
 .hamburger {
@@ -227,7 +277,7 @@ body {
 
 .hero-content {
     max-width: 800px;
-    padding: 0 20px;
+    padding: 0 40px;
     z-index: 1;
 }
 
@@ -728,8 +778,47 @@ body {
     font-style: italic;
 }
 
+/* Global Container Padding System - Applies to ALL pages */
+.container {
+    padding: 0 40px !important;
+}
+
+.nav-container {
+    padding: 0 40px !important;
+}
+
+.hero-content {
+    padding: 0 40px !important;
+}
+
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 30px !important;
+    }
+    
+    .nav-container {
+        padding: 0 30px !important;
+    }
+    
+    .hero-content {
+        padding: 0 30px !important;
+    }
+}
+
 @media (max-width: 768px) {
+    .container {
+        padding: 0 20px !important;
+    }
+    
+    .nav-container {
+        padding: 0 20px !important;
+    }
+    
+    .hero-content {
+        padding: 0 20px !important;
+    }
+    
     .hamburger {
         display: flex;
     }
@@ -803,6 +892,18 @@ body {
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 0 15px !important;
+    }
+    
+    .nav-container {
+        padding: 0 15px !important;
+    }
+    
+    .hero-content {
+        padding: 0 15px !important;
+    }
+    
     .nav-logo {
         gap: 0.5rem;
     }
@@ -827,6 +928,21 @@ body {
         padding: 12px;
         margin-bottom: 1rem;
     }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 10px !important;
+    }
+    
+    .nav-container {
+        padding: 0 10px !important;
+    }
+    
+    .hero-content {
+        padding: 0 10px !important;
+    }
     
     .footer-logo-container {
         padding: 8px;
@@ -836,4 +952,39 @@ body {
     .hero-decorations {
         display: none;
     }
+}/
+* Additional Navigation Consistency Rules */
+.nav-link,
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active,
+.nav-link:visited {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    text-decoration: none !important;
+}
+
+/* Ensure no browser-specific selection styles */
+.nav-link::selection {
+    background: transparent;
+}
+
+.nav-link::-moz-selection {
+    background: transparent;
+}
+
+/* Remove any potential button-like styling */
+.nav-link {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-clip: padding-box;
+}
+
+/* Force consistent behavior across all browsers */
+.navbar .nav-link {
+    display: inline-block;
+    position: relative;
+    overflow: visible;
 }

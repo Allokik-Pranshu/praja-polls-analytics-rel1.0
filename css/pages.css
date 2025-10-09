@@ -141,34 +141,31 @@
 }
 
 /* State Analysis Page Styles */
+/* Modern Analysis Layout */
 .analysis-layout {
     display: grid;
     grid-template-columns: 280px 1fr;
-    gap: 1rem;
-    padding: 100px 0 80px;
+    gap: 0;
+    padding: 100px 40px 80px;
     min-height: 100vh;
     max-width: 100%;
-    transition: grid-template-columns 0.3s ease;
+    transition: grid-template-columns 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .analysis-layout.sidebar-collapsed {
     grid-template-columns: 60px 1fr;
 }
 
-.sidebar {
-    background: white;
-    border-radius: 12px;
-    padding: 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    height: fit-content;
-    position: sticky;
-    top: 100px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    width: 280px;
+/* Modern Sidebar Design */
+.modern-sidebar {
+    position: relative;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
 }
 
-.sidebar.collapsed {
+.modern-sidebar.collapsed {
     width: 60px;
 }
 
@@ -176,9 +173,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 1rem 1.5rem;
     border-bottom: 1px solid #f1f5f9;
     background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    transition: padding 0.3s ease;
 }
 
 .sidebar-header h3 {
@@ -189,9 +187,21 @@
     transition: opacity 0.3s ease;
 }
 
+.sidebar.collapsed .sidebar-header {
+    padding: 1rem 0.5rem;
+    justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+    position: relative;
+    z-index: 10;
+}
+
 .sidebar.collapsed .sidebar-header h3 {
     opacity: 0;
     pointer-events: none;
+    width: 0;
+    overflow: hidden;
 }
 
 .sidebar-toggle {
@@ -199,14 +209,18 @@
     color: white;
     border: none;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
+    width: 30px;
+    height: 30px;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 100;
 }
 
 .sidebar-toggle:hover {
@@ -214,17 +228,15 @@
     transform: scale(1.1);
 }
 
-.sidebar.collapsed .sidebar-toggle i {
-    transform: rotate(180deg);
-}
+/* Icon rotation is now handled by JavaScript */
 
 .sidebar-content {
-    padding: 1.5rem 2rem 2rem;
+    padding: 1rem 1.5rem 1.5rem;
     transition: padding 0.3s ease;
 }
 
 .sidebar.collapsed .sidebar-content {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 0.25rem;
 }
 
 .state-nav {
@@ -460,194 +472,214 @@
     .analysis-layout {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 100px 30px 80px;
     }
-    
+}
+
+@media (max-width: 768px) {
+    .analysis-layout {
+        padding: 100px 20px 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .analysis-layout {
+        padding: 100px 15px 80px;
+    }
+
     .analysis-layout.sidebar-collapsed {
         grid-template-columns: 1fr;
     }
-    
+
     .sidebar {
         position: static;
         order: 2;
         width: 100%;
         max-width: none;
+        top: auto;
     }
-    
+
     .sidebar.collapsed {
         width: 100%;
+        height: 60px;
+        overflow: hidden;
     }
-    
+
     .sidebar.collapsed .sidebar-content {
-        padding: 1rem 2rem;
+        padding: 0;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
     }
-    
+
     .sidebar.collapsed .state-name,
     .sidebar.collapsed .note-title,
     .sidebar.collapsed .note-text {
-        opacity: 1;
-        pointer-events: auto;
+        opacity: 0;
+        pointer-events: none;
     }
-    
+
     .sidebar.collapsed .sidebar-note {
-        opacity: 1;
-        pointer-events: auto;
+        opacity: 0;
+        pointer-events: none;
         margin-top: 2rem;
         padding: 1.2rem;
     }
-    
+
     .main-content {
         order: 1;
     }
 }
 
 @media (max-width: 768px) {
+
     /* States page mobile responsiveness */
     .page-header {
         padding: 80px 0 60px;
     }
-    
+
     .page-header h1 {
         font-size: 2.2rem;
     }
-    
+
     .page-header p {
         font-size: 1rem;
-        padding: 0 1rem;
     }
-    
+
     .states-section {
         padding: 60px 0;
     }
-    
+
     .states-filter {
         margin-bottom: 2rem;
     }
-    
+
     .filter-buttons {
         flex-direction: column;
         gap: 0.8rem;
         align-items: center;
     }
-    
+
     .filter-btn {
         width: 200px;
         text-align: center;
     }
-    
+
     .all-states-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .state-card-detailed {
         flex-direction: column;
         text-align: center;
         padding: 1.5rem;
         gap: 1rem;
     }
-    
+
     .state-flag {
         align-self: center;
     }
-    
+
     .flag-placeholder {
         width: 50px;
         height: 50px;
         font-size: 1rem;
     }
-    
+
     .state-info h3 {
         font-size: 1.3rem;
         margin-bottom: 0.8rem;
     }
-    
+
     .state-status {
         font-size: 0.85rem;
         padding: 6px 12px;
         margin-bottom: 1rem;
         display: inline-block;
     }
-    
+
     .state-metrics {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.8rem;
         margin: 1rem 0;
     }
-    
+
     .metric-label {
         font-size: 0.75rem;
     }
-    
+
     .metric-value {
         font-size: 1rem;
     }
-    
+
     .btn {
         padding: 10px 20px;
         font-size: 0.9rem;
         width: 100%;
         max-width: 200px;
     }
-    
+
     /* Coming soon section mobile */
     .coming-soon-section {
         margin-top: 3rem;
         padding: 2rem 0;
     }
-    
+
     .coming-soon-content {
         padding: 0 1rem;
     }
-    
+
     .coming-soon-icon {
         width: 60px;
         height: 60px;
         margin-bottom: 1.5rem;
     }
-    
+
     .coming-soon-icon i {
         font-size: 1.5rem;
     }
-    
+
     .coming-soon-content h3 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
     }
-    
+
     .coming-soon-content p {
         font-size: 0.95rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .features-list {
         grid-template-columns: 1fr;
         gap: 0.8rem;
     }
-    
+
     .feature-item {
         padding: 0.8rem;
         font-size: 0.85rem;
     }
-    
+
     .feature-item i {
         font-size: 1rem;
     }
-    
+
     /* Analysis page mobile adjustments */
     .analysis-header {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
     }
-    
+
     .methodology-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .charts-grid {
         grid-template-columns: 1fr;
     }
 }
+
 /* 
 Election Survey Data Styles */
 
@@ -669,10 +701,21 @@ Election Survey Data Styles */
     border-top: 4px solid;
 }
 
-.summary-card.bjp-card { border-top-color: #ff6b35; }
-.summary-card.sp-card { border-top-color: #10b981; }
-.summary-card.congress-card { border-top-color: #3b82f6; }
-.summary-card.others-card { border-top-color: #8b5cf6; }
+.summary-card.bjp-card {
+    border-top-color: #ff6b35;
+}
+
+.summary-card.sp-card {
+    border-top-color: #10b981;
+}
+
+.summary-card.congress-card {
+    border-top-color: #3b82f6;
+}
+
+.summary-card.others-card {
+    border-top-color: #8b5cf6;
+}
 
 .party-icon {
     font-size: 1.5rem;
@@ -687,7 +730,9 @@ Election Survey Data Styles */
     gap: 0.5rem;
 }
 
-.estimated, .calculated, .actual {
+.estimated,
+.calculated,
+.actual {
     padding: 0.5rem;
     border-radius: 6px;
     font-weight: 600;
@@ -716,7 +761,8 @@ Election Survey Data Styles */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.prediction-table, .agency-table {
+.prediction-table,
+.agency-table {
     width: 100%;
     border-collapse: collapse;
     background: white;
@@ -769,11 +815,21 @@ Election Survey Data Styles */
 
 /* Party Badges */
 .party-badge {
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.875rem;
     font-weight: 600;
+    text-align: center;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    min-width: 60px;
+}
+
+.party-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .party-badge.bjp {
@@ -782,18 +838,30 @@ Election Survey Data Styles */
 }
 
 .party-badge.sp {
-    background: #dcfce7;
-    color: #166534;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: 2px solid #047857;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .party-badge.congress {
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #ffffff;
+    border: 2px solid #1d4ed8;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
 }
 
 .party-badge.bsp {
-    background: #e0e7ff;
-    color: #3730a3;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    border: 2px solid #3730a3;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
 }
 
 .party-badge.others {
@@ -1164,48 +1232,48 @@ Election Survey Data Styles */
     .prediction-summary {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .constituency-stats {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .insights-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .chart-bars {
         height: 200px;
     }
-    
+
     .bar-group .bar {
         width: 20px;
     }
-    
+
     .chart-legend {
         gap: 1rem;
     }
-    
+
     .region-bar,
     .performance-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
     }
-    
+
     .region-name,
     .agency-label {
         min-width: auto;
     }
-    
+
     .accuracy-bar,
     .performance-bar {
         width: 100%;
     }
-    
+
     .table-container {
         font-size: 0.8rem;
     }
-    
+
     .prediction-table th,
     .prediction-table td,
     .agency-table th,
@@ -1218,23 +1286,35 @@ Election Survey Data Styles */
     .prediction-summary {
         grid-template-columns: 1fr;
     }
-    
+
     .constituency-stats {
         grid-template-columns: 1fr;
     }
-    
+
     .chart-legend {
         flex-direction: column;
         align-items: center;
     }
 }
+
 * Andhra Pradesh Specific Styles */
 
 /* Party-specific color schemes */
-.ysrcp-card { border-top-color: #10b981; }
-.tdp-card { border-top-color: #f59e0b; }
-.jsp-card { border-top-color: #ef4444; }
-.bjp-card { border-top-color: #ff6b35; }
+.ysrcp-card {
+    border-top-color: #10b981;
+}
+
+.tdp-card {
+    border-top-color: #f59e0b;
+}
+
+.jsp-card {
+    border-top-color: #ef4444;
+}
+
+.bjp-card {
+    border-top-color: #ff6b35;
+}
 
 .party-badge.ysrcp {
     background: #dcfce7;
@@ -1430,10 +1510,21 @@ Election Survey Data Styles */
     border-left: 4px solid;
 }
 
-.vote-card.ysrcp-vote { border-left-color: #10b981; }
-.vote-card.tdp-vote { border-left-color: #f59e0b; }
-.vote-card.jsp-vote { border-left-color: #ef4444; }
-.vote-card.bjp-vote { border-left-color: #ff6b35; }
+.vote-card.ysrcp-vote {
+    border-left-color: #10b981;
+}
+
+.vote-card.tdp-vote {
+    border-left-color: #f59e0b;
+}
+
+.vote-card.jsp-vote {
+    border-left-color: #ef4444;
+}
+
+.vote-card.bjp-vote {
+    border-left-color: #ff6b35;
+}
 
 .party-header {
     display: flex;
@@ -1537,34 +1628,34 @@ Election Survey Data Styles */
     .vote-comparison-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .region-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .region-stats {
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .accuracy-circle {
         width: 80px;
         height: 80px;
     }
-    
+
     .accuracy-circle::before {
         width: 55px;
         height: 55px;
     }
-    
+
     .accuracy-circle span {
         font-size: 1rem;
     }
-    
+
     .comparison-chart .bar-group .bar {
         width: 25px;
     }
-    
+
     .comparison-chart .chart-bars {
         height: 250px;
         padding: 1rem;
@@ -1577,17 +1668,19 @@ Election Survey Data Styles */
         gap: 0.5rem;
         align-items: flex-start;
     }
-    
+
     .vote-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.2rem;
     }
-    
+
     .methodology-note {
         padding: 1rem;
     }
-}/* S
+}
+
+/* S
 idebar Note Styling */
 .sidebar-note {
     margin-top: 2rem;
@@ -1628,15 +1721,17 @@ idebar Note Styling */
         margin-top: 1rem;
         padding: 1rem;
     }
-    
+
     .sidebar-note h4 {
         font-size: 0.9rem;
     }
-    
+
     .sidebar-note p {
         font-size: 0.8rem;
     }
-}/* C
+}
+
+/* C
 oming Soon Section */
 .coming-soon-section {
     margin-top: 4rem;
@@ -1717,33 +1812,35 @@ oming Soon Section */
         margin-top: 2rem;
         padding: 2rem 0;
     }
-    
+
     .coming-soon-content {
         padding: 0 1rem;
     }
-    
+
     .coming-soon-icon {
         width: 60px;
         height: 60px;
         margin-bottom: 1.5rem;
     }
-    
+
     .coming-soon-icon i {
         font-size: 1.5rem;
     }
-    
+
     .coming-soon-content h3 {
         font-size: 1.5rem;
     }
-    
+
     .coming-soon-content p {
         font-size: 1rem;
     }
-    
+
     .features-list {
         grid-template-columns: 1fr;
     }
-}/* Andhra 
+}
+
+/* Andhra 
 Pradesh Specific Styles */
 .page-header-ap {
     background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
@@ -1832,29 +1929,68 @@ Pradesh Specific Styles */
     border-bottom: none;
 }
 
-/* Party badges for AP */
+/* Enhanced Party badges for better visibility */
 .party-badge.ysrcp {
-    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-    color: #166534;
-    border: 1px solid #10b981;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: 2px solid #047857;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .party-badge.tdp {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-    border: 1px solid #f59e0b;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #ffffff;
+    border: 2px solid #b45309;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
 }
 
 .party-badge.jsp {
-    background: linear-gradient(135deg, #fee2e2, #fecaca);
-    color: #dc2626;
-    border: 1px solid #ef4444;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #ffffff;
+    border: 2px solid #b91c1c;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
 }
 
 .party-badge.bjp {
-    background: linear-gradient(135deg, #fed7aa, #fdba74);
-    color: #c2410c;
-    border: 1px solid #ff6b35;
+    background: linear-gradient(135deg, #ff6b35, #ea580c);
+    color: #ffffff;
+    border: 2px solid #c2410c;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.2);
+}
+
+.party-badge.congress {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #ffffff;
+    border: 2px solid #1d4ed8;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.party-badge.others {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: #ffffff;
+    border: 2px solid #6d28d9;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+}
+
+.party-badge.rld {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: #ffffff;
+    border: 2px solid #0f766e;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
 }
 
 /* Difference indicators */
@@ -1871,21 +2007,21 @@ Pradesh Specific Styles */
 /* Responsive design for AP page */
 @media (max-width: 768px) {
     .page-header-ap {
-        padding: 2rem 1rem;
+        padding: 2rem 0;
     }
-    
+
     .page-header-ap h1 {
         font-size: 1.8rem;
     }
-    
+
     .survey-subtitle {
         font-size: 1rem;
     }
-    
+
     .ap-prediction-table {
         font-size: 0.9rem;
     }
-    
+
     .ap-prediction-table th,
     .ap-prediction-table td {
         padding: 0.8rem 0.5rem;
@@ -1896,22 +2032,26 @@ Pradesh Specific Styles */
     .page-header-ap h1 {
         font-size: 1.5rem;
     }
-    
+
     .ap-prediction-table {
         font-size: 0.8rem;
     }
-    
+
     .ap-prediction-table th,
     .ap-prediction-table td {
         padding: 0.6rem 0.4rem;
     }
-}/* 
+}
+
+/* 
 Neutral difference indicator */
 .neutral {
     color: #64748b;
     font-weight: 700;
     text-align: center;
-}/*
+}
+
+/*
  Centered table styling */
 .centered-table td:not(:first-child):not(:nth-child(2)) {
     text-align: center;
@@ -2115,22 +2255,67 @@ Neutral difference indicator */
     white-space: nowrap;
 }
 
-/* Responsive Table Styles */
-.constituency-data-table {
+/* Override for UP table to enable horizontal scroll */
+.constituency-data-table.simple-table {
+    overflow-x: auto !important;
+    overflow-y: visible;
     width: 100%;
-    overflow: visible;
     max-width: 100%;
 }
 
-.table-container {
-    overflow-x: visible !important;
-    width: 100%;
+.constituency-data-table.simple-table .constituency-table {
+    table-layout: auto !important;
+    min-width: 900px !important;
+    width: auto !important;
 }
 
-.constituency-table {
-    width: 100%;
-    table-layout: fixed;
-    word-wrap: break-word;
+/* Reset fixed column widths for scrollable table */
+.constituency-data-table.simple-table .constituency-table th,
+.constituency-data-table.simple-table .constituency-table td {
+    width: auto !important;
+    min-width: 100px !important;
+    white-space: nowrap;
+}
+
+/* Scroll indicator for UP table */
+.constituency-data-table.simple-table::before {
+    content: "← Scroll horizontally to view all data →";
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    background: #f0f9ff;
+    color: #1e40af;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-bottom: 1px solid #bae6fd;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .constituency-data-table.simple-table::before {
+        content: "← Swipe to view all data →";
+        font-size: 0.75rem;
+    }
+}
+
+/* Force scroll bars to be visible */
+.constituency-data-table.simple-table::-webkit-scrollbar {
+    height: 12px !important;
+    -webkit-appearance: none;
+}
+
+.constituency-data-table.simple-table::-webkit-scrollbar-track {
+    background: #f1f5f9 !important;
+    border-radius: 6px;
+}
+
+.constituency-data-table.simple-table::-webkit-scrollbar-thumb {
+    background: #1e40af !important;
+    border-radius: 6px;
+}
+
+.constituency-data-table.simple-table::-webkit-scrollbar-thumb:hover {
+    background: #1d4ed8 !important;
 }
 
 .constituency-table th,
@@ -2142,44 +2327,51 @@ Neutral difference indicator */
 }
 
 /* Column width distribution */
-.constituency-table th:nth-child(1), /* S.No. */
+.constituency-table th:nth-child(1),
+/* S.No. */
 .constituency-table td:nth-child(1) {
     width: 6%;
     min-width: 40px;
 }
 
-.constituency-table th:nth-child(2), /* District Name */
+.constituency-table th:nth-child(2),
+/* District Name */
 .constituency-table td:nth-child(2) {
     width: 14%;
     min-width: 100px;
 }
 
-.constituency-table th:nth-child(3), /* Assembly Name */
+.constituency-table th:nth-child(3),
+/* Assembly Name */
 .constituency-table td:nth-child(3) {
     width: 16%;
     min-width: 120px;
 }
 
-.constituency-table th:nth-child(4), /* Party */
+.constituency-table th:nth-child(4),
+/* Party */
 .constituency-table td:nth-child(4) {
     width: 12%;
     min-width: 80px;
     text-align: center;
 }
 
-.constituency-table th:nth-child(5), /* Estimated Votes */
+.constituency-table th:nth-child(5),
+/* Estimated Votes */
 .constituency-table td:nth-child(5) {
     width: 18%;
     min-width: 100px;
 }
 
-.constituency-table th:nth-child(6), /* Actual Votes */
+.constituency-table th:nth-child(6),
+/* Actual Votes */
 .constituency-table td:nth-child(6) {
     width: 18%;
     min-width: 100px;
 }
 
-.constituency-table th:nth-child(7), /* Difference */
+.constituency-table th:nth-child(7),
+/* Difference */
 .constituency-table td:nth-child(7) {
     width: 16%;
     min-width: 90px;
@@ -2200,12 +2392,12 @@ Neutral difference indicator */
         gap: 15px;
         align-items: stretch;
     }
-    
+
     .page-navigation {
         justify-content: center;
         flex-wrap: wrap;
     }
-    
+
     .page-info {
         margin-left: 0;
         text-align: center;
@@ -2250,25 +2442,25 @@ Neutral difference indicator */
     .pie-charts-container {
         grid-template-columns: 1fr;
     }
-    
+
     .pie-chart canvas {
         width: 150px;
         height: 150px;
     }
-    
+
     .charts-section {
         gap: 2rem;
     }
-    
+
     .pie-chart-section {
         padding: 1.5rem;
     }
-    
+
     .comparison-chart .chart-bars {
         height: 250px;
         padding: 1rem;
     }
-    
+
     .comparison-chart .bar-group .bar {
         width: 25px;
     }
@@ -2278,16 +2470,18 @@ Neutral difference indicator */
     .pie-legend {
         align-items: center;
     }
-    
+
     .pie-legend-item {
         font-size: 0.8rem;
     }
-    
+
     .pie-color {
         width: 12px;
         height: 12px;
     }
-}/* Enha
+}
+
+/* Enha
 nced bar chart styling */
 .comparison-chart .chart-bars {
     background: #f8fafc;
@@ -2342,7 +2536,7 @@ nced bar chart styling */
         grid-template-columns: 1fr 1fr;
         gap: 3rem;
     }
-    
+
     .pie-chart-section {
         max-width: none;
     }
@@ -2374,7 +2568,9 @@ nced bar chart styling */
     border-radius: 12px;
     font-weight: 600;
     font-size: 0.85rem;
-}/* Simple
+}
+
+/* Simple
  difference styling without color coding */
 .difference {
     padding: 0.4rem 0.8rem;
@@ -2410,7 +2606,9 @@ nced bar chart styling */
 .summary-card.jsp-card,
 .summary-card.bjp-card {
     border-top-color: #e5e7eb;
-}/* 
+}
+
+/* 
 Constituency Data Table Styling */
 .constituency-data-table {
     margin: 1.5rem 0;
@@ -2538,7 +2736,7 @@ Constituency Data Table Styling */
     .constituency-data-table .constituency-table {
         font-size: 0.75rem;
     }
-    
+
     .constituency-data-table .constituency-table th,
     .constituency-data-table .constituency-table td {
         padding: 0.5rem 0.3rem;
@@ -2547,25 +2745,26 @@ Constituency Data Table Styling */
 
 @media (max-width: 768px) {
     .constituency-data-table {
-        margin: 1rem -1rem; /* Extend to screen edges on mobile */
+        margin: 1rem -1rem;
+        /* Extend to screen edges on mobile */
         border-radius: 0;
     }
-    
+
     .constituency-data-table .constituency-table {
         font-size: 0.7rem;
         min-width: 1800px;
     }
-    
+
     .constituency-data-table .constituency-table th,
     .constituency-data-table .constituency-table td {
         padding: 0.4rem 0.2rem;
     }
-    
+
     .data-note {
         margin: 1rem 0;
         padding: 1.5rem;
     }
-    
+
     .data-note h4 {
         font-size: 1rem;
     }
@@ -2616,7 +2815,9 @@ Constituency Data Table Styling */
 .constituency-data-table .constituency-table tbody tr:nth-child(even):hover td:nth-child(1),
 .constituency-data-table .constituency-table tbody tr:nth-child(even):hover td:nth-child(2) {
     background: #f1f5f9;
-}/* Layo
+}
+
+/* Layo
 ut optimizations for better space utilization */
 .main-content {
     padding: 1rem;
@@ -2642,9 +2843,13 @@ ut optimizations for better space utilization */
 
 /* Make party badges smaller in constituency table */
 .constituency-data-table .party-badge {
-    padding: 0.2rem 0.5rem;
-    font-size: 0.7rem;
-    border-radius: 10px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    min-width: 50px;
+    text-align: center;
 }
 
 /* Sidebar note styling */
@@ -2683,37 +2888,35 @@ ut optimizations for better space utilization */
 /* Responsive breakpoints for sidebar */
 @media (min-width: 1025px) {
     .analysis-layout {
-        grid-template-columns: 300px 1fr;
+        grid-template-columns: 240px 1fr;
     }
-    
+
     .sidebar {
-        width: 300px;
+        width: 240px;
     }
-    
+
     .analysis-layout.sidebar-collapsed {
-        grid-template-columns: 60px 1fr;
+        grid-template-columns: 50px 1fr;
     }
 }
 
 /* Full width layout for very large screens */
 @media (min-width: 1400px) {
-    .container {
-        padding: 0 10px;
-    }
-    
+    /* Container padding handled by global styles */
+
     .analysis-layout {
         grid-template-columns: 320px 1fr;
     }
-    
+
     .sidebar {
         width: 320px;
     }
-    
+
     .constituency-data-table .constituency-table {
         min-width: 1400px;
         font-size: 0.8rem;
     }
-    
+
     .constituency-data-table .constituency-table th,
     .constituency-data-table .constituency-table td {
         padding: 0.6rem 0.4rem;
@@ -2728,7 +2931,7 @@ ut optimizations for better space utilization */
 /* Remove excessive margins from page header */
 .page-header-ap {
     margin-bottom: 1rem;
-    padding: 2rem 1rem;
+    padding: 2rem 0;
 }
 
 /* Optimize prediction summary cards */
@@ -2745,7 +2948,9 @@ ut optimizations for better space utilization */
 .constituency-stats {
     margin: 1.5rem 0;
     gap: 1rem;
-}/* Enh
+}
+
+/* Enh
 anced mobile responsiveness for states page */
 
 /* Tablet landscape (1024px and below) */
@@ -2753,20 +2958,20 @@ anced mobile responsiveness for states page */
     .states-section {
         padding: 70px 0;
     }
-    
+
     .all-states-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1.5rem;
     }
-    
+
     .state-card-detailed {
         padding: 1.8rem;
     }
-    
+
     .filter-buttons {
         gap: 0.8rem;
     }
-    
+
     .filter-btn {
         padding: 8px 16px;
         font-size: 0.9rem;
@@ -2777,72 +2982,69 @@ anced mobile responsiveness for states page */
 
 /* Large mobile phones (480px and below) */
 @media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
+    /* Container padding handled by global styles */
+
     .page-header {
         padding: 70px 0 50px;
     }
-    
+
     .page-header h1 {
         font-size: 1.8rem;
         line-height: 1.2;
     }
-    
+
     .page-header p {
         font-size: 0.9rem;
-        padding: 0 0.5rem;
     }
-    
+
     .states-section {
         padding: 40px 0;
     }
-    
+
     .states-filter {
         margin-bottom: 1.5rem;
     }
-    
+
     .filter-buttons {
         gap: 0.6rem;
     }
-    
+
     .filter-btn {
         width: 180px;
         padding: 8px 12px;
         font-size: 0.85rem;
     }
-    
+
     .all-states-grid {
         gap: 1rem;
     }
-    
+
     .state-card-detailed {
         padding: 1.2rem;
         border-radius: 8px;
     }
-    
+
     .flag-placeholder {
         width: 45px;
         height: 45px;
         font-size: 0.9rem;
     }
-    
+
     .state-info h3 {
         font-size: 1.2rem;
     }
-    
+
     .state-status {
         font-size: 0.8rem;
         padding: 5px 10px;
     }
-    
+
     .state-metrics {
         grid-template-columns: 1fr;
         gap: 0.6rem;
         text-align: left;
     }
-    
+
     .metric {
         display: flex;
         justify-content: space-between;
@@ -2850,70 +3052,70 @@ anced mobile responsiveness for states page */
         padding: 0.5rem 0;
         border-bottom: 1px solid #f1f5f9;
     }
-    
+
     .metric:last-child {
         border-bottom: none;
     }
-    
+
     .metric-label {
         font-size: 0.8rem;
         color: #64748b;
     }
-    
+
     .metric-value {
         font-size: 1rem;
         font-weight: 600;
         color: #1e40af;
     }
-    
+
     .btn {
         padding: 10px 16px;
         font-size: 0.85rem;
         width: 100%;
         max-width: 180px;
     }
-    
+
     /* Coming soon section small mobile */
     .coming-soon-section {
         margin-top: 2rem;
         padding: 1.5rem 0;
     }
-    
+
     .coming-soon-content {
         padding: 0 0.5rem;
     }
-    
+
     .coming-soon-icon {
         width: 50px;
         height: 50px;
         margin-bottom: 1rem;
     }
-    
+
     .coming-soon-icon i {
         font-size: 1.2rem;
     }
-    
+
     .coming-soon-content h3 {
         font-size: 1.3rem;
         margin-bottom: 0.8rem;
     }
-    
+
     .coming-soon-content p {
         font-size: 0.9rem;
         margin-bottom: 1.2rem;
         line-height: 1.5;
     }
-    
+
     .features-list {
         gap: 0.6rem;
     }
-    
+
     .feature-item {
         padding: 0.6rem;
         font-size: 0.8rem;
         border-radius: 6px;
     }
-    
+
     .feature-item i {
         font-size: 0.9rem;
     }
@@ -2921,31 +3123,29 @@ anced mobile responsiveness for states page */
 
 /* Extra small devices (360px and below) */
 @media (max-width: 360px) {
-    .container {
-        padding: 0 10px;
-    }
-    
+    /* Container padding handled by global styles */
+
     .page-header h1 {
         font-size: 1.6rem;
     }
-    
+
     .filter-btn {
         width: 160px;
         font-size: 0.8rem;
     }
-    
+
     .state-card-detailed {
         padding: 1rem;
     }
-    
+
     .state-info h3 {
         font-size: 1.1rem;
     }
-    
+
     .coming-soon-content h3 {
         font-size: 1.2rem;
     }
-    
+
     .feature-item {
         padding: 0.5rem;
         font-size: 0.75rem;
@@ -2957,29 +3157,29 @@ anced mobile responsiveness for states page */
     .page-header {
         padding: 60px 0 40px;
     }
-    
+
     .page-header h1 {
         font-size: 1.8rem;
     }
-    
+
     .states-section {
         padding: 30px 0;
     }
-    
+
     .coming-soon-section {
         padding: 1rem 0;
     }
-    
+
     .all-states-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
-    
+
     .state-card-detailed {
         flex-direction: row;
         text-align: left;
         padding: 1rem;
     }
-    
+
     .state-metrics {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -2988,34 +3188,39 @@ anced mobile responsiveness for states page */
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
     .filter-btn {
-        min-height: 44px; /* Minimum touch target size */
+        min-height: 44px;
+        /* Minimum touch target size */
         padding: 10px 16px;
     }
-    
+
     .btn {
         min-height: 44px;
         padding: 12px 20px;
     }
-    
+
     .state-card-detailed {
-        transition: none; /* Remove hover effects on touch devices */
+        transition: none;
+        /* Remove hover effects on touch devices */
     }
-    
+
     .state-card-detailed:hover {
         transform: none;
     }
 }
 
 /* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
     .flag-placeholder {
         border: 1px solid rgba(0, 0, 0, 0.1);
     }
-    
+
     .state-card-detailed {
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     }
-}/* Anim
+}
+
+/* Anim
 ation classes for enhanced mobile experience */
 .animate-in {
     animation: slideInUp 0.6s ease forwards;
@@ -3026,6 +3231,7 @@ ation classes for enhanced mobile experience */
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -3064,6 +3270,7 @@ ation classes for enhanced mobile experience */
 
 /* Optimize for reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
+
     .state-card-detailed,
     .filter-btn,
     .btn,
@@ -3071,7 +3278,7 @@ ation classes for enhanced mobile experience */
         animation: none;
         transition: none;
     }
-    
+
     .state-card-detailed:hover {
         transform: none;
     }
@@ -3083,25 +3290,29 @@ ation classes for enhanced mobile experience */
         background: #1e293b;
         color: #f1f5f9;
     }
-    
+
     .state-status {
         background: #334155;
         color: #e2e8f0;
     }
-    
+
     .metric-label {
         color: #94a3b8;
     }
-}/*
+}
+
+/*
  Screen width optimization for Andhra Pradesh page */
 .analysis-layout {
     max-width: 100vw;
-    overflow-x: hidden; /* Prevent horizontal scroll on main layout */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll on main layout */
 }
 
 .main-content {
     max-width: 100%;
-    overflow-x: hidden; /* Prevent horizontal scroll on main content */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll on main content */
 }
 
 /* Ensure all sections except constituency table fit within screen */
@@ -3112,7 +3323,7 @@ ation classes for enhanced mobile experience */
 
 /* Page header optimization */
 .page-header-ap {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0;
     margin-bottom: 1rem;
     max-width: 100%;
 }
@@ -3148,7 +3359,9 @@ ation classes for enhanced mobile experience */
     gap: 0.4rem;
 }
 
-.estimated, .actual, .difference {
+.estimated,
+.actual,
+.difference {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
 }
@@ -3162,7 +3375,8 @@ ation classes for enhanced mobile experience */
 
 .ap-prediction-table {
     width: 100%;
-    min-width: auto; /* Allow table to fit within container */
+    min-width: auto;
+    /* Allow table to fit within container */
     font-size: 0.85rem;
 }
 
@@ -3244,40 +3458,41 @@ ation classes for enhanced mobile experience */
         grid-template-columns: 1fr;
         padding: 80px 0 60px;
     }
-    
+
     .main-content {
         padding: 0.8rem;
     }
-    
+
     .section-card {
         padding: 1rem;
         margin-bottom: 0.8rem;
     }
-    
+
     .page-header-ap {
-        padding: 1rem 0.5rem;
+        padding: 1rem 0;
     }
-    
+
     .prediction-summary {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.6rem;
     }
-    
+
     .pie-charts-container {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
-    
+
     .constituency-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.6rem;
     }
-    
+
     .constituency-data-table {
-        margin: 1rem -0.8rem; /* Extend to edges on mobile */
+        margin: 1rem -0.8rem;
+        /* Extend to edges on mobile */
         border-radius: 0;
     }
-    
+
     /* Scroll indicator removed for mobile too */
 }
 
@@ -3285,15 +3500,15 @@ ation classes for enhanced mobile experience */
     .prediction-summary {
         grid-template-columns: 1fr;
     }
-    
+
     .constituency-stats {
         grid-template-columns: 1fr;
     }
-    
+
     .summary-card {
         padding: 0.8rem;
     }
-    
+
     .stat-card {
         padding: 0.8rem;
     }
@@ -3328,7 +3543,8 @@ ation classes for enhanced mobile experience */
 
 .ap-constituency-table .constituency-table {
     width: 100%;
-    min-width: 3200px; /* Increased width to accommodate all columns */
+    min-width: 3200px;
+    /* Increased width to accommodate all columns */
     border-collapse: collapse;
     background: white;
     margin: 0;
@@ -3390,12 +3606,14 @@ ation classes for enhanced mobile experience */
 /* Specific column widths to ensure all columns are visible */
 .ap-constituency-table .constituency-table th:nth-child(1),
 .ap-constituency-table .constituency-table td:nth-child(1) {
-    min-width: 80px; /* Constituency No. */
+    min-width: 80px;
+    /* Constituency No. */
 }
 
 .ap-constituency-table .constituency-table th:nth-child(2),
 .ap-constituency-table .constituency-table td:nth-child(2) {
-    min-width: 150px; /* Constituency Name */
+    min-width: 150px;
+    /* Constituency Name */
 }
 
 /* 2019 Election Data columns */
@@ -3439,11 +3657,15 @@ ation classes for enhanced mobile experience */
 /* Party badges in AP table */
 .ap-constituency-table .party-badge {
     display: inline-block;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
     color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    min-width: 45px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Mobile adjustments for AP table */
@@ -3452,16 +3674,527 @@ ation classes for enhanced mobile experience */
         font-size: 0.7rem;
         padding: 0.4rem;
     }
-    
+
     .ap-constituency-table .constituency-table th,
     .ap-constituency-table .constituency-table td {
         padding: 6px 8px;
         font-size: 10px;
         min-width: 70px;
     }
-    
+
     .ap-constituency-table .constituency-table th:nth-child(2),
     .ap-constituency-table .constituency-table td:nth-child(2) {
         min-width: 100px;
+    }
+}
+
+/* Universal Responsive Table System */
+/* This system makes all tables responsive across desktop and mobile */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+/* Scroll indicator for all tables on mobile */
+@media (max-width: 768px) {
+    .table-container::before {
+        content: "← Swipe to view all data →";
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        background: #f0f9ff;
+        color: #1e40af;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border-bottom: 1px solid #bae6fd;
+        margin: 0;
+    }
+}
+
+/* Desktop scroll indicator for complex tables */
+@media (min-width: 769px) {
+    .table-container.complex-table::before {
+        content: "← Scroll horizontally to view all data →";
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        background: #f0f9ff;
+        color: #1e40af;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border-bottom: 1px solid #bae6fd;
+        margin: 0;
+    }
+}
+
+/* Base table styling */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin: 0;
+    min-width: fit-content;
+}
+
+/* Responsive table headers and cells */
+.table-container th,
+.table-container td {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+.table-container th {
+    background: #1e40af;
+    color: white;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+
+    .table-container th,
+    .table-container td {
+        padding: 8px 10px;
+        font-size: 12px;
+        min-width: 70px;
+    }
+
+    .table-container th {
+        font-size: 11px;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .table-container th,
+    .table-container td {
+        padding: 6px 8px;
+        font-size: 11px;
+        min-width: 60px;
+    }
+
+    .table-container th {
+        font-size: 10px;
+    }
+}
+
+/* Sticky first columns for better navigation on large tables */
+.table-container.has-sticky-cols th:first-child,
+.table-container.has-sticky-cols td:first-child {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 5;
+    border-right: 2px solid #3b82f6;
+}
+
+.table-container.has-sticky-cols th:first-child {
+    background: #1e40af;
+    z-index: 15;
+}
+
+/* Two sticky columns for very wide tables */
+.table-container.has-two-sticky-cols th:nth-child(1),
+.table-container.has-two-sticky-cols th:nth-child(2) {
+    position: sticky;
+    background: #1e40af;
+    z-index: 15;
+    border-right: 2px solid #1e3a8a;
+}
+
+.table-container.has-two-sticky-cols td:nth-child(1),
+.table-container.has-two-sticky-cols td:nth-child(2) {
+    position: sticky;
+    background: white;
+    z-index: 5;
+    border-right: 2px solid #3b82f6;
+}
+
+.table-container.has-two-sticky-cols th:nth-child(1),
+.table-container.has-two-sticky-cols td:nth-child(1) {
+    left: 0;
+    min-width: 60px;
+}
+
+.table-container.has-two-sticky-cols th:nth-child(2),
+.table-container.has-two-sticky-cols td:nth-child(2) {
+    left: 60px;
+    min-width: 120px;
+    text-align: left;
+}
+
+/* Specific table type adjustments */
+/* Simple tables (UP constituency table) */
+.table-container.simple-table table {
+    min-width: 800px;
+}
+
+/* Complex tables (AP constituency table) */
+.table-container.complex-table table {
+    min-width: 3200px;
+}
+
+/* Medium complexity tables */
+.table-container.medium-table table {
+    min-width: 1400px;
+}
+
+/* Party badge styling */
+.table-container .party-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+}
+
+/* Positive/negative styling */
+.table-container .positive {
+    color: #059669;
+    font-weight: 600;
+}
+
+.table-container .negative {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Ensure scroll bars are always visible when needed */
+.table-container::-webkit-scrollbar {
+    height: 12px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Mo
+dern Sidebar Components */
+
+/* Toggle Button - Always Visible */
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 120px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    border: 2px solid white;
+}
+
+/* When sidebar is expanded on desktop */
+@media (min-width: 1025px) {
+    .sidebar-toggle-btn {
+        left: 260px;
+    }
+
+    .modern-sidebar.collapsed .sidebar-toggle-btn {
+        left: 40px;
+    }
+}
+
+.sidebar-toggle-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 64, 175, 0.5);
+}
+
+.sidebar-toggle-btn:active {
+    transform: translateY(0);
+}
+
+/* Sidebar Wrapper */
+.sidebar-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    transition: all 0.3s ease;
+}
+
+.sidebar-brand i {
+    color: #1e40af;
+    font-size: 20px;
+    min-width: 20px;
+}
+
+.modern-sidebar.collapsed .brand-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+
+.nav-section {
+    margin-bottom: 30px;
+}
+
+.nav-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.nav-section-title i {
+    font-size: 14px;
+    min-width: 14px;
+}
+
+.modern-sidebar.collapsed .section-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin-bottom: 4px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 0;
+    position: relative;
+}
+
+.nav-link:hover {
+    background: #f8fafc;
+    color: #1e40af;
+    padding-left: 24px;
+}
+
+.nav-link.active {
+    background: linear-gradient(90deg, #1e40af, #3b82f6);
+    color: white;
+    border-left: 4px solid #1d4ed8;
+}
+
+.nav-link i {
+    font-size: 16px;
+    min-width: 16px;
+    transition: all 0.3s ease;
+}
+
+.modern-sidebar.collapsed .link-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.modern-sidebar.collapsed .nav-link {
+    justify-content: center;
+    padding: 12px 8px;
+}
+
+.state-badge {
+    background: #e5e7eb;
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: auto;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover .state-badge {
+    background: #1e40af;
+    color: white;
+}
+
+.modern-sidebar.collapsed .state-badge {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+    background: #f8fafc;
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #6b7280;
+    transition: all 0.3s ease;
+}
+
+.footer-info i {
+    color: #1e40af;
+    font-size: 14px;
+    min-width: 14px;
+}
+
+.modern-sidebar.collapsed .footer-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+/* Sidebar Overlay for Mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Responsive Design for Modern Sidebar */
+@media (max-width: 1024px) {
+    .analysis-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 100px 30px 80px;
+    }
+
+    .analysis-layout.sidebar-collapsed {
+        grid-template-columns: 1fr;
+    }
+
+    .modern-sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        z-index: 1000;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modern-sidebar.active {
+        left: 0;
+    }
+
+    .modern-sidebar.collapsed {
+        width: 280px;
+        left: -280px;
+    }
+
+    .modern-sidebar.collapsed.active {
+        left: 0;
+    }
+
+    .sidebar-toggle-btn {
+        left: 20px !important;
+        top: 110px;
+    }
+}
+
+@media (max-width: 768px) {
+    .analysis-layout {
+        padding: 100px 20px 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .analysis-layout {
+        padding: 100px 15px 80px;
+    }
+
+    .sidebar-toggle-btn {
+        left: 15px !important;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
     }
 }

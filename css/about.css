@@ -738,11 +738,14 @@ ced Company Overview Styles */
 /* Key Stats in Visual Section */
 .key-stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
     margin-top: 2rem;
     padding-top: 2rem;
     border-top: 2px solid #e5e7eb;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .stat-item {
