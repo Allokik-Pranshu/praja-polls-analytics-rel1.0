@@ -130,17 +130,15 @@ class ComponentLoader {
             if (response.ok) {
                 const html = await response.text();
                 targetElement.innerHTML = html;
-                console.log(`Successfully loaded component from: ${componentPath}`);
                 return;
             }
         } catch (error) {
-            console.log(`Fetch failed for ${componentPath}, using embedded template`);
+            // Silently fall back to embedded template
         }
 
         // Fallback to embedded template
         if (fallbackTemplate) {
             targetElement.innerHTML = fallbackTemplate;
-            console.log(`Loaded embedded template for: ${targetSelector}`);
         }
     }
 
@@ -214,8 +212,6 @@ class ComponentLoader {
 
 // Auto-initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing components...');
-
     const pageType = document.body.getAttribute('data-page-type') || 'default';
     const currentState = document.body.getAttribute('data-current-state') || '';
 

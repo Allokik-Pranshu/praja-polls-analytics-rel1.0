@@ -11,18 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add loading animation for chart placeholders
-    document.querySelectorAll('.chart-placeholder').forEach(placeholder => {
-        placeholder.addEventListener('click', function() {
-            this.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #1e40af;"></i><span style="margin-left: 1rem; color: #64748b;">Loading chart data...</span></div>';
-            
-            // Simulate loading
-            setTimeout(() => {
-                this.innerHTML = '<div style="color: #64748b; text-align: center;"><i class="fas fa-chart-bar" style="font-size: 3rem; color: #1e40af; margin-bottom: 1rem;"></i><h4>Interactive Chart</h4><p>Chart functionality would be implemented with libraries like Chart.js or D3.js</p></div>';
-            }, 2000);
-        });
-    });
-
     // Animate sections on load
     const sections = document.querySelectorAll('.section-card');
     sections.forEach((section, index) => {

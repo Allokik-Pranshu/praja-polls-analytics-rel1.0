@@ -26,8 +26,7 @@ praja-polls-analytics/
 │   ├── analysis.js           # State analysis page functionality
 │   └── contact.js            # Contact form and feedback functionality
 ├── images/                    # Logo and image assets
-│   ├── ppalogo.svg           # Company logo (SVG - primary)
-│   └── ppalogo.png           # Company logo (PNG - backup)
+│   └── ppalogo.svg           # Company logo (SVG)
 ├── pages/                     # Main website pages (✅ All use components)
 │   ├── home.html             # Homepage with hero and featured states
 │   ├── states.html           # Available states listing
@@ -36,9 +35,7 @@ praja-polls-analytics/
 ├── states/                    # Individual state analysis pages (✅ All use components)
 │   ├── uttar-pradesh.html    # UP 2017 election analysis
 │   └── andhra-pradesh.html   # AP 2024 SGED survey results
-└── Documents/                 # Survey data files
-    ├── andhra.xlsx           # AP election survey data
-    └── ap.numbers            # Additional AP data
+
 ```
 
 ## 🎨 Design Features

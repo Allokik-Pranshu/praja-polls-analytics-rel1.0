@@ -54,8 +54,7 @@ function handleFormSubmit(e) {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
         
-        // Log form data (for development)
-        console.log('Form submitted:', data);
+
     }, 2000);
 }
 
@@ -76,8 +75,7 @@ function handleStarRating(e) {
     // Show thank you message
     showNotification(`Thank you for rating us ${rating} star${rating > 1 ? 's' : ''}!`, 'success');
     
-    // Log rating (replace with actual API call)
-    console.log('Rating submitted:', rating);
+
 }
 
 // Handle star hover effect
@@ -125,8 +123,7 @@ function openFeedbackModal(type, title, placeholder) {
         // Show success message
         showNotification('Thank you for your feedback! We appreciate your input.', 'success');
         
-        // Log feedback (replace with actual API call)
-        console.log('Feedback submitted:', { type, feedback });
+
     }
 }
 

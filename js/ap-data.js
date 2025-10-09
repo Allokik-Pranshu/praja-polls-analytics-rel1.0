@@ -8,7 +8,7 @@ let allAPConstituencyData = [];
 
 // Function to load AP constituency data with pagination
 function loadAPConstituencyData() {
-    console.log('Loading AP constituency data...');
+
     try {
         // Check if apConstituencyData is available (loaded from ap-constituency-data.js)
         if (typeof apConstituencyData === 'undefined') {
@@ -20,11 +20,11 @@ function loadAPConstituencyData() {
             return;
         }
 
-        console.log('AP Data loaded successfully, total records:', apConstituencyData.length);
+
 
         // Skip the first row as it contains headers
         allAPConstituencyData = apConstituencyData.slice(1);
-        console.log('AP Data after removing header, records:', allAPConstituencyData.length);
+
 
         // Create pagination controls at top
         createAPTopPaginationControls();
@@ -35,7 +35,7 @@ function loadAPConstituencyData() {
         // Create pagination controls at bottom
         createAPBottomPaginationControls();
 
-        console.log('AP table populated with pagination, total records:', allAPConstituencyData.length);
+
 
     } catch (error) {
         console.error('Error loading AP constituency data:', error);
@@ -338,17 +338,17 @@ function createAPPageButton(pageNum) {
 
 // Initialize AP data loading when DOM is ready
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM loaded, checking current state:', document.body.dataset.currentState);
+
     
     // Check if we're on the AP page
     if (document.body.dataset.currentState === 'andhra-pradesh') {
-        console.log('On AP page, loading constituency data...');
+
         // Wait a bit for the page to load, then load constituency data
         setTimeout(() => {
-            console.log('Starting AP data load...');
+
             loadAPConstituencyData();
         }, 100);
     } else {
-        console.log('Not on AP page, skipping data load');
+
     }
 });

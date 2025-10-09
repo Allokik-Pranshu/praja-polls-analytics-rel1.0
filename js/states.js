@@ -177,7 +177,7 @@ let allConstituencyData = [];
 
 // Function to load UP constituency data with pagination
 function loadUPConstituencyData() {
-    console.log('Loading UP constituency data...');
+
     try {
         // Check if upConstituencyData is available (loaded from up-data.js)
         if (typeof upConstituencyData === 'undefined') {
@@ -186,7 +186,7 @@ function loadUPConstituencyData() {
         }
 
         allConstituencyData = upConstituencyData;
-        console.log('Data loaded successfully, records:', allConstituencyData.length);
+
 
         // Create pagination controls at top
         createTopPaginationControls();
@@ -429,8 +429,6 @@ function createConstituencyRow(record, serialNo) {
     const row = document.createElement('tr');
 
     // Calculate margin and determine if positive/negative
-    const votes1 = parseInt(record.votes1) || 0;
-    const votes2 = parseInt(record.votes2) || 0;
     const margin = record.margin && record.margin !== '-' ? parseInt(record.margin) : null;
 
     // Format numbers with commas
@@ -477,7 +475,6 @@ function createConstituencyRow(record, serialNo) {
 // Function to update constituency statistics
 function updateConstituencyStats(data) {
     const totalConstituencies = data.length;
-    const validResults = data.filter(record => record.votes2 && record.votes2 !== '-').length;
     const closeResults = data.filter(record => {
         const margin = parseInt(record.margin);
         return margin && Math.abs(margin) <= 1000;
@@ -489,12 +486,5 @@ function updateConstituencyStats(data) {
         return margin && Math.abs(margin) <= 5000; // Within 5000 votes considered accurate
     }).length;
 
-    // Update stat cards
-    const statCards = document.querySelectorAll('.constituency-stats .stat-card');
-    if (statCards.length >= 4) {
-        statCards[0].querySelector('.stat-number').textContent = totalConstituencies;
-        statCards[1].querySelector('.stat-number').textContent = accurateResults;
-        statCards[2].querySelector('.stat-number').textContent = `${((accurateResults / totalConstituencies) * 100).toFixed(1)}%`;
-        statCards[3].querySelector('.stat-number').textContent = closeResults;
-    }
+
 }

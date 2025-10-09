@@ -73,12 +73,7 @@ function initializeMainJS() {
     const analysisLayout = document.querySelector('.analysis-layout');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-    console.log('Modern sidebar elements found:', {
-        toggle: !!sidebarToggleBtn,
-        sidebar: !!modernSidebar,
-        layout: !!analysisLayout,
-        overlay: !!sidebarOverlay
-    });
+
 
     if (sidebarToggleBtn && modernSidebar && analysisLayout) {
         // Check if we're on mobile
@@ -254,62 +249,3 @@ document.addEventListener('DOMContentLoaded', function () {
         initializeMainJS();
     }
 });
-// Constituency table scroll enhancement
-const constituencyTable = document.querySelector('.constituency-data-table');
-if (constituencyTable) {
-    // Add scroll indicators
-    const scrollIndicator = document.createElement('div');
-    scrollIndicator.className = 'scroll-indicator';
-    scrollIndicator.innerHTML = '<i class="fas fa-arrows-alt-h"></i> Scroll to view all columns';
-
-    // Show/hide scroll indicator based on scroll position
-    constituencyTable.addEventListener('scroll', function () {
-        const isScrolledToEnd = this.scrollLeft >= (this.scrollWidth - this.clientWidth - 10);
-        const isAtStart = this.scrollLeft <= 10;
-
-        if (isScrolledToEnd) {
-            scrollIndicator.style.opacity = '0.5';
-            scrollIndicator.innerHTML = '<i class="fas fa-arrow-left"></i> Scroll back to see previous columns';
-        } else if (isAtStart) {
-            scrollIndicator.style.opacity = '1';
-            scrollIndicator.innerHTML = '<i class="fas fa-arrow-right"></i> Scroll to view more columns';
-        } else {
-            scrollIndicator.style.opacity = '0.8';
-            scrollIndicator.innerHTML = '<i class="fas fa-arrows-alt-h"></i> Scroll to view all columns';
-        }
-    });
-
-    // Add smooth scrolling for better UX
-    let isScrolling = false;
-    constituencyTable.addEventListener('wheel', function (e) {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-            e.preventDefault();
-            if (!isScrolling) {
-                isScrolling = true;
-                this.scrollLeft += e.deltaX;
-                setTimeout(() => { isScrolling = false; }, 50);
-            }
-        }
-    });
-
-    // Touch scroll enhancement for mobile
-    let startX = 0;
-    let scrollLeft = 0;
-
-    constituencyTable.addEventListener('touchstart', function (e) {
-        startX = e.touches[0].pageX - this.offsetLeft;
-        scrollLeft = this.scrollLeft;
-    });
-
-    constituencyTable.addEventListener('touchmove', function (e) {
-        if (!startX) return;
-        e.preventDefault();
-        const x = e.touches[0].pageX - this.offsetLeft;
-        const walk = (x - startX) * 2;
-        this.scrollLeft = scrollLeft - walk;
-    });
-
-    constituencyTable.addEventListener('touchend', function () {
-        startX = 0;
-    });
-}
