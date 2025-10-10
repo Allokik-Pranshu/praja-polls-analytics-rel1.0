@@ -296,6 +296,235 @@ Since each election survey has unique data structures and requirements, new stat
 - Replace [name], [phone_number], [address] with real information
 - Add actual director information and credentials
 
+## 📊 Google Sheets Integration
+
+The contact page includes Google Sheets integration for collecting and managing form submissions, feedback, and ratings. This allows you to automatically store all user interactions in a Google Spreadsheet for easy management and analysis.
+
+### Features
+- **Contact Form Submissions**: All contact form data is automatically saved
+- **Star Ratings**: User ratings are tracked with timestamps and IP addresses
+- **Feedback Collection**: Feature suggestions and issue reports are stored
+- **Offline Support**: Data is stored locally if Google Sheets is unavailable and synced when online
+- **No Backend Required**: Uses Google Apps Script as a free backend solution
+
+### Setup Instructions
+
+#### Step 1: Create a Google Spreadsheet
+1. Go to [Google Sheets](https://sheets.google.com)
+2. Create a new spreadsheet
+3. Name it "Praja Polls Analytics - Contact & Feedback"
+4. Copy the spreadsheet ID from the URL (the long string between `/d/` and `/edit`)
+   - Example URL: `https://docs.google.com/spreadsheets/d/1ABC123xyz789/edit#gid=0`
+   - Spreadsheet ID: `1ABC123xyz789`
+
+#### Step 2: Set Up Google Apps Script
+1. Go to [Google Apps Script](https://script.google.com)
+2. Click "New Project"
+3. Replace the default `Code.gs` content with the following code:
+
+```javascript
+function doPost(e) {
+    try {
+        const data = JSON.parse(e.postData.contents);
+        const spreadsheetId = 'YOUR_SPREADSHEET_ID'; // Replace with your actual spreadsheet ID
+        const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+        
+        let sheet;
+        let headers;
+        let rowData;
+        
+        // Determine which sheet to use based on form type
+        switch(data.formType) {
+            case 'contact':
+                sheet = getOrCreateSheet(spreadsheet, 'Contact_Forms');
+                headers = ['Timestamp', 'First Name', 'Last Name', 'Email', 'Phone', 'Organization', 'Subject', 'Message', 'Newsletter', 'IP Address'];
+                rowData = [
+                    new Date(),
+                    data.firstName || '',
+                    data.lastName || '',
+                    data.email || '',
+                    data.phone || '',
+                    data.organization || '',
+                    data.subject || '',
+                    data.message || '',
+                    data.newsletter || 'No',
+                    data.ipAddress || ''
+                ];
+                break;
+                
+            case 'feedback':
+                sheet = getOrCreateSheet(spreadsheet, 'Feedback');
+                headers = ['Timestamp', 'Name', 'Email', 'Feedback Type', 'Message', 'Rating', 'IP Address'];
+                rowData = [
+                    new Date(),
+                    data.name || '',
+                    data.email || '',
+                    data.feedbackType || '',
+                    data.message || '',
+                    data.rating || '',
+                    data.ipAddress || ''
+                ];
+                break;
+                
+            case 'rating':
+                sheet = getOrCreateSheet(spreadsheet, 'Ratings');
+                headers = ['Timestamp', 'Rating', 'IP Address', 'User Agent'];
+                rowData = [
+                    new Date(),
+                    data.rating || '',
+                    data.ipAddress || '',
+                    data.userAgent || ''
+                ];
+                break;
+                
+            default:
+                throw new Error('Invalid form type');
+        }
+        
+        // Set headers if sheet is empty
+        if (sheet.getLastRow() === 0) {
+            sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+            sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+            sheet.setFrozenRows(1);
+        }
+        
+        // Add the data
+        sheet.appendRow(rowData);
+        
+        // Auto-resize columns
+        sheet.autoResizeColumns(1, headers.length);
+        
+        return ContentService
+            .createTextOutput(JSON.stringify({
+                success: true,
+                message: 'Data submitted successfully',
+                timestamp: new Date().toISOString()
+            }))
+            .setMimeType(ContentService.MimeType.JSON);
+            
+    } catch (error) {
+        return ContentService
+            .createTextOutput(JSON.stringify({
+                success: false,
+                error: error.toString()
+            }))
+            .setMimeType(ContentService.MimeType.JSON);
+    }
+}
+
+function doGet(e) {
+    return ContentService
+        .createTextOutput(JSON.stringify({
+            status: 'Google Apps Script is running',
+            timestamp: new Date().toISOString()
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+}
+
+function getOrCreateSheet(spreadsheet, sheetName) {
+    let sheet = spreadsheet.getSheetByName(sheetName);
+    if (!sheet) {
+        sheet = spreadsheet.insertSheet(sheetName);
+    }
+    return sheet;
+}
+```
+
+4. Replace `YOUR_SPREADSHEET_ID` with your actual spreadsheet ID from Step 1
+5. Save the project with a name like "Contact Form Handler"
+
+#### Step 3: Deploy as Web App
+1. In Google Apps Script, click "Deploy" > "New deployment"
+2. Click the gear icon next to "Type" and select "Web app"
+3. Fill in the deployment configuration:
+   - **Description**: "Contact and Feedback Form Handler"
+   - **Execute as**: "Me"
+   - **Who has access**: "Anyone"
+4. Click "Deploy"
+5. Review and authorize the permissions when prompted
+6. Copy the Web App URL (it will look like: `https://script.google.com/macros/s/ABC123xyz789/exec`)
+
+#### Step 4: Update Your Website Configuration
+1. Open `js/contact.js` in your project
+2. Find the `GOOGLE_SHEETS_CONFIG` object at the top of the file
+3. Replace the configuration values:
+
+```javascript
+const GOOGLE_SHEETS_CONFIG = {
+    // Replace with your actual Web App URL from Step 3
+    webAppUrl: 'https://script.google.com/macros/s/YOUR_ACTUAL_SCRIPT_ID/exec',
+    
+    // Replace with your actual Spreadsheet ID from Step 1
+    spreadsheetId: 'YOUR_ACTUAL_SPREADSHEET_ID',
+    
+    // Sheet names (these will be created automatically)
+    sheets: {
+        contact: 'Contact_Forms',
+        feedback: 'Feedback',
+        ratings: 'Ratings'
+    }
+};
+```
+
+#### Step 5: Test the Integration
+1. Open your contact page in a web browser
+2. Fill out and submit the contact form
+3. Try rating the service using the star rating
+4. Use the feedback buttons to submit suggestions or report issues
+5. Check your Google Spreadsheet to see if the data appears
+
+### Data Structure
+The integration automatically creates three sheets in your spreadsheet:
+
+#### Contact_Forms Sheet
+- Timestamp, First Name, Last Name, Email, Phone, Organization, Subject, Message, Newsletter, IP Address
+
+#### Feedback Sheet  
+- Timestamp, Name, Email, Feedback Type, Message, Rating, IP Address
+
+#### Ratings Sheet
+- Timestamp, Rating, IP Address, User Agent
+
+### Troubleshooting
+
+#### Common Issues:
+1. **"Script function not found" error**
+   - Make sure you've saved the Google Apps Script
+   - Verify the function names are correct (doPost, doGet)
+
+2. **"Permission denied" error**
+   - Re-deploy the web app
+   - Make sure "Execute as" is set to "Me"
+   - Check that you've authorized all permissions
+
+3. **Data not appearing in spreadsheet**
+   - Verify the spreadsheet ID is correct
+   - Check the Google Apps Script execution log for errors
+   - Ensure the web app URL is correct
+
+4. **CORS errors**
+   - Make sure the web app access is set to "Anyone"
+   - Try redeploying the web app
+
+#### Checking Logs:
+1. Go to your Google Apps Script project
+2. Click "Executions" in the left sidebar
+3. Look for any error messages in recent executions
+
+### Security Considerations
+- The web app is set to "Anyone" access for simplicity
+- Consider implementing additional validation in the Apps Script
+- Monitor usage to prevent spam/abuse
+- You can add rate limiting if needed
+
+### Benefits
+- **No Backend Required**: Uses Google Sheets as your database
+- **Real-time Data**: Submissions appear instantly in your spreadsheet
+- **Free Solution**: No hosting or database costs
+- **Easy Management**: View and manage data directly in Google Sheets
+- **Offline Support**: Data is stored locally if Google Sheets is unavailable
+- **Automatic Retry**: Failed submissions are automatically retried when online
+
 ## 📄 License
 
 This project is created for Praja Polls Analytics. All rights reserved.
