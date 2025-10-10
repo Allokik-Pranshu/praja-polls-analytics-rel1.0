@@ -59,8 +59,11 @@ function initializeMainJS() {
         });
     }, observerOptions);
 
-    // Observe animated elements
-    document.querySelectorAll('.stat-card, .state-card, .director-card, .achievement-card').forEach(card => {
+    // Observe animated elements (exclude state-card on states page to avoid conflicts)
+    const isStatesPage = document.body.getAttribute('data-page') === 'states';
+    const selector = isStatesPage ? '.stat-card, .director-card, .achievement-card' : '.stat-card, .state-card, .director-card, .achievement-card';
+    
+    document.querySelectorAll(selector).forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';

@@ -56,23 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Enhanced animation for state cards with mobile optimization
-    const stateCardsDetailed = document.querySelectorAll('.state-card-detailed');
-    const isMobile = window.innerWidth <= 768;
-
-    stateCardsDetailed.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-
-        // Reduce animation delay on mobile for better performance
-        const delay = isMobile ? index * 50 : index * 100;
-        card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, 100 + delay);
-    });
+    // No animation for state cards to avoid any display issues
+    // Cards will display normally without any fade-in effects
 
     // Add touch feedback for mobile devices
     if ('ontouchstart' in window) {
