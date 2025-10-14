@@ -252,3 +252,69 @@ document.addEventListener('DOMContentLoaded', function () {
         initializeMainJS();
     }
 });
+// Video Modal Functionality
+function initializeVideoModal() {
+    // Create video modal HTML
+    const modalHTML = `
+        <div id="videoModal" class="video-modal">
+            <div class="video-modal-content">
+                <span class="video-modal-close">&times;</span>
+                <iframe id="videoFrame" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to body if it doesn't exist
+    if (!document.getElementById('videoModal')) {
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+    
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoFrame');
+    const closeBtn = document.querySelector('.video-modal-close');
+    
+    // Add click event to all video thumbnails
+    document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            const videoId = this.getAttribute('data-video-id');
+            if (videoId) {
+                const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+                iframe.src = embedUrl;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+    
+    // Close modal functionality
+    function closeModal() {
+        modal.style.display = 'none';
+        iframe.src = '';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal when clicking X
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+}
+
+// Initialize video modal when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for the page to fully load
+    setTimeout(initializeVideoModal, 500);
+});
