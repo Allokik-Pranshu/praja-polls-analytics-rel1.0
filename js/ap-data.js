@@ -83,21 +83,10 @@ function createAPConstituencyRow(record, serialNo) {
     };
 
     // Map the JSON columns to table columns based on the actual structure
+    // Note: Column4-Column15 have been removed from the data
     row.innerHTML = `
         <td>${record["Column2"] || serialNo}</td>
         <td style="text-align: left;">${record["Column3"] || '-'}</td>
-        <td>${formatNumber(record["Column4"])}</td>
-        <td>${formatNumber(record["Column5"])}</td>
-        <td>${formatPercentage(record["Column6"])}</td>
-        <td>${formatNumber(record["Column7"])}</td>
-        <td>${formatPercentage(record["Column8"])}</td>
-        <td>${formatNumber(record["Column9"])}</td>
-        <td>${formatNumber(record["Column10"])}</td>
-        <td>${formatNumber(record["Column11"])}</td>
-        <td>${formatNumber(record["Column12"])}</td>
-        <td>${formatNumber(record["Column13"])}</td>
-        <td>${formatNumber(record["Column14"])}</td>
-        <td>${formatNumber(record["Column15"])}</td>
         <td>${formatNumber(record["Column16"])}</td>
         <td>${formatNumber(record["Column17"])}</td>
         <td>${formatNumber(record["Column18"])}</td>

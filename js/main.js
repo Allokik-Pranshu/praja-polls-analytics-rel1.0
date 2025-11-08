@@ -254,6 +254,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // Video Modal Functionality
 function initializeVideoModal() {
+    // Only initialize if there are video thumbnails on the page
+    const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+    if (videoThumbnails.length === 0) {
+        return; // Exit if no video thumbnails found
+    }
+    
     // Create video modal HTML
     const modalHTML = `
         <div id="videoModal" class="video-modal">
@@ -274,7 +280,7 @@ function initializeVideoModal() {
     const closeBtn = document.querySelector('.video-modal-close');
     
     // Add click event to all video thumbnails
-    document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
+    videoThumbnails.forEach(thumbnail => {
         thumbnail.addEventListener('click', function() {
             const videoId = this.getAttribute('data-video-id');
             if (videoId) {
