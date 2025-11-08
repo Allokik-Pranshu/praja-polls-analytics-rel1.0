@@ -1,4 +1,4 @@
-# Praja Polls Analytics Website
+# Praja Poll Analytics Website
 
 A responsive website for a research consultancy specializing in exit polls and election result predictions across India. Built with a modern component-based architecture for easy maintenance and scalability.
 
@@ -312,7 +312,7 @@ The contact page includes Google Sheets integration for collecting and managing 
 #### Step 1: Create a Google Spreadsheet
 1. Go to [Google Sheets](https://sheets.google.com)
 2. Create a new spreadsheet
-3. Name it "Praja Polls Analytics - Contact & Feedback"
+3. Name it "Praja Poll Analytics - Contact & Feedback"
 4. Copy the spreadsheet ID from the URL (the long string between `/d/` and `/edit`)
    - Example URL: `https://docs.google.com/spreadsheets/d/1ABC123xyz789/edit#gid=0`
    - Spreadsheet ID: `1ABC123xyz789`
@@ -527,8 +527,8 @@ The integration automatically creates three sheets in your spreadsheet:
 
 ## 📄 License
 
-This project is created for Praja Polls Analytics. All rights reserved.
+This project is created for Praja Poll Analytics. All rights reserved.
 
 ---
 
-**Praja Polls Analytics** - Decoding Democracy with Data
+**Praja Poll Analytics** - Decoding Democracy with Data
