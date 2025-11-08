@@ -96,6 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (document.body.dataset.currentState === 'uttar-pradesh') {
             initializeUPCharts();
         }
+        // Check if we're on the Bihar page
+        if (document.body.dataset.currentState === 'bihar') {
+            initializeBiharCharts();
+        }
     }, 100);
 });
 
@@ -174,5 +178,26 @@ function initializeUPCharts() {
     if (upCalculatedCanvas) {
         const upCalculatedChart = new PieChart(upCalculatedCanvas, upPredictedData, upColors);
         upCalculatedChart.draw();
+    }
+}
+
+function initializeBiharCharts() {
+    // Bihar 2025 Predicted data
+    const biharPredictedData = [
+        { label: 'BJP', value: 125 },
+        { label: 'JDU', value: 48 },
+        { label: 'RJD', value: 52 },
+        { label: 'Congress', value: 18 },
+        { label: 'Others', value: 0 }
+    ];
+
+    // Colors for Bihar parties
+    const biharColors = ['#ff6b35', '#00a86b', '#10b981', '#3b82f6', '#8b5cf6'];
+
+    // Draw Bihar predicted pie chart
+    const biharPredictedCanvas = document.querySelector('#bihar-predicted-pie canvas');
+    if (biharPredictedCanvas) {
+        const biharPredictedChart = new PieChart(biharPredictedCanvas, biharPredictedData, biharColors);
+        biharPredictedChart.draw();
     }
 }

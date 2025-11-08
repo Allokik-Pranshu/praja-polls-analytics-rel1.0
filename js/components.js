@@ -4,8 +4,8 @@ const ComponentTemplates = {
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo">
-            <img src="../images/ppalogo.svg" alt="Praja Polls Analytics Logo">
-            <h2>Praja Polls Analytics</h2>
+            <img src="../images/ppalogo.svg" alt="Praja Poll Analytics Logo">
+            <h2>Praja Poll Analytics</h2>
         </div>
         <ul class="nav-menu">
             <li class="nav-item">
@@ -33,8 +33,8 @@ const ComponentTemplates = {
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo">
-            <img src="../images/ppalogo.svg" alt="Praja Polls Analytics Logo">
-            <h2>Praja Polls Analytics</h2>
+            <img src="../images/ppalogo.svg" alt="Praja Poll Analytics Logo">
+            <h2>Praja Poll Analytics</h2>
         </div>
         <ul class="nav-menu">
             <li class="nav-item">
@@ -65,9 +65,9 @@ const ComponentTemplates = {
             <div class="footer-section">
                 <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
                     <div class="footer-logo-container">
-                        <img src="../images/ppalogo.svg" alt="Praja Polls Analytics Logo" class="logo-medium">
+                        <img src="../images/ppalogo.svg" alt="Praja Poll Analytics Logo" class="logo-medium">
                     </div>
-                    <h3>Praja Polls Analytics</h3>
+                    <h3>Praja Poll Analytics</h3>
                 </div>
                 <p>Decoding Democracy with Data</p>
                 <div class="social-links">
@@ -93,7 +93,7 @@ const ComponentTemplates = {
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Praja Polls Analytics. All rights reserved.</p>
+            <p>&copy; 2024 Praja Poll Analytics. All rights reserved.</p>
             <p class="disclaimer">Disclaimer: All predictions are based on statistical analysis and may vary from actual results.</p>
         </div>
     </div>
@@ -105,6 +105,7 @@ const ComponentTemplates = {
     <ul class="state-nav">
         <li><a href="uttar-pradesh.html" data-state="uttar-pradesh">Uttar Pradesh</a></li>
         <li><a href="andhra-pradesh.html" data-state="andhra-pradesh">Andhra Pradesh</a></li>
+        <li><a href="bihar.html" data-state="bihar">Bihar</a></li>
     </ul>
     
     <div class="sidebar-note">

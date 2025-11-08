@@ -3272,25 +3272,7 @@ ation classes for enhanced mobile experience */
     }
 }
 
-/* Dark mode support (if needed in future) */
-@media (prefers-color-scheme: dark) {
-    .state-card-detailed {
-        background: #1e293b;
-        color: #f1f5f9;
-    }
-
-    .state-status {
-        background: #334155;
-        color: #e2e8f0;
-    }
-
-    .metric-label {
-        color: #94a3b8;
-    }
-}
-
-/*
- Screen width optimization for Andhra Pradesh page */
+/* Screen width optimization for Andhra Pradesh page */
 .analysis-layout {
     max-width: 100vw;
     overflow-x: hidden;
@@ -4185,4 +4167,279 @@ dern Sidebar Components */
         height: 36px;
         font-size: 16px;
     }
+}
+/* 
+Bihar Party Badges */
+.party-badge.jdu {
+    background: linear-gradient(135deg, #00a86b, #008f5a);
+    color: #ffffff;
+    border: 2px solid #007a4d;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 168, 107, 0.2);
+}
+
+.party-badge.rjd {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: 2px solid #047857;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+/* Bihar Summary Cards */
+.summary-card.jdu-card {
+    border-top-color: #00a86b;
+}
+
+.summary-card.rjd-card {
+    border-top-color: #10b981;
+}
+
+/* Bihar Table Row Styles */
+.jdu-row {
+    background: #f0fdf4;
+}
+
+.rjd-row {
+    background: #ecfdf5;
+}
+
+/* Bihar Pie Chart Colors */
+.pie-color.jdu-color {
+    background: #00a86b;
+}
+
+.pie-color.rjd-color {
+    background: #10b981;
+}
+
+/* Bihar Compact Table Styles */
+.bihar-compact-table {
+    font-size: 0.72rem;
+    table-layout: fixed !important;
+    width: 448px !important;
+    max-width: 448px !important;
+}
+
+.bihar-compact-table th,
+.bihar-compact-table td {
+    padding: 5px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.bihar-compact-table th {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 7px 2px;
+}
+
+.bihar-compact-table .party-badge {
+    padding: 0.18rem 0.25rem;
+    font-size: 0.58rem;
+    min-width: auto;
+    display: inline-block;
+    letter-spacing: -0.5px;
+}
+
+.bihar-constituency-table {
+    overflow-x: visible;
+    max-width: 100%;
+}
+
+.bihar-constituency-table .table-container {
+    overflow: visible;
+}
+
+/* Responsive adjustments for Bihar table */
+@media (max-width: 1200px) {
+    .bihar-compact-table {
+        font-size: 0.75rem;
+        max-width: 100%;
+    }
+    
+    .bihar-compact-table th,
+    .bihar-compact-table td {
+        padding: 6px 3px;
+    }
+    
+    .bihar-compact-table .party-badge {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .bihar-constituency-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        border-radius: 8px;
+    }
+    
+    .bihar-compact-table {
+        table-layout: auto;
+        min-width: 580px; /* Slightly reduced for mobile */
+        font-size: 0.7rem;
+    }
+    
+    .bihar-compact-table th,
+    .bihar-compact-table td {
+        padding: 5px 2px;
+    }
+    
+    .bihar-compact-table .party-badge {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bihar-constituency-table {
+        margin: 0 -1rem; /* Extend to edges on small screens */
+        border-radius: 0;
+    }
+    
+    .bihar-compact-table {
+        min-width: 550px;
+        font-size: 0.65rem;
+    }
+    
+    .bihar-compact-table th {
+        font-size: 0.65rem;
+        padding: 6px 2px;
+    }
+    
+    .bihar-compact-table td {
+        padding: 4px 2px;
+    }
+    
+    .bihar-compact-table .party-badge {
+        font-size: 0.5rem;
+        padding: 0.1rem 0.2rem;
+    }
+}
+
+/* Bihar Charts Grid - Pie Chart and Map Side by Side */
+.bihar-charts-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem;
+    align-items: stretch;
+    width: 100%;
+}
+
+.bihar-charts-grid .pie-chart-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.bihar-map-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bihar-map-section h4 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+    font-size: 1.1rem;
+}
+
+.bihar-map-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.bihar-map-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: contain;
+    max-height: 500px;
+    min-height: 350px;
+}
+
+/* Responsive adjustments for Bihar charts */
+@media (max-width: 1024px) {
+    .bihar-charts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+    }
+    
+    .bihar-map-container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .bihar-charts-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .bihar-map-container {
+        padding: 0.5rem;
+    }
+    
+    .bihar-map-image {
+        max-height: 300px;
+    }
+}
+
+/* Additional Bihar Charts Grid Fixes */
+.charts-section .bihar-charts-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.pie-charts-container.bihar-charts-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Ensure pie chart section doesn't take full width */
+.bihar-charts-grid > * {
+    min-width: 0;
+}
+
+/* Bihar Subsection Styling */
+.bihar-subsection {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+.bihar-subsection h3 {
+    color: #1e293b;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bihar-subsection h3 i {
+    color: #1e40af;
+}
+
+.bihar-subsection p {
+    color: #64748b;
+    margin-bottom: 1.5rem;
 }
