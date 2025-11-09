@@ -4667,6 +4667,18 @@ Bihar Party Badges */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     margin-top: 9px;
     margin-bottom: 9px;
+    transition: all 0.3s ease;
+}
+
+.news-bulletin:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.bulletin-link {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
 }
 
 .bulletin-container {
@@ -4675,6 +4687,11 @@ Bihar Party Badges */
     gap: 20px;
     max-width: 100%;
     padding: 0 40px;
+    transition: all 0.3s ease;
+}
+
+.bulletin-link:hover .bulletin-container {
+    opacity: 0.95;
 }
 
 .bulletin-icon {
@@ -4706,6 +4723,10 @@ Bihar Party Badges */
     font-size: 1rem;
     animation: scrollBulletin 30s linear infinite;
     padding-left: 100%;
+}
+
+.bulletin-link:hover .bulletin-text {
+    animation-play-state: paused;
 }
 
 @keyframes scrollBulletin {
@@ -5033,3 +5054,264 @@ Bihar Party Badges */
 .quick-link-card:nth-child(4) { animation-delay: 0.4s; }
 .quick-link-card:nth-child(5) { animation-delay: 0.5s; }
 .quick-link-card:nth-child(6) { animation-delay: 0.6s; }
+
+
+/* Bihar Coming Soon Page */
+.bihar-coming-soon {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.coming-soon-icon-large {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    box-shadow: 0 10px 40px rgba(30, 64, 175, 0.3);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.coming-soon-icon-large i {
+    font-size: 3.5rem;
+    color: white;
+}
+
+.bihar-coming-soon h1 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+}
+
+.upcoming-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.upcoming-badge i {
+    font-size: 1.2rem;
+}
+
+.launch-announcement {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.launch-announcement h2 {
+    font-size: 2rem;
+    color: #1e40af;
+    margin-bottom: 1rem;
+}
+
+.launch-details {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+
+.launch-time {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    min-width: 280px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.time-box:hover {
+    transform: translateY(-5px);
+}
+
+.time-box i {
+    font-size: 2.5rem;
+    color: #1e40af;
+}
+
+.time-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.time-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.time-value {
+    font-size: 1.3rem;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.features-preview {
+    margin: 4rem 0;
+}
+
+.features-preview h3 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin-bottom: 2rem;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.preview-item {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.preview-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.preview-item i {
+    font-size: 2.5rem;
+    color: #1e40af;
+    margin-bottom: 1rem;
+}
+
+.preview-item h4 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.preview-item p {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.stay-tuned {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    border-radius: 16px;
+    color: white;
+}
+
+.stay-tuned p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.stay-tuned i {
+    font-size: 1.5rem;
+    animation: ring 2s ease-in-out infinite;
+}
+
+@keyframes ring {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10%, 30% {
+        transform: rotate(-15deg);
+    }
+    20%, 40% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .bihar-coming-soon {
+        padding: 2rem 1rem;
+    }
+
+    .coming-soon-icon-large {
+        width: 100px;
+        height: 100px;
+    }
+
+    .coming-soon-icon-large i {
+        font-size: 2.5rem;
+    }
+
+    .bihar-coming-soon h1 {
+        font-size: 1.8rem;
+    }
+
+    .launch-announcement {
+        padding: 2rem 1.5rem;
+    }
+
+    .launch-announcement h2 {
+        font-size: 1.5rem;
+    }
+
+    .launch-details {
+        font-size: 1rem;
+    }
+
+    .launch-time {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .time-box {
+        min-width: auto;
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    .time-value {
+        font-size: 1.1rem;
+    }
+
+    .preview-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .stay-tuned p {
+        font-size: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
