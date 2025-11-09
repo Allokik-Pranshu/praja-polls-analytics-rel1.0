@@ -2041,17 +2041,12 @@ Neutral difference indicator */
 
 /*
  Centered table styling */
-.centered-table td:not(:first-child):not(:nth-child(2)) {
+.centered-table td {
     text-align: center;
 }
 
 .centered-table th {
     text-align: center;
-}
-
-.centered-table td:first-child,
-.centered-table td:nth-child(2) {
-    text-align: left;
 }
 
 /* Charts Section */
@@ -2318,51 +2313,58 @@ Neutral difference indicator */
 .constituency-table th:nth-child(1),
 /* S.No. */
 .constituency-table td:nth-child(1) {
-    width: 6%;
-    min-width: 40px;
+    width: 2%;
+    min-width: 10px;
 }
 
 .constituency-table th:nth-child(2),
 /* District Name */
 .constituency-table td:nth-child(2) {
-    width: 14%;
-    min-width: 100px;
+    width: 4%;
+    min-width: 40px;
 }
 
 .constituency-table th:nth-child(3),
 /* Assembly Name */
 .constituency-table td:nth-child(3) {
-    width: 16%;
-    min-width: 120px;
+    width: 4%;
+    min-width: 50px;
 }
 
 .constituency-table th:nth-child(4),
 /* Party */
 .constituency-table td:nth-child(4) {
-    width: 12%;
-    min-width: 80px;
+    width: 12.5%;
+    min-width: 70px;
     text-align: center;
 }
 
 .constituency-table th:nth-child(5),
 /* Estimated Votes */
 .constituency-table td:nth-child(5) {
-    width: 18%;
-    min-width: 100px;
+    width: 12%;
+    min-width: 75px;
 }
 
 .constituency-table th:nth-child(6),
 /* Actual Votes */
 .constituency-table td:nth-child(6) {
-    width: 18%;
-    min-width: 100px;
+    width: 12%;
+    min-width: 75px;
 }
 
 .constituency-table th:nth-child(7),
 /* Difference */
 .constituency-table td:nth-child(7) {
-    width: 16%;
-    min-width: 90px;
+    width: 10%;
+    min-width: 70px;
+}
+
+.constituency-table th:nth-child(8),
+/* Runner Up Party Votes */
+.constituency-table td:nth-child(8) {
+    width: 12%;
+    min-width: 75px;
 }
 
 /* Shorter column headers */
@@ -4442,4 +4444,120 @@ Bihar Party Badges */
 .bihar-subsection p {
     color: #64748b;
     margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   BIHAR TABLE - COMPLETELY INDEPENDENT STYLES
+   ======================================== */
+
+/* Bihar table container max-width */
+.bihar-constituency-table {
+    max-width: 800px; /* Adjust this value as needed */
+    margin: 0 auto; /* Center the table */
+}
+
+/* Base Bihar table styling */
+.bihar-table {
+    width: 80%;
+    max-width: 100%; /* Table fills container */
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Bihar table headers and cells - general */
+.bihar-table th,
+.bihar-table td {
+    padding: 8px 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    vertical-align: top;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Bihar table headers */
+.bihar-table th {
+    background: #1e40af;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.2;
+    padding: 10px 6px;
+}
+
+/* Bihar table row hover */
+.bihar-table tr:hover {
+    background: #f8fafc;
+}
+
+/* Bihar Column 1 - No. */
+.bihar-table th:nth-child(1),
+.bihar-table td:nth-child(1) {
+    width: 4%;
+    min-width: 35px;
+}
+
+/* Bihar Column 2 - District */
+.bihar-table th:nth-child(2),
+.bihar-table td:nth-child(2) {
+    width: 4%;
+    min-width: 80px;
+}
+
+/* Bihar Column 3 - Constituency */
+.bihar-table th:nth-child(3),
+.bihar-table td:nth-child(3) {
+    width: 4%;
+    min-width: 90px;
+}
+
+/* Bihar Column 4 - Winning Party */
+.bihar-table th:nth-child(4),
+.bihar-table td:nth-child(4) {
+    width: 4%;
+    min-width: 70px;
+}
+
+/* Bihar Column 5 - Expected Votes */
+.bihar-table th:nth-child(5),
+.bihar-table td:nth-child(5) {
+    width: 4%;
+    min-width: 75px;
+}
+
+/* Bihar Column 6 - Winning Margin */
+.bihar-table th:nth-child(6),
+.bihar-table td:nth-child(6) {
+    width: 4%;
+    min-width: 75px;
+}
+
+/* Bihar Column 7 - Runner Up Party */
+.bihar-table th:nth-child(7),
+.bihar-table td:nth-child(7) {
+    width: 10%;
+    min-width: 70px;
+}
+
+/* Bihar Column 8 - Runner Up Party Votes */
+.bihar-table th:nth-child(8),
+.bihar-table td:nth-child(8) {
+    width: 4%;
+    min-width: 75px;
+}
+
+/* Bihar table mobile responsive */
+@media (max-width: 768px) {
+    .bihar-table th,
+    .bihar-table td {
+        padding: 6px 4px;
+        font-size: 11px;
+    }
+
+    .bihar-table th {
+        font-size: 10px;
+        line-height: 1.1;
+    }
 }

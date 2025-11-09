@@ -10,7 +10,7 @@ function loadBiharConstituencyData() {
         // Check if biharConstituencyData is available
         if (typeof biharConstituencyData === 'undefined') {
             console.error('biharConstituencyData not found. Make sure bihar-constituency-data.js is loaded.');
-            const tbody = document.querySelector('.bihar-constituency-table .constituency-table tbody');
+            const tbody = document.querySelector('.bihar-constituency-table .bihar-table tbody');
             if (tbody) {
                 tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">Error: Bihar constituency data not loaded</td></tr>';
             }
@@ -30,7 +30,7 @@ function loadBiharConstituencyData() {
 
     } catch (error) {
         console.error('Error loading Bihar constituency data:', error);
-        const tbody = document.querySelector('.bihar-constituency-table .constituency-table tbody');
+        const tbody = document.querySelector('.bihar-constituency-table .bihar-table tbody');
         if (tbody) {
             tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">Error loading constituency data</td></tr>';
         }
@@ -64,8 +64,8 @@ function createBiharConstituencyRow(record) {
 
     row.innerHTML = `
         <td>${record.sno}</td>
-        <td style="text-align: left;">${record.district}</td>
-        <td style="text-align: left;">${record.constituency}</td>
+        <td>${record.district}</td>
+        <td>${record.constituency}</td>
         <td><span class="party-badge ${getPartyBadge(record.expectedWinningParty)}">${record.expectedWinningParty}</span></td>
         <td>${formatNumber(record.expectedVotes)}</td>
         <td>${formatNumber(record.winningMargin)}</td>
@@ -78,7 +78,7 @@ function createBiharConstituencyRow(record) {
 
 // Function to load a specific page for Bihar data
 function loadBiharPage(pageNumber) {
-    const tbody = document.querySelector('.bihar-constituency-table .constituency-table tbody');
+    const tbody = document.querySelector('.bihar-constituency-table .bihar-table tbody');
     if (!tbody) return;
 
     // Clear existing content
