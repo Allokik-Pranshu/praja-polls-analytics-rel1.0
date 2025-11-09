@@ -87,7 +87,7 @@ const ComponentTemplates = {
             </div>
             <div class="footer-section" id="contact">
                 <h4>Contact Info</h4>
-                <p><i class="fas fa-envelope"></i> info@prajapollsanalytics.com</p>
+                <p><i class="fas fa-envelope"></i> prajapollsanalytics@gmail.com</p>
                 <p><i class="fas fa-phone"></i> +91 99811 92939</p>
                 <p><i class="fas fa-map-marker-alt"></i> 126, SLV Green Meadows, Near IRR, Ramavarappadu, Vijayawada, NTR District, Andhra Pradesh, India</p>
             </div>

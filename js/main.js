@@ -324,3 +324,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // Wait a bit for the page to fully load
     setTimeout(initializeVideoModal, 500);
 });
+
+
+// Enhanced smooth scrolling for hash links to about page sections
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle clicks on quick link cards
+    const quickLinks = document.querySelectorAll('.quick-link-card[href*="#"]');
+    
+    quickLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // If it's a link to another page with a hash
+            if (href.includes('about.html#')) {
+                // Let the browser handle navigation to the other page
+                // The hash will be processed when the page loads
+                return;
+            }
+            
+            // If it's a hash on the current page
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Handle hash on page load (for about.html)
+    if (window.location.hash) {
+        setTimeout(() => {
+            const targetId = window.location.hash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }, 100);
+    }
+    
+    // Pause bulletin animation on hover
+    const bulletinText = document.querySelector('.bulletin-text');
+    if (bulletinText) {
+        bulletinText.addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+        });
+        
+        bulletinText.addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+        });
+    }
+});

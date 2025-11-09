@@ -177,6 +177,13 @@ body {
     overflow: hidden;
 }
 
+.hero-compact {
+    height: 55vh;
+    min-height: 450px;
+    padding-top: 120px;
+    padding-bottom: 40px;
+}
+
 .hero-background {
     position: absolute;
     top: 0;
@@ -195,57 +202,87 @@ body {
     width: 100%;
     height: 100%;
     background-image: 
-        /* India map outline */
-        radial-gradient(ellipse 200px 300px at 30% 40%, rgba(255, 255, 255, 0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 150px 200px at 35% 45%, rgba(255, 255, 255, 0.05) 0%, transparent 70%),
+        /* Animated India map outline */
+        radial-gradient(ellipse 250px 350px at 30% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 180px 250px at 35% 45%, rgba(255, 255, 255, 0.08) 0%, transparent 70%),
         
-        /* Data visualization elements */
-        linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.03) 49%, rgba(255, 255, 255, 0.03) 51%, transparent 52%),
-        linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.03) 49%, rgba(255, 255, 255, 0.03) 51%, transparent 52%),
-        
-        /* Chart bars pattern */
+        /* Grid pattern for data analytics feel */
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 50px,
+            rgba(255, 255, 255, 0.03) 50px,
+            rgba(255, 255, 255, 0.03) 51px
+        ),
         repeating-linear-gradient(
             90deg,
             transparent,
-            transparent 80px,
-            rgba(255, 255, 255, 0.02) 80px,
-            rgba(255, 255, 255, 0.02) 85px
+            transparent 50px,
+            rgba(255, 255, 255, 0.03) 50px,
+            rgba(255, 255, 255, 0.03) 51px
         ),
         
-        /* Voting booth/ballot pattern */
-        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.04) 0%, transparent 30%),
+        /* Diagonal data streams */
+        linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.04) 49%, rgba(255, 255, 255, 0.04) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.04) 49%, rgba(255, 255, 255, 0.04) 51%, transparent 52%),
         
-        /* Statistical dots pattern */
-        radial-gradient(circle 2px at 20px 30px, rgba(255, 255, 255, 0.1), transparent),
-        radial-gradient(circle 2px at 40px 70px, rgba(255, 255, 255, 0.08), transparent),
-        radial-gradient(circle 1px at 90px 40px, rgba(255, 255, 255, 0.06), transparent),
-        radial-gradient(circle 1px at 130px 80px, rgba(255, 255, 255, 0.05), transparent);
+        /* Chart bars pattern - animated */
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 60px,
+            rgba(255, 255, 255, 0.05) 60px,
+            rgba(255, 255, 255, 0.05) 62px,
+            transparent 62px,
+            transparent 70px,
+            rgba(255, 255, 255, 0.08) 70px,
+            rgba(255, 255, 255, 0.08) 72px
+        ),
+        
+        /* Voting booth/ballot pattern with glow */
+        radial-gradient(circle at 75% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 35%),
+        radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.08) 0%, transparent 30%),
+        radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 25%),
+        
+        /* Statistical dots pattern - larger and more visible */
+        radial-gradient(circle 3px at 20px 30px, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(circle 2px at 60px 80px, rgba(255, 255, 255, 0.12), transparent),
+        radial-gradient(circle 2px at 110px 50px, rgba(255, 255, 255, 0.1), transparent),
+        radial-gradient(circle 3px at 150px 100px, rgba(255, 255, 255, 0.13), transparent),
+        radial-gradient(circle 2px at 200px 40px, rgba(255, 255, 255, 0.11), transparent);
     background-size: 
-        400px 500px,
-        300px 400px,
-        100px 100px,
-        100px 100px,
-        200px 200px,
-        300px 300px,
+        500px 600px,
+        350px 450px,
+        50px 50px,
+        50px 50px,
+        150px 150px,
+        150px 150px,
         250px 250px,
-        100px 100px,
-        120px 120px,
-        80px 80px,
-        90px 90px;
+        400px 400px,
+        350px 350px,
+        300px 300px,
+        150px 150px,
+        180px 180px,
+        140px 140px,
+        200px 200px,
+        160px 160px;
     background-position:
         30% 40%,
         35% 45%,
         0 0,
         0 0,
         0 0,
-        70% 30%,
-        80% 70%,
         0 0,
-        25% 25%,
-        75% 75%,
-        50% 50%;
-    animation: backgroundShift 20s ease-in-out infinite;
+        0 0,
+        75% 25%,
+        85% 75%,
+        15% 80%,
+        0 0,
+        30% 30%,
+        60% 60%,
+        80% 40%,
+        40% 80%;
+    animation: backgroundShift 25s ease-in-out infinite, dataFlow 15s linear infinite;
     z-index: -1;
 }
 
@@ -259,19 +296,58 @@ body {
     z-index: -1;
 }
 
-/* Background animation */
+/* Background animations */
 @keyframes backgroundShift {
     0%, 100% {
-        transform: translateX(0) translateY(0);
+        transform: translateX(0) translateY(0) scale(1);
     }
     25% {
-        transform: translateX(-10px) translateY(-5px);
+        transform: translateX(-15px) translateY(-8px) scale(1.02);
     }
     50% {
-        transform: translateX(5px) translateY(-10px);
+        transform: translateX(8px) translateY(-15px) scale(1);
     }
     75% {
-        transform: translateX(-5px) translateY(5px);
+        transform: translateX(-8px) translateY(8px) scale(1.01);
+    }
+}
+
+@keyframes dataFlow {
+    0% {
+        background-position:
+            30% 40%,
+            35% 45%,
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            75% 25%,
+            85% 75%,
+            15% 80%,
+            0 0,
+            30% 30%,
+            60% 60%,
+            80% 40%,
+            40% 80%;
+    }
+    100% {
+        background-position:
+            30% 40%,
+            35% 45%,
+            50px 50px,
+            -50px -50px,
+            0 0,
+            0 0,
+            0 0,
+            75% 25%,
+            85% 75%,
+            15% 80%,
+            150px 150px,
+            180px 180px,
+            140px 140px,
+            200px 200px,
+            160px 160px;
     }
 }
 
@@ -283,13 +359,24 @@ body {
 
 .hero-logo-container {
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 20px;
+    backdrop-filter: blur(15px);
+    border-radius: 24px;
+    padding: 25px;
     margin-bottom: 2rem;
     display: inline-block;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.25);
     position: relative;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: logoGlow 4s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.2);
+    }
 }
 
 /* Additional decorative elements for democracy theme */
@@ -298,12 +385,13 @@ body {
     position: absolute;
     top: 10%;
     right: 10%;
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.05);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    animation: float 6s ease-in-out infinite;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    animation: float 6s ease-in-out infinite, pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .hero::before {
@@ -311,12 +399,13 @@ body {
     position: absolute;
     bottom: 15%;
     left: 8%;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.03);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    animation: float 8s ease-in-out infinite reverse;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    animation: float 8s ease-in-out infinite reverse, pulse 4s ease-in-out infinite;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
 }
 
 @keyframes float {
@@ -324,7 +413,18 @@ body {
         transform: translateY(0px) rotate(0deg);
     }
     50% {
-        transform: translateY(-20px) rotate(180deg);
+        transform: translateY(-30px) rotate(180deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
     }
 }
 
@@ -341,53 +441,52 @@ body {
 
 .decoration-element {
     position: absolute;
-    opacity: 0.1;
+    opacity: 0.15;
 }
 
 .chart-bars {
-    top: 20%;
-    right: 15%;
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    animation: fadeInOut 4s ease-in-out infinite;
+    display: none;
 }
 
 .chart-bars .bar {
-    width: 8px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    animation: barGrow 3s ease-in-out infinite;
+    display: none;
+}
+
+.chart-bars .bar:nth-child(1) {
+    display: none;
 }
 
 .chart-bars .bar:nth-child(2) {
-    animation-delay: 0.5s;
+    display: none;
 }
 
 .chart-bars .bar:nth-child(3) {
-    animation-delay: 1s;
+    display: none;
 }
 
 .chart-bars .bar:nth-child(4) {
-    animation-delay: 1.5s;
+    display: none;
 }
 
 .voting-box {
     bottom: 25%;
     left: 12%;
-    width: 50px;
-    height: 35px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    animation: pulse 5s ease-in-out infinite;
+    width: 60px;
+    height: 45px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    animation: pulse 5s ease-in-out infinite, float 7s ease-in-out infinite;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .ballot-slot {
-    width: 30px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.3);
-    margin: 8px auto;
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
+    margin: 12px auto;
     border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .data-points {
@@ -395,80 +494,82 @@ body {
     right: 25%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 12px;
     animation: twinkle 6s ease-in-out infinite;
 }
 
 .data-points .point {
-    width: 6px;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.4);
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 100%);
     border-radius: 50%;
     animation: pointPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.data-points .point:nth-child(1) {
+    animation-delay: 0s;
 }
 
 .data-points .point:nth-child(2) {
-    animation-delay: 0.4s;
+    animation-delay: 0.3s;
 }
 
 .data-points .point:nth-child(3) {
-    animation-delay: 0.8s;
+    animation-delay: 0.6s;
 }
 
 .data-points .point:nth-child(4) {
-    animation-delay: 1.2s;
+    animation-delay: 0.9s;
 }
 
 .data-points .point:nth-child(5) {
-    animation-delay: 1.6s;
+    animation-delay: 1.2s;
 }
 
 @keyframes barGrow {
     0%, 100% {
-        transform: scaleY(0.8);
+        transform: scaleY(0.7);
+        opacity: 0.6;
     }
     50% {
-        transform: scaleY(1.2);
+        transform: scaleY(1.3);
+        opacity: 1;
     }
 }
 
 @keyframes fadeInOut {
     0%, 100% {
-        opacity: 0.1;
+        opacity: 0.15;
+        transform: translateY(0);
     }
     50% {
-        opacity: 0.3;
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.1;
-    }
-    50% {
-        transform: scale(1.1);
-        opacity: 0.2;
+        opacity: 0.4;
+        transform: translateY(-5px);
     }
 }
 
 @keyframes twinkle {
     0%, 100% {
-        opacity: 0.1;
+        opacity: 0.15;
+        transform: scale(1);
     }
     50% {
-        opacity: 0.4;
+        opacity: 0.5;
+        transform: scale(1.1);
     }
 }
 
 @keyframes pointPulse {
     0%, 100% {
         transform: scale(1);
-        opacity: 0.4;
+        opacity: 0.5;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
     50% {
-        transform: scale(1.5);
-        opacity: 0.8;
+        transform: scale(1.4);
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
     }
 }
 
@@ -607,16 +708,16 @@ body {
 
 /* Featured States */
 .featured-states {
-    padding: 80px 0;
+    padding: 40px 0 20px;
     background: #f8fafc;
 }
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
     color: #1e293b;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .states-grid {
@@ -952,7 +1053,7 @@ body {
     .hero-decorations {
         display: none;
     }
-}/
+}
 * Additional Navigation Consistency Rules */
 .nav-link,
 .nav-link:hover,
