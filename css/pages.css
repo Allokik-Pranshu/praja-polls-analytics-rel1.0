@@ -1993,7 +1993,7 @@ Pradesh Specific Styles */
 }
 
 .party-badge.bjp {
-    background: linear-gradient(135deg, #ff6b35, #ea580c);
+    background: linear-gradient(135deg, #FF6B35, #ea580c);
     color: #ffffff;
     border: 2px solid #c2410c;
     font-weight: 600;
@@ -2029,30 +2029,30 @@ Pradesh Specific Styles */
 }
 
 .party-badge.jdu {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
+    background: linear-gradient(135deg, #16A34A, #15803d);
     color: #ffffff;
-    border: 2px solid #15803d;
+    border: 2px solid #14532d;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
+    box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
 }
 
 .party-badge.rjd {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #0EA5E9, #0284c7);
     color: #ffffff;
-    border: 2px solid #047857;
+    border: 2px solid #0369a1;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
 }
 
 .party-badge.ljp {
-    background: linear-gradient(135deg, #a855f7, #9333ea);
+    background: linear-gradient(135deg, #9333EA, #7e22ce);
     color: #ffffff;
-    border: 2px solid #7e22ce;
+    border: 2px solid #6b21a8;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(168, 85, 247, 0.2);
+    box-shadow: 0 2px 4px rgba(147, 51, 234, 0.2);
 }
 
 .party-badge.nda {
@@ -2082,9 +2082,8 @@ Pradesh Specific Styles */
     box-shadow: 0 2px 4px rgba(21, 128, 61, 0.2);
 }
 
-.party-badge.cpiml,
-.party-badge.cpim {
-    background: linear-gradient(135deg, #dc2626, #b91c1c);
+.party-badge.cpiml {
+    background: linear-gradient(135deg, #DC2626, #b91c1c);
     color: #ffffff;
     border: 2px solid #991b1b;
     font-weight: 600;
@@ -2092,34 +2091,135 @@ Pradesh Specific Styles */
     box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
 }
 
-.party-badge.inc {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+.party-badge.cpim {
+    background: linear-gradient(135deg, #14B8A6, #0d9488);
     color: #ffffff;
-    border: 2px solid #1d4ed8;
+    border: 2px solid #0f766e;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+}
+
+.party-badge.inc {
+    background: linear-gradient(135deg, #2563EB, #1d4ed8);
+    color: #ffffff;
+    border: 2px solid #1e40af;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
 }
 
 .party-badge.vip,
 .party-badge.vsip {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    background: linear-gradient(135deg, #7C3AED, #6d28d9);
     color: #ffffff;
-    border: 2px solid #6d28d9;
+    border: 2px solid #5b21b6;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
 }
 
-.party-badge.rlm,
-.party-badge.jjd,
 .party-badge.hams {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    background: linear-gradient(135deg, #F59E0B, #d97706);
     color: #ffffff;
     border: 2px solid #b45309;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+}
+
+.party-badge.rlm,
+.party-badge.jjd {
+    background: linear-gradient(135deg, #EC4899, #db2777);
+    color: #ffffff;
+    border: 2px solid #be185d;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(236, 72, 153, 0.2);
+}
+
+.party-badge.cpi {
+    background: linear-gradient(135deg, #EF4444, #dc2626);
+    color: #ffffff;
+    border: 2px solid #b91c1c;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+/* Alliance badges */
+.alliance-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.alliance-badge.nda {
+    background: linear-gradient(135deg, #ff6b35, #ea580c);
+    color: #ffffff;
+    border: 2px solid #c2410c;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.2);
+}
+
+.alliance-badge.mgb {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: 2px solid #047857;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+/* Alliance cell with merged rows and rotated text */
+.alliance-cell {
+    vertical-align: middle !important;
+    text-align: center !important;
+    padding: 20px 8px !important;
+    position: relative;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.alliance-nda {
+    background: linear-gradient(135deg, #ff6b35, #ea580c);
+    color: #ffffff;
+    border-left: 4px solid #c2410c !important;
+    border-right: 4px solid #c2410c !important;
+}
+
+.alliance-mgb {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border-left: 4px solid #047857 !important;
+    border-right: 4px solid #047857 !important;
+}
+
+.alliance-text-rotated {
+    display: inline-block;
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive alliance text */
+@media (max-width: 768px) {
+    .alliance-text-rotated {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+    
+    .alliance-cell {
+        padding: 15px 6px !important;
+    }
 }
 
 /* Difference indicators */
@@ -4554,25 +4654,111 @@ dern Sidebar Components */
         font-size: 16px;
     }
 }
-/* 
-Bihar Party Badges */
-.party-badge.jdu {
-    background: linear-gradient(135deg, #00a86b, #008f5a);
-    color: #ffffff;
-    border: 2px solid #007a4d;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(0, 168, 107, 0.2);
+/* Bihar Methodology Section */
+.methodology-section {
+    margin: 3rem 0;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 12px;
+    border-left: 5px solid #1e40af;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.party-badge.rjd {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: #ffffff;
-    border: 2px solid #047857;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+.methodology-section h3 {
+    color: #1e40af;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
+
+.methodology-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.methodology-english,
+.methodology-hindi {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.methodology-hindi h4 {
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.methodology-english ol,
+.methodology-hindi ol {
+    padding-left: 1.5rem;
+    margin: 0;
+}
+
+.methodology-english li,
+.methodology-hindi li {
+    margin-bottom: 1.2rem;
+    line-height: 1.8;
+    color: #334155;
+    font-size: 1rem;
+}
+
+.methodology-english li:last-child,
+.methodology-hindi li:last-child {
+    margin-bottom: 0;
+}
+
+.methodology-hindi {
+    font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+}
+
+/* Responsive Methodology */
+@media (max-width: 768px) {
+    .methodology-section {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .methodology-section h3 {
+        font-size: 1.4rem;
+    }
+    
+    .methodology-english,
+    .methodology-hindi {
+        padding: 1.5rem;
+    }
+    
+    .methodology-english li,
+    .methodology-hindi li {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .methodology-section {
+        padding: 1rem;
+    }
+    
+    .methodology-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .methodology-english,
+    .methodology-hindi {
+        padding: 1rem;
+    }
+    
+    .methodology-english li,
+    .methodology-hindi li {
+        font-size: 0.9rem;
+    }
+}
+
+/* Bihar Party Badges - Using colors from main definitions above */
 
 /* Bihar Summary Cards */
 .summary-card.jdu-card {
@@ -4592,13 +4778,49 @@ Bihar Party Badges */
     background: #ecfdf5;
 }
 
-/* Bihar Pie Chart Colors */
+/* Bihar Pie Chart Colors - Diverse and distinguishable */
+.pie-color.bjp-color {
+    background: #FF6B35;
+}
+
 .pie-color.jdu-color {
-    background: #00a86b;
+    background: #16A34A;
 }
 
 .pie-color.rjd-color {
-    background: #10b981;
+    background: #0EA5E9;
+}
+
+.pie-color.congress-color {
+    background: #2563EB;
+}
+
+.pie-color.ljp-color {
+    background: #9333EA;
+}
+
+.pie-color.hams-color {
+    background: #F59E0B;
+}
+
+.pie-color.rlm-color {
+    background: #EC4899;
+}
+
+.pie-color.cpiml-color {
+    background: #DC2626;
+}
+
+.pie-color.vip-color {
+    background: #7C3AED;
+}
+
+.pie-color.cpim-color {
+    background: #14B8A6;
+}
+
+.pie-color.cpi-color {
+    background: #EF4444;
 }
 
 /* Bihar Compact Table Styles */
@@ -4722,8 +4944,55 @@ Bihar Party Badges */
 .bihar-charts-grid .pie-chart-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+/* Make Bihar pie chart bigger and clearer */
+#bihar-predicted-pie {
+    min-height: 400px;
+}
+
+#bihar-predicted-pie canvas {
+    max-width: 280px;
+    max-height: 280px;
     width: 100%;
+    height: auto;
+}
+
+#bihar-predicted-pie .pie-legend {
+    width: 100%;
+    max-width: 300px;
+}
+
+#bihar-predicted-pie .pie-legend-item {
+    font-size: 0.95rem;
+    padding: 4px 0;
+}
+
+#bihar-predicted-pie .pie-legend-item span {
+    font-weight: 500;
+}
+
+/* Responsive adjustments for Bihar pie chart */
+@media (max-width: 768px) {
+    #bihar-predicted-pie canvas {
+        max-width: 220px;
+        max-height: 220px;
+    }
+    
+    #bihar-predicted-pie .pie-legend-item {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #bihar-predicted-pie canvas {
+        max-width: 180px;
+        max-height: 180px;
+    }
+    
+    #bihar-predicted-pie .pie-legend-item {
+        font-size: 0.8rem;
+    }
 }
 
 .bihar-map-section {

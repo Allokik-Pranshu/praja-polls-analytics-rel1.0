@@ -182,17 +182,35 @@ function initializeUPCharts() {
 }
 
 function initializeBiharCharts() {
-    // Bihar 2025 Predicted data
+    // Bihar 2025 Predicted data - All 11 parties
     const biharPredictedData = [
         { label: 'BJP', value: 125 },
         { label: 'JDU', value: 48 },
         { label: 'RJD', value: 52 },
-        { label: 'Congress', value: 18 },
-        { label: 'Others', value: 0 }
+        { label: 'INC', value: 18 },
+        { label: 'LJP(RV)', value: 5 },
+        { label: 'HAMS', value: 4 },
+        { label: 'RLM', value: 3 },
+        { label: 'CPI(ML)', value: 3 },
+        { label: 'VIP', value: 2 },
+        { label: 'CPI(M)', value: 2 },
+        { label: 'CPI', value: 1 }
     ];
 
-    // Colors for Bihar parties
-    const biharColors = ['#ff6b35', '#00a86b', '#10b981', '#3b82f6', '#8b5cf6'];
+    // Colors for Bihar parties - Diverse and distinguishable colors
+    const biharColors = [
+        '#FF6B35',  // BJP - Bright Orange
+        '#16A34A',  // JDU - Forest Green
+        '#0EA5E9',  // RJD - Sky Blue
+        '#2563EB',  // INC - Royal Blue
+        '#9333EA',  // LJP(RV) - Purple
+        '#F59E0B',  // HAMS - Amber
+        '#EC4899',  // RLM - Pink
+        '#DC2626',  // CPI(ML) - Red
+        '#7C3AED',  // VIP - Violet
+        '#14B8A6',  // CPI(M) - Teal
+        '#EF4444'   // CPI - Bright Red
+    ];
 
     // Draw Bihar predicted pie chart
     const biharPredictedCanvas = document.querySelector('#bihar-predicted-pie canvas');

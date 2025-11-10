@@ -40,6 +40,7 @@
                             <thead>
                                 <tr>
                                     <th>S.No.</th>
+                                    <th>Alliance</th>
                                     <th>Party Name</th>
                                     <th>Estimated Seats Prediction</th>
                                     <th>Estimated Plus Minus</th>
@@ -48,6 +49,7 @@
                             <tbody>
                                 <tr class="bjp-row">
                                     <td>1</td>
+                                    <td rowspan="5" class="alliance-cell alliance-nda"><span class="alliance-text-rotated">NDA</span></td>
                                     <td><span class="party-badge bjp">BJP</span></td>
                                     <td>125</td>
                                     <td>±8</td>
@@ -58,25 +60,63 @@
                                     <td>48</td>
                                     <td>±5</td>
                                 </tr>
-                                <tr class="rjd-row">
+                                <tr class="ljp-row">
                                     <td>3</td>
+                                    <td><span class="party-badge ljp">LJP(RV)</span></td>
+                                    <td>5</td>
+                                    <td>±2</td>
+                                </tr>
+                                <tr class="rlm-row">
+                                    <td>4</td>
+                                    <td><span class="party-badge rlm">RLM</span></td>
+                                    <td>3</td>
+                                    <td>±1</td>
+                                </tr>
+                                <tr class="hams-row">
+                                    <td>5</td>
+                                    <td><span class="party-badge hams">HAMS</span></td>
+                                    <td>4</td>
+                                    <td>±1</td>
+                                </tr>
+                                <tr class="rjd-row">
+                                    <td>6</td>
+                                    <td rowspan="6" class="alliance-cell alliance-mgb"><span class="alliance-text-rotated">MGB</span></td>
                                     <td><span class="party-badge rjd">RJD</span></td>
                                     <td>52</td>
                                     <td>±6</td>
                                 </tr>
                                 <tr class="congress-row">
-                                    <td>4</td>
-                                    <td><span class="party-badge congress">Congress</span></td>
+                                    <td>7</td>
+                                    <td><span class="party-badge inc">INC</span></td>
                                     <td>18</td>
                                     <td>±3</td>
                                 </tr>
-                                <tr class="others-row">
-                                    <td>5</td>
-                                    <td><span class="party-badge others">Others</span></td>
-                                    <td>0</td>
-                                    <td>±2</td>
+                                <tr class="vip-row">
+                                    <td>8</td>
+                                    <td><span class="party-badge vip">VIP</span></td>
+                                    <td>2</td>
+                                    <td>±1</td>
+                                </tr>
+                                <tr class="cpim-row">
+                                    <td>9</td>
+                                    <td><span class="party-badge cpim">CPI(M)</span></td>
+                                    <td>2</td>
+                                    <td>±1</td>
+                                </tr>
+                                <tr class="cpiml-row">
+                                    <td>10</td>
+                                    <td><span class="party-badge cpiml">CPI(ML)</span></td>
+                                    <td>3</td>
+                                    <td>±1</td>
+                                </tr>
+                                <tr class="cpi-row">
+                                    <td>11</td>
+                                    <td><span class="party-badge cpi">CPI</span></td>
+                                    <td>1</td>
+                                    <td>±1</td>
                                 </tr>
                                 <tr class="total-row">
+                                    <td><strong></strong></td>
                                     <td><strong></strong></td>
                                     <td><strong>Total</strong></td>
                                     <td><strong>243</strong></td>
@@ -93,27 +133,51 @@
                             <div class="pie-chart-section">
                                 <h4>Predicted Seat Distribution</h4>
                                 <div class="pie-chart" id="bihar-predicted-pie">
-                                    <canvas width="200" height="200"></canvas>
+                                    <canvas width="280" height="280"></canvas>
                                     <div class="pie-legend">
                                         <div class="pie-legend-item">
                                             <div class="pie-color bjp-color"></div>
-                                            <span>BJP (125 - 51%)</span>
+                                            <span>BJP (125 - 51.4%)</span>
                                         </div>
                                         <div class="pie-legend-item">
                                             <div class="pie-color jdu-color"></div>
-                                            <span>JDU (48 - 20%)</span>
+                                            <span>JDU (48 - 19.8%)</span>
                                         </div>
                                         <div class="pie-legend-item">
                                             <div class="pie-color rjd-color"></div>
-                                            <span>RJD (52 - 21%)</span>
+                                            <span>RJD (52 - 21.4%)</span>
                                         </div>
                                         <div class="pie-legend-item">
                                             <div class="pie-color congress-color"></div>
-                                            <span>Congress (18 - 7%)</span>
+                                            <span>INC (18 - 7.4%)</span>
                                         </div>
                                         <div class="pie-legend-item">
-                                            <div class="pie-color others-color"></div>
-                                            <span>Others (0 - 1%)</span>
+                                            <div class="pie-color ljp-color"></div>
+                                            <span>LJP(RV) (5 - 2.1%)</span>
+                                        </div>
+                                        <div class="pie-legend-item">
+                                            <div class="pie-color hams-color"></div>
+                                            <span>HAMS (4 - 1.6%)</span>
+                                        </div>
+                                        <div class="pie-legend-item">
+                                            <div class="pie-color rlm-color"></div>
+                                            <span>RLM (3 - 1.2%)</span>
+                                        </div>
+                                        <div class="pie-legend-item">
+                                            <div class="pie-color cpiml-color"></div>
+                                            <span>CPI(ML) (3 - 1.2%)</span>
+                                        </div>
+                                        <div class="pie-legend-item">
+                                            <div class="pie-color vip-color"></div>
+                                            <span>VIP (2 - 0.8%)</span>
+                                        </div>
+                                        <div class="pie-legend-item">
+                                            <div class="pie-color cpim-color"></div>
+                                            <span>CPI(M) (2 - 0.8%)</span>
+                                        </div>
+                                        <div class="pie-legend-item">
+                                            <div class="pie-color cpi-color"></div>
+                                            <span>CPI (1 - 0.4%)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -124,6 +188,31 @@
                                 <div class="bihar-map-container">
                                     <img src="../images/biharmap.jpeg" alt="Bihar Electoral Map" class="bihar-map-image">
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Methodology Section -->
+                    <div class="bihar-subsection methodology-section">
+                        <h3><i class="fas fa-microscope"></i> Methodology / कार्यप्रणाली</h3>
+                        
+                        <div class="methodology-content">
+                            <div class="methodology-english">
+                                <ol>
+                                    <li>The survey is based on field visit to constituencies and direct interaction with people.</li>
+                                    <li>The methodology adopted was both structured and unstructured questionnaire, participative and non-participative observation, random samples and selective samples and group discussions.</li>
+                                    <li>The largest group consisted of different age groups, different income groups, different social backgrounds (OC/BC/SC/ST and minorities), different occupations (Govt. and non-Govt.), male and female, students, agriculture & labour, businessmen, professionals, house wives, farmers and auto drivers etc.</li>
+                                    <li>This is a trend setting survey because predicting candidate wise winning margin is a difficult process and a bit technical. We could successfully do it in 2017 UP assembly Elections and 2024 A.P assembly elections and we were correct to a large extent in many constituencies. This needs lot of planning and collecting error free data which sometimes may go wrong also. I hope you understand the difficulties and will appreciate our effort and overlook shortcomings. Your suggestions are highly appreciated.</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="methodology-hindi">
+                                <ol>
+                                    <li>यह सर्वेक्षण क्षेत्रों (निर्वाचन क्षेत्रों) के फील्ड विजिट और लोगों से सीधे संवाद पर आधारित है।</li>
+                                    <li>अपनाई गई कार्यप्रणाली में संरचित एवं असंरचित प्रश्नावली, सहभागी एवं गैर-सहभागी अवलोकन, रैंडम सैंपल (यादृच्छिक नमूने) और चयनित नमूने तथा समूह चर्चा शामिल थे।</li>
+                                    <li>सर्वेक्षण में विभिन्न आयु वर्गों, आय वर्गों, सामाजिक पृष्ठभूमियों (OC/BC/SC/ST एवं अल्पसंख्यक), विभिन्न व्यवसायों (सरकारी एवं गैर-सरकारी), पुरुष एवं महिला, छात्र, कृषि एवं श्रमिक, व्यवसायी, पेशेवर, गृहिणी, किसान और ऑटो चालकों आदि को शामिल किया गया।</li>
+                                    <li>यह एक ट्रेंड सेटिंग सर्वेक्षण है क्योंकि प्रत्याशीवार जीत के अंतर की भविष्यवाणी करना एक कठिन और तकनीकी प्रक्रिया है। हमने इसे 2017 उत्तर प्रदेश विधानसभा चुनावों और 2024 आंध्र प्रदेश विधानसभा चुनावों में सफलतापूर्वक किया था और कई निर्वाचन क्षेत्रों में हमारे परिणाम काफी हद तक सही थे। यह प्रक्रिया काफी योजना और त्रुटिरहित डेटा संग्रह की मांग करती है, जो कभी-कभी गलत भी हो सकता है। हमें उम्मीद है कि आप इन कठिनाइयों को समझेंगे और हमारे प्रयासों की सराहना करेंगे तथा छोटी-मोटी कमियों को नज़रअंदाज़ करेंगे। आपके सुझावों का स्वागत है।</li>
+                                </ol>
                             </div>
                         </div>
                     </div>
