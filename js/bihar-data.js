@@ -10,14 +10,62 @@ function loadBiharConstituencyData() {
         // Check if biharConstituencyData is available
         if (typeof biharConstituencyData === 'undefined') {
             console.error('biharConstituencyData not found. Make sure bihar-constituency-data.js is loaded.');
-            const tbody = document.querySelector('.bihar-constituency-table .bihar-table tbody');
+            const tbody = document.querySelector('.bihar-constituency-table .constituency-table tbody');
             if (tbody) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">Error: Bihar constituency data not loaded</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 20px;">Error: Bihar constituency data not loaded</td></tr>';
             }
             return;
         }
 
-        allBiharConstituencyData = biharConstituencyData;
+        // Filter out the header row and process data with district grouping
+        const rawData = biharConstituencyData.filter(record => 
+            record.Sno !== "Sno" && record.Constituency && record.Constituency.trim() !== ""
+        );
+
+        // Process data to fill in missing district/sno values and track grouping
+        let currentSno = '';
+        let currentDistrict = '';
+        let districtGroups = {};
+        
+        allBiharConstituencyData = rawData.map((record, index) => {
+            // Update current district and sno if present
+            if (record.Sno && record.Sno.trim() !== '') {
+                currentSno = record.Sno.trim();
+            }
+            if (record.Distrinct && record.Distrinct.trim() !== '') {
+                currentDistrict = record.Distrinct.trim();
+                if (!districtGroups[currentDistrict]) {
+                    districtGroups[currentDistrict] = [];
+                }
+            }
+            
+            const processedRecord = {
+                sno: currentSno,
+                district: currentDistrict,
+                constituency: record.Constituency || '',
+                expectedWinningParty: record.WinningParty || '-',
+                expectedVotes: record.ExpectedWinningVotes || '-',
+                runnerUpParty: record.RunnerUpParty || '-',
+                runnerUpVotes: record.RunnerUpVotes || '-',
+                winningMargin: record.WinningMargin || '-',
+                errorMargin: record.ErrorMargin || '±5000',
+                isFirstInDistrict: record.Distrinct && record.Distrinct.trim() !== '',
+                originalIndex: index
+            };
+            
+            if (currentDistrict) {
+                districtGroups[currentDistrict].push(processedRecord);
+            }
+            
+            return processedRecord;
+        });
+
+        // Calculate rowspan for each district group
+        allBiharConstituencyData.forEach(record => {
+            if (record.isFirstInDistrict && districtGroups[record.district]) {
+                record.districtRowspan = districtGroups[record.district].length;
+            }
+        });
 
         // Create pagination controls at top
         createBiharTopPaginationControls();
@@ -30,55 +78,113 @@ function loadBiharConstituencyData() {
 
     } catch (error) {
         console.error('Error loading Bihar constituency data:', error);
-        const tbody = document.querySelector('.bihar-constituency-table .bihar-table tbody');
+        const tbody = document.querySelector('.bihar-constituency-table .constituency-table tbody');
         if (tbody) {
-            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">Error loading constituency data</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 20px;">Error loading constituency data</td></tr>';
         }
     }
 }
 
-// Function to create a Bihar constituency table row
+// Function to create a Bihar constituency table row with district grouping
 function createBiharConstituencyRow(record) {
     const row = document.createElement('tr');
 
-    // Format numbers compactly (in thousands with K suffix)
+    // Format numbers with commas
     const formatNumber = (num) => {
         if (!num || num === '-' || num === null || num === undefined) return '-';
         if (typeof num === 'string' && num.trim() === '') return '-';
         const numValue = parseInt(num);
-        if (numValue >= 1000) {
-            return (numValue / 1000).toFixed(0) + 'K';
-        }
-        return numValue.toString();
+        if (isNaN(numValue)) return '-';
+        return numValue.toLocaleString('en-IN');
     };
 
-    // Determine party badge class
+    // Format text to separate English and Hindi names
+    const formatBilingualText = (text) => {
+        if (!text || text === '-') return '-';
+        // Split by newline character
+        const parts = text.split('\n');
+        if (parts.length === 2) {
+            // English on first line, Hindi on second line
+            return `<div class="bilingual-text"><span class="english-text">${parts[0].trim()}</span><span class="hindi-text">${parts[1].trim()}</span></div>`;
+        }
+        return text;
+    };
+
+    // Determine party badge class and alliance
     const getPartyBadge = (party) => {
         const partyStr = party.toString().toLowerCase().trim();
         if (partyStr.includes('bjp')) return 'bjp';
         if (partyStr.includes('jdu') || partyStr.includes('jd(u)')) return 'jdu';
         if (partyStr.includes('rjd')) return 'rjd';
-        if (partyStr.includes('congress')) return 'congress';
+        if (partyStr.includes('congress') || partyStr.includes('inc')) return 'inc';
+        if (partyStr.includes('ljp')) return 'ljp';
+        if (partyStr.includes('nda')) return 'nda';
+        if (partyStr.includes('mgb')) return 'mgb';
+        if (partyStr.includes('aimim')) return 'aimim';
+        if (partyStr.includes('cpiml')) return 'cpiml';
+        if (partyStr.includes('cpim')) return 'cpim';
+        if (partyStr.includes('vip') || partyStr.includes('vsip')) return 'vip';
+        if (partyStr.includes('rlm')) return 'rlm';
+        if (partyStr.includes('jjd')) return 'jjd';
+        if (partyStr.includes('hams')) return 'hams';
         return 'others';
     };
 
-    row.innerHTML = `
-        <td>${record.sno}</td>
-        <td>${record.district}</td>
-        <td>${record.constituency}</td>
-        <td><span class="party-badge ${getPartyBadge(record.expectedWinningParty)}">${record.expectedWinningParty}</span></td>
-        <td>${formatNumber(record.expectedVotes)}</td>
-        <td>${formatNumber(record.winningMargin)}</td>
-        <td><span class="party-badge ${getPartyBadge(record.runnerUpParty)}">${record.runnerUpParty}</span></td>
-        <td>${formatNumber(record.runnerUpVotes)}</td>
+    // Determine alliance based on party
+    const getAlliance = (party) => {
+        const partyStr = party.toString().toLowerCase().trim();
+        if (partyStr.includes('bjp') || partyStr.includes('jdu') || partyStr.includes('jd(u)') || partyStr.includes('ljp') || partyStr.includes('nda')) {
+            return 'NDA';
+        }
+        if (partyStr.includes('rjd') || partyStr.includes('congress') || partyStr.includes('inc') || partyStr.includes('mgb') || partyStr.includes('cpiml') || partyStr.includes('cpim')) {
+            return 'MGB';
+        }
+        return '';
+    };
+
+    const winningParty = record.expectedWinningParty || '-';
+    const runnerUpParty = record.runnerUpParty || '-';
+    const winningAlliance = getAlliance(winningParty);
+    const runnerUpAlliance = getAlliance(runnerUpParty);
+
+    // Build row HTML with conditional rowspan for district grouping
+    let rowHTML = '';
+    
+    // Only show S.No. and District cells if this is the first row in the district group
+    if (record.isFirstInDistrict) {
+        rowHTML += `<td rowspan="${record.districtRowspan}" class="district-group-cell">${record.sno || '-'}</td>`;
+        rowHTML += `<td rowspan="${record.districtRowspan}" class="district-group-cell">${formatBilingualText(record.district)}</td>`;
+    }
+    
+    rowHTML += `
+        <td class="constituency-cell">${formatBilingualText(record.constituency)}</td>
+        <td class="party-cell">
+            <span class="party-badge ${getPartyBadge(winningParty)}">${winningParty}</span>
+            ${winningAlliance ? `<br><small style="color: #6b7280;">(${winningAlliance})</small>` : ''}
+        </td>
+        <td class="votes-cell">${formatNumber(record.expectedVotes)}</td>
+        <td class="party-cell">
+            <span class="party-badge ${getPartyBadge(runnerUpParty)}">${runnerUpParty}</span>
+            ${runnerUpAlliance ? `<br><small style="color: #6b7280;">(${runnerUpAlliance})</small>` : ''}
+        </td>
+        <td class="votes-cell">${formatNumber(record.runnerUpVotes)}</td>
+        <td class="votes-cell">${formatNumber(record.winningMargin)}</td>
+        <td class="error-cell">${record.errorMargin || '±5000'}</td>
     `;
+
+    row.innerHTML = rowHTML;
+    
+    // Add class to indicate if this is part of a district group
+    if (record.isFirstInDistrict) {
+        row.classList.add('district-group-start');
+    }
 
     return row;
 }
 
 // Function to load a specific page for Bihar data
 function loadBiharPage(pageNumber) {
-    const tbody = document.querySelector('.bihar-constituency-table .bihar-table tbody');
+    const tbody = document.querySelector('.bihar-constituency-table .constituency-table tbody');
     if (!tbody) return;
 
     // Clear existing content
@@ -88,12 +194,38 @@ function loadBiharPage(pageNumber) {
     const startIndex = (pageNumber - 1) * biharRecordsPerPage;
     const endIndex = Math.min(startIndex + biharRecordsPerPage, allBiharConstituencyData.length);
 
-    // Generate table rows for current page
-    for (let i = startIndex; i < endIndex; i++) {
-        const record = allBiharConstituencyData[i];
-        const row = createBiharConstituencyRow(record);
+    // Get records for current page
+    const pageRecords = allBiharConstituencyData.slice(startIndex, endIndex);
+
+    // Recalculate rowspan for this page only
+    // Track which districts appear on this page and count their rows
+    const districtCountsOnPage = {};
+    const districtFirstIndexOnPage = {};
+    
+    pageRecords.forEach((record, pageIndex) => {
+        const districtKey = record.district;
+        if (!districtCountsOnPage[districtKey]) {
+            districtCountsOnPage[districtKey] = 0;
+            districtFirstIndexOnPage[districtKey] = pageIndex;
+        }
+        districtCountsOnPage[districtKey]++;
+    });
+
+    // Generate table rows for current page with adjusted rowspan
+    pageRecords.forEach((record, pageIndex) => {
+        const districtKey = record.district;
+        const isFirstOnPage = districtFirstIndexOnPage[districtKey] === pageIndex;
+        
+        // Create a modified record for this page
+        const pageRecord = {
+            ...record,
+            isFirstInDistrict: isFirstOnPage,
+            districtRowspan: districtCountsOnPage[districtKey]
+        };
+        
+        const row = createBiharConstituencyRow(pageRecord);
         tbody.appendChild(row);
-    }
+    });
 
     biharCurrentPage = pageNumber;
     updateBiharPaginationControls();
