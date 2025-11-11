@@ -607,7 +607,7 @@ const biharConstituencyData = [
   },
   {
     "Sno": "",
-    "Distrinct": "",
+    "Distrinct": "PURNIA\nपूर्णिया",
     "Constituency": "56 - AMOUR\nअमौर",
     "WinningParty": "AIMIM",
     "ExpectedWinningVotes": "",
@@ -640,7 +640,7 @@ const biharConstituencyData = [
   },
   {
     "Sno": "9",
-    "Distrinct": "PURNIA\nपूर्णिया",
+    "Distrinct": "",
     "Constituency": "59 - BANMANKHI (SC)\nबनमनखी (अ.जा.)",
     "WinningParty": "BJP",
     "ExpectedWinningVotes": "",
@@ -849,7 +849,7 @@ const biharConstituencyData = [
   },
   {
     "Sno": "",
-    "Distrinct": "",
+    "Distrinct": "DARBHANGA\nदरभंगा",
     "Constituency": "78 - KUSHESHWAR ASTHAN (SC)\nकुशेश्वर स्थान(अ.जा.)",
     "WinningParty": "JDU",
     "ExpectedWinningVotes": "",
@@ -860,7 +860,7 @@ const biharConstituencyData = [
   },
   {
     "Sno": "13",
-    "Distrinct": "DARBHANGA\nदरभंगा",
+    "Distrinct": "",
     "Constituency": "79 - GAURA BAURAM\nगौरा बौराम",
     "WinningParty": "VIP",
     "ExpectedWinningVotes": "",
