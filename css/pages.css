@@ -2199,6 +2199,40 @@ Pradesh Specific Styles */
     border-right: 4px solid #047857 !important;
 }
 
+/* Alliance Total Seats Column */
+.alliance-total-cell {
+    vertical-align: middle !important;
+    text-align: center !important;
+    padding: 20px 15px !important;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.alliance-nda-total {
+    background: linear-gradient(135deg, #fff7ed, #ffedd5);
+    color: #c2410c;
+    border-left: 3px solid #ff6b35 !important;
+    border-right: 3px solid #ff6b35 !important;
+}
+
+.alliance-mgb-total {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    color: #047857;
+    border-left: 3px solid #10b981 !important;
+    border-right: 3px solid #10b981 !important;
+}
+
+/* No Alliance Cells */
+.no-alliance-cell,
+.no-alliance-total {
+    background: #f8fafc;
+    color: #94a3b8;
+    font-weight: 500;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
 .alliance-text-rotated {
     display: inline-block;
     transform: rotate(-90deg);
@@ -2219,6 +2253,18 @@ Pradesh Specific Styles */
     
     .alliance-cell {
         padding: 15px 6px !important;
+    }
+    
+    .alliance-total-cell {
+        font-size: 20px;
+        padding: 15px 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .alliance-total-cell {
+        font-size: 18px;
+        padding: 12px 8px !important;
     }
 }
 
@@ -4821,6 +4867,14 @@ dern Sidebar Components */
 
 .pie-color.cpi-color {
     background: #EF4444;
+}
+
+.pie-color.aimim-color {
+    background: #15803d;
+}
+
+.pie-color.others-color {
+    background: #8b5cf6;
 }
 
 /* Bihar Compact Table Styles */

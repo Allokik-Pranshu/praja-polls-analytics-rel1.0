@@ -182,7 +182,7 @@ function initializeUPCharts() {
 }
 
 function initializeBiharCharts() {
-    // Bihar 2025 Predicted data - All 11 parties
+    // Bihar 2025 Predicted data - All 13 parties
     const biharPredictedData = [
         { label: 'BJP', value: 125 },
         { label: 'JDU', value: 48 },
@@ -194,7 +194,9 @@ function initializeBiharCharts() {
         { label: 'CPI(ML)', value: 3 },
         { label: 'VIP', value: 2 },
         { label: 'CPI(M)', value: 2 },
-        { label: 'CPI', value: 1 }
+        { label: 'CPI', value: 1 },
+        { label: 'AIMIM', value: 5 },
+        { label: 'Others', value: 0 }
     ];
 
     // Colors for Bihar parties - Diverse and distinguishable colors
@@ -209,7 +211,9 @@ function initializeBiharCharts() {
         '#DC2626',  // CPI(ML) - Red
         '#7C3AED',  // VIP - Violet
         '#14B8A6',  // CPI(M) - Teal
-        '#EF4444'   // CPI - Bright Red
+        '#EF4444',  // CPI - Bright Red
+        '#15803d',  // AIMIM - Dark Green
+        '#8b5cf6'   // Others - Purple
     ];
 
     // Draw Bihar predicted pie chart
