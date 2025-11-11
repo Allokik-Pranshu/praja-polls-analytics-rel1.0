@@ -5335,6 +5335,42 @@ dern Sidebar Components */
     transform: translateY(-2px);
 }
 
+/* Live News Bulletin */
+.news-bulletin-live {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f97316 100%);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    }
+    50% {
+        box-shadow: 0 6px 30px rgba(220, 38, 38, 0.6);
+    }
+}
+
+.bulletin-icon-live {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.live-indicator {
+    animation: blink 1.5s ease-in-out infinite;
+    font-size: 10px;
+    color: #ffffff;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
 .bulletin-link {
     text-decoration: none;
     display: block;
