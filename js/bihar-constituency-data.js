@@ -1949,7 +1949,7 @@ const biharConstituencyData = [
   },
   {
     "Sno": "",
-    "Distrinct": "",
+    "Distrinct": "PATNA\nपटना",
     "Constituency": "178 - MOKAMA\nमोकामा",
     "WinningParty": "RJD",
     "ExpectedWinningVotes": "",
@@ -1960,7 +1960,7 @@ const biharConstituencyData = [
   },
   {
     "Sno": "28",
-    "Distrinct": "PATNA\nपटना",
+    "Distrinct": "",
     "Constituency": "179 - BARH\nबाढ",
     "WinningParty": "BJP",
     "ExpectedWinningVotes": "",
