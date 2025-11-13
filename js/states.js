@@ -147,8 +147,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Load UP constituency data if on UP page
     if (document.body.dataset.currentState === 'uttar-pradesh') {
-        // Wait a bit for the up-data.js to load, then load constituency data
-        setTimeout(loadUPConstituencyData, 100);
+        // Wait for the up-data.js to load with retry mechanism
+        let retryCount = 0;
+        const maxRetries = 5;
+        
+        function tryLoadUPData() {
+            if (typeof upConstituencyData !== 'undefined') {
+                loadUPConstituencyData();
+            } else if (retryCount < maxRetries) {
+                retryCount++;
+                console.log(`Waiting for UP data... Retry ${retryCount}/${maxRetries}`);
+                setTimeout(tryLoadUPData, 200);
+            } else {
+                console.error('Failed to load UP data after multiple retries');
+                loadUPConstituencyData(); // This will show the error message
+            }
+        }
+        
+        setTimeout(tryLoadUPData, 100);
     }
 });
 
@@ -167,6 +183,10 @@ function loadUPConstituencyData() {
         // Check if upConstituencyData is available (loaded from up-data.js)
         if (typeof upConstituencyData === 'undefined') {
             console.error('upConstituencyData not found. Make sure up-data.js is loaded.');
+            const tbody = document.querySelector('.constituency-table tbody');
+            if (tbody) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px; color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Error: UP constituency data not loaded. Please refresh the page.</td></tr>';
+            }
             return;
         }
 
