@@ -1994,6 +1994,65 @@ Video Section Styles */
     transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Featured Video Badge */
+.featured-video {
+    border: 3px solid #dc2626;
+    position: relative;
+}
+
+.featured-video::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+    z-index: 2;
+    animation: featuredPulse 2s ease-in-out infinite;
+}
+
+.featured-badge i {
+    margin-right: 4px;
+    animation: starSpin 3s linear infinite;
+}
+
+@keyframes featuredPulse {
+    0%, 100% {
+        box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+    }
+    50% {
+        box-shadow: 0 6px 20px rgba(220, 38, 38, 0.7);
+    }
+}
+
+@keyframes starSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .video-duration {
     position: absolute;
     bottom: 10px;
