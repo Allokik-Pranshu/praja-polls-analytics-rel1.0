@@ -149,22 +149,27 @@ document.addEventListener('DOMContentLoaded', function () {
     if (document.body.dataset.currentState === 'uttar-pradesh') {
         // Wait for the up-data.js to load with retry mechanism
         let retryCount = 0;
-        const maxRetries = 5;
+        const maxRetries = 10;
         
         function tryLoadUPData() {
-            if (typeof upConstituencyData !== 'undefined') {
+            if (typeof upConstituencyData !== 'undefined' && upConstituencyData.length > 0) {
+                console.log('UP data loaded successfully, rendering table...');
                 loadUPConstituencyData();
             } else if (retryCount < maxRetries) {
                 retryCount++;
                 console.log(`Waiting for UP data... Retry ${retryCount}/${maxRetries}`);
-                setTimeout(tryLoadUPData, 200);
+                setTimeout(tryLoadUPData, 150);
             } else {
                 console.error('Failed to load UP data after multiple retries');
-                loadUPConstituencyData(); // This will show the error message
+                const tbody = document.querySelector('.constituency-table tbody');
+                if (tbody) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px; color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Error: Failed to load constituency data. Please refresh the page.</td></tr>';
+                }
             }
         }
         
-        setTimeout(tryLoadUPData, 100);
+        // Start trying immediately
+        tryLoadUPData();
     }
 });
 
@@ -175,14 +180,16 @@ document.addEventListener('DOMContentLoaded', function () {
 let currentPage = 1;
 let recordsPerPage = 25;
 let allConstituencyData = [];
+let filteredConstituencyData = []; // For search results
 
 // Function to load UP constituency data with pagination
 function loadUPConstituencyData() {
-
+    console.log('loadUPConstituencyData called');
+    
     try {
         // Check if upConstituencyData is available (loaded from up-data.js)
-        if (typeof upConstituencyData === 'undefined') {
-            console.error('upConstituencyData not found. Make sure up-data.js is loaded.');
+        if (typeof upConstituencyData === 'undefined' || !upConstituencyData || upConstituencyData.length === 0) {
+            console.error('upConstituencyData not found or empty. Make sure up-data.js is loaded.');
             const tbody = document.querySelector('.constituency-table tbody');
             if (tbody) {
                 tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px; color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Error: UP constituency data not loaded. Please refresh the page.</td></tr>';
@@ -190,13 +197,14 @@ function loadUPConstituencyData() {
             return;
         }
 
+        console.log(`Loading ${upConstituencyData.length} constituency records`);
         allConstituencyData = upConstituencyData;
-
+        filteredConstituencyData = upConstituencyData; // Initialize filtered data
 
         // Create pagination controls at top
         createTopPaginationControls();
 
-        // Load first page
+        // Load first page - this will clear the loading message
         loadPage(1);
 
         // Create pagination controls at bottom
@@ -204,38 +212,83 @@ function loadUPConstituencyData() {
 
         // Update statistics
         updateConstituencyStats(allConstituencyData);
+        
+        console.log('UP constituency data loaded successfully');
 
     } catch (error) {
         console.error('Error loading UP constituency data:', error);
         // Fallback: show error message
         const tbody = document.querySelector('.constituency-table tbody');
         if (tbody) {
-            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px;">Error loading constituency data</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px; color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Error loading constituency data. Please try refreshing the page.</td></tr>';
         }
     }
+}
+
+// Function to filter UP constituencies based on search query
+function filterUPConstituencies(searchQuery) {
+    const query = searchQuery.toLowerCase().trim();
+    
+    if (!query) {
+        // If search is empty, show all data
+        filteredConstituencyData = allConstituencyData;
+    } else {
+        // Filter data based on search query
+        filteredConstituencyData = allConstituencyData.filter(record => {
+            return (
+                (record.state && record.state.toLowerCase().includes(query)) ||
+                (record.constituency && record.constituency.toLowerCase().includes(query)) ||
+                (record.party && record.party.toLowerCase().includes(query))
+            );
+        });
+    }
+    
+    // Reset to first page and reload
+    currentPage = 1;
+    loadPage(1);
 }
 
 // Function to load a specific page
 function loadPage(pageNumber) {
     const tbody = document.querySelector('.constituency-table tbody');
-    if (!tbody) return;
+    if (!tbody) {
+        console.error('Table tbody not found');
+        return;
+    }
 
-    // Clear existing content
+    // Clear existing content (including loading message)
     tbody.innerHTML = '';
+
+    // Use filtered data instead of all data
+    const dataToDisplay = filteredConstituencyData || allConstituencyData;
+
+    // Validate data
+    if (!dataToDisplay || dataToDisplay.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px; color: #dc2626;">No constituency data found</td></tr>';
+        return;
+    }
 
     // Calculate start and end indices
     const startIndex = (pageNumber - 1) * recordsPerPage;
-    const endIndex = Math.min(startIndex + recordsPerPage, allConstituencyData.length);
+    const endIndex = Math.min(startIndex + recordsPerPage, dataToDisplay.length);
+
+    console.log(`Loading page ${pageNumber}: records ${startIndex + 1} to ${endIndex}`);
 
     // Generate table rows for current page
     for (let i = startIndex; i < endIndex; i++) {
-        const record = allConstituencyData[i];
+        const record = dataToDisplay[i];
         const row = createConstituencyRow(record, i + 1);
         tbody.appendChild(row);
     }
 
     currentPage = pageNumber;
     updatePaginationControls();
+    
+    // Scroll to top of table
+    const tableContainer = document.querySelector('.constituency-data-table');
+    if (tableContainer && pageNumber > 1) {
+        tableContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 // Function to create top pagination controls
@@ -263,10 +316,48 @@ function createTopPaginationControls() {
         border: 1px solid #e2e8f0;
     `;
 
-    // Left side - Records per page selector
+    // Left side - Search and Records per page selector
     const leftControls = document.createElement('div');
-    leftControls.style.cssText = 'display: flex; align-items: center; gap: 10px;';
+    leftControls.style.cssText = 'display: flex; align-items: center; gap: 15px; flex-wrap: wrap;';
 
+    // Search box
+    const searchContainer = document.createElement('div');
+    searchContainer.style.cssText = 'display: flex; align-items: center; gap: 8px;';
+    
+    const searchIcon = document.createElement('i');
+    searchIcon.className = 'fas fa-search';
+    searchIcon.style.cssText = 'color: #6b7280;';
+    
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search district, constituency, party...';
+    searchInput.className = 'constituency-search-input';
+    searchInput.style.cssText = `
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        width: 280px;
+        outline: none;
+        transition: border-color 0.2s;
+    `;
+    searchInput.addEventListener('focus', () => {
+        searchInput.style.borderColor = '#3b82f6';
+    });
+    searchInput.addEventListener('blur', () => {
+        searchInput.style.borderColor = '#d1d5db';
+    });
+    searchInput.addEventListener('input', (e) => {
+        filterUPConstituencies(e.target.value);
+    });
+    
+    searchContainer.appendChild(searchIcon);
+    searchContainer.appendChild(searchInput);
+
+    // Records per page selector
+    const recordsContainer = document.createElement('div');
+    recordsContainer.style.cssText = 'display: flex; align-items: center; gap: 10px;';
+    
     const recordsLabel = document.createElement('span');
     recordsLabel.textContent = 'Show:';
     recordsLabel.style.cssText = 'font-weight: 500; color: #374151;';
@@ -290,9 +381,12 @@ function createTopPaginationControls() {
     recordsPerPageLabel.textContent = 'records per page';
     recordsPerPageLabel.style.cssText = 'color: #6b7280;';
 
-    leftControls.appendChild(recordsLabel);
-    leftControls.appendChild(recordsSelect);
-    leftControls.appendChild(recordsPerPageLabel);
+    recordsContainer.appendChild(recordsLabel);
+    recordsContainer.appendChild(recordsSelect);
+    recordsContainer.appendChild(recordsPerPageLabel);
+
+    leftControls.appendChild(searchContainer);
+    leftControls.appendChild(recordsContainer);
 
     // Right side - Page navigation
     const rightControls = document.createElement('div');
@@ -340,7 +434,8 @@ function createBottomPaginationControls() {
 
 // Function to update pagination controls
 function updatePaginationControls() {
-    const totalPages = Math.ceil(allConstituencyData.length / recordsPerPage);
+    const dataToDisplay = filteredConstituencyData || allConstituencyData;
+    const totalPages = Math.ceil(dataToDisplay.length / recordsPerPage);
 
     // Update both top and bottom navigation
     const pageNavigations = document.querySelectorAll('.page-navigation');
@@ -410,8 +505,8 @@ function updatePaginationControls() {
         const pageInfo = document.createElement('span');
         pageInfo.className = 'page-info';
         const startRecord = (currentPage - 1) * recordsPerPage + 1;
-        const endRecord = Math.min(currentPage * recordsPerPage, allConstituencyData.length);
-        pageInfo.textContent = `${startRecord}-${endRecord} of ${allConstituencyData.length}`;
+        const endRecord = Math.min(currentPage * recordsPerPage, dataToDisplay.length);
+        pageInfo.textContent = `${startRecord}-${endRecord} of ${dataToDisplay.length}`;
 
         nav.appendChild(prevBtn);
         nav.appendChild(pageNumbers);

@@ -3,6 +3,7 @@
 let biharCurrentPage = 1;
 let biharRecordsPerPage = 25;
 let allBiharConstituencyData = [];
+let filteredBiharConstituencyData = []; // For search results
 
 // Function to load Bihar constituency data with pagination
 function loadBiharConstituencyData() {
@@ -66,6 +67,9 @@ function loadBiharConstituencyData() {
                 record.districtRowspan = districtGroups[record.district].length;
             }
         });
+
+        // Initialize filtered data
+        filteredBiharConstituencyData = allBiharConstituencyData;
 
         // Create pagination controls at top
         createBiharTopPaginationControls();
@@ -182,6 +186,30 @@ function createBiharConstituencyRow(record) {
     return row;
 }
 
+// Function to filter Bihar constituencies based on search query
+function filterBiharConstituencies(searchQuery) {
+    const query = searchQuery.toLowerCase().trim();
+    
+    if (!query) {
+        // If search is empty, show all data
+        filteredBiharConstituencyData = allBiharConstituencyData;
+    } else {
+        // Filter data based on search query
+        filteredBiharConstituencyData = allBiharConstituencyData.filter(record => {
+            return (
+                (record.district && record.district.toLowerCase().includes(query)) ||
+                (record.constituency && record.constituency.toLowerCase().includes(query)) ||
+                (record.expectedWinningParty && record.expectedWinningParty.toLowerCase().includes(query)) ||
+                (record.runnerUpParty && record.runnerUpParty.toLowerCase().includes(query))
+            );
+        });
+    }
+    
+    // Reset to first page and reload
+    biharCurrentPage = 1;
+    loadBiharPage(1);
+}
+
 // Function to load a specific page for Bihar data
 function loadBiharPage(pageNumber) {
     const tbody = document.querySelector('.bihar-constituency-table .constituency-table tbody');
@@ -190,12 +218,21 @@ function loadBiharPage(pageNumber) {
     // Clear existing content
     tbody.innerHTML = '';
 
+    // Use filtered data instead of all data
+    const dataToDisplay = filteredBiharConstituencyData || allBiharConstituencyData;
+
+    // Validate data
+    if (!dataToDisplay || dataToDisplay.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 20px; color: #dc2626;">No constituency data found</td></tr>';
+        return;
+    }
+
     // Calculate start and end indices
     const startIndex = (pageNumber - 1) * biharRecordsPerPage;
-    const endIndex = Math.min(startIndex + biharRecordsPerPage, allBiharConstituencyData.length);
+    const endIndex = Math.min(startIndex + biharRecordsPerPage, dataToDisplay.length);
 
     // Get records for current page
-    const pageRecords = allBiharConstituencyData.slice(startIndex, endIndex);
+    const pageRecords = dataToDisplay.slice(startIndex, endIndex);
 
     // Recalculate rowspan for this page only
     // Track which districts appear on this page and count their rows
@@ -256,10 +293,48 @@ function createBiharTopPaginationControls() {
         border: 1px solid #e2e8f0;
     `;
 
-    // Left side - Records per page selector
+    // Left side - Search and Records per page selector
     const leftControls = document.createElement('div');
-    leftControls.style.cssText = 'display: flex; align-items: center; gap: 10px;';
+    leftControls.style.cssText = 'display: flex; align-items: center; gap: 15px; flex-wrap: wrap;';
 
+    // Search box
+    const searchContainer = document.createElement('div');
+    searchContainer.style.cssText = 'display: flex; align-items: center; gap: 8px;';
+    
+    const searchIcon = document.createElement('i');
+    searchIcon.className = 'fas fa-search';
+    searchIcon.style.cssText = 'color: #6b7280;';
+    
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search district, constituency, party...';
+    searchInput.className = 'bihar-constituency-search-input';
+    searchInput.style.cssText = `
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        width: 280px;
+        outline: none;
+        transition: border-color 0.2s;
+    `;
+    searchInput.addEventListener('focus', () => {
+        searchInput.style.borderColor = '#3b82f6';
+    });
+    searchInput.addEventListener('blur', () => {
+        searchInput.style.borderColor = '#d1d5db';
+    });
+    searchInput.addEventListener('input', (e) => {
+        filterBiharConstituencies(e.target.value);
+    });
+    
+    searchContainer.appendChild(searchIcon);
+    searchContainer.appendChild(searchInput);
+
+    // Records per page selector
+    const recordsContainer = document.createElement('div');
+    recordsContainer.style.cssText = 'display: flex; align-items: center; gap: 10px;';
+    
     const recordsLabel = document.createElement('span');
     recordsLabel.textContent = 'Show:';
     recordsLabel.style.cssText = 'font-weight: 500; color: #374151;';
@@ -283,9 +358,12 @@ function createBiharTopPaginationControls() {
     recordsPerPageLabel.textContent = 'records per page';
     recordsPerPageLabel.style.cssText = 'color: #6b7280;';
 
-    leftControls.appendChild(recordsLabel);
-    leftControls.appendChild(recordsSelect);
-    leftControls.appendChild(recordsPerPageLabel);
+    recordsContainer.appendChild(recordsLabel);
+    recordsContainer.appendChild(recordsSelect);
+    recordsContainer.appendChild(recordsPerPageLabel);
+
+    leftControls.appendChild(searchContainer);
+    leftControls.appendChild(recordsContainer);
 
     // Right side - Page navigation
     const rightControls = document.createElement('div');
@@ -333,7 +411,8 @@ function createBiharBottomPaginationControls() {
 
 // Function to update pagination controls for Bihar
 function updateBiharPaginationControls() {
-    const totalPages = Math.ceil(allBiharConstituencyData.length / biharRecordsPerPage);
+    const dataToDisplay = filteredBiharConstituencyData || allBiharConstituencyData;
+    const totalPages = Math.ceil(dataToDisplay.length / biharRecordsPerPage);
 
     // Update both top and bottom navigation
     const pageNavigations = document.querySelectorAll('.bihar-page-navigation');
@@ -403,8 +482,8 @@ function updateBiharPaginationControls() {
         const pageInfo = document.createElement('span');
         pageInfo.className = 'page-info';
         const startRecord = (biharCurrentPage - 1) * biharRecordsPerPage + 1;
-        const endRecord = Math.min(biharCurrentPage * biharRecordsPerPage, allBiharConstituencyData.length);
-        pageInfo.textContent = `${startRecord}-${endRecord} of ${allBiharConstituencyData.length}`;
+        const endRecord = Math.min(biharCurrentPage * biharRecordsPerPage, dataToDisplay.length);
+        pageInfo.textContent = `${startRecord}-${endRecord} of ${dataToDisplay.length}`;
 
         nav.appendChild(prevBtn);
         nav.appendChild(pageNumbers);

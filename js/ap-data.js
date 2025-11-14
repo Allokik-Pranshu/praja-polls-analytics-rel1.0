@@ -5,6 +5,7 @@
 let apCurrentPage = 1;
 let apRecordsPerPage = 25;
 let allAPConstituencyData = [];
+let filteredAPConstituencyData = []; // For search results
 
 // Function to load AP constituency data with pagination
 function loadAPConstituencyData() {
@@ -25,6 +26,8 @@ function loadAPConstituencyData() {
         // Skip the first row as it contains headers
         allAPConstituencyData = apConstituencyData.slice(1);
 
+        // Initialize filtered data
+        filteredAPConstituencyData = allAPConstituencyData;
 
         // Create pagination controls at top
         createAPTopPaginationControls();
@@ -111,6 +114,30 @@ function createAPConstituencyRow(record, serialNo) {
     return row;
 }
 
+// Function to filter AP constituencies based on search query
+function filterAPConstituencies(searchQuery) {
+    const query = searchQuery.toLowerCase().trim();
+    
+    if (!query) {
+        // If search is empty, show all data
+        filteredAPConstituencyData = allAPConstituencyData;
+    } else {
+        // Filter data based on search query
+        filteredAPConstituencyData = allAPConstituencyData.filter(record => {
+            return (
+                (record.Column3 && record.Column3.toLowerCase().includes(query)) ||
+                (record.Column26 && record.Column26.toLowerCase().includes(query)) ||
+                (record.Column27 && record.Column27.toLowerCase().includes(query)) ||
+                (record.Column28 && record.Column28.toLowerCase().includes(query))
+            );
+        });
+    }
+    
+    // Reset to first page and reload
+    apCurrentPage = 1;
+    loadAPPage(1);
+}
+
 // Function to load a specific page for AP data
 function loadAPPage(pageNumber) {
     const tbody = document.querySelector('.ap-constituency-table .constituency-table tbody');
@@ -119,13 +146,22 @@ function loadAPPage(pageNumber) {
     // Clear existing content
     tbody.innerHTML = '';
 
+    // Use filtered data instead of all data
+    const dataToDisplay = filteredAPConstituencyData || allAPConstituencyData;
+
+    // Validate data
+    if (!dataToDisplay || dataToDisplay.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="21" style="text-align: center; padding: 20px; color: #dc2626;">No constituency data found</td></tr>';
+        return;
+    }
+
     // Calculate start and end indices
     const startIndex = (pageNumber - 1) * apRecordsPerPage;
-    const endIndex = Math.min(startIndex + apRecordsPerPage, allAPConstituencyData.length);
+    const endIndex = Math.min(startIndex + apRecordsPerPage, dataToDisplay.length);
 
     // Generate table rows for current page
     for (let i = startIndex; i < endIndex; i++) {
-        const record = allAPConstituencyData[i];
+        const record = dataToDisplay[i];
         const row = createAPConstituencyRow(record, i + 1);
         tbody.appendChild(row);
     }
@@ -159,10 +195,48 @@ function createAPTopPaginationControls() {
         border: 1px solid #e2e8f0;
     `;
 
-    // Left side - Records per page selector
+    // Left side - Search and Records per page selector
     const leftControls = document.createElement('div');
-    leftControls.style.cssText = 'display: flex; align-items: center; gap: 10px;';
+    leftControls.style.cssText = 'display: flex; align-items: center; gap: 15px; flex-wrap: wrap;';
 
+    // Search box
+    const searchContainer = document.createElement('div');
+    searchContainer.style.cssText = 'display: flex; align-items: center; gap: 8px;';
+    
+    const searchIcon = document.createElement('i');
+    searchIcon.className = 'fas fa-search';
+    searchIcon.style.cssText = 'color: #6b7280;';
+    
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search constituency, party...';
+    searchInput.className = 'ap-constituency-search-input';
+    searchInput.style.cssText = `
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        width: 280px;
+        outline: none;
+        transition: border-color 0.2s;
+    `;
+    searchInput.addEventListener('focus', () => {
+        searchInput.style.borderColor = '#3b82f6';
+    });
+    searchInput.addEventListener('blur', () => {
+        searchInput.style.borderColor = '#d1d5db';
+    });
+    searchInput.addEventListener('input', (e) => {
+        filterAPConstituencies(e.target.value);
+    });
+    
+    searchContainer.appendChild(searchIcon);
+    searchContainer.appendChild(searchInput);
+
+    // Records per page selector
+    const recordsContainer = document.createElement('div');
+    recordsContainer.style.cssText = 'display: flex; align-items: center; gap: 10px;';
+    
     const recordsLabel = document.createElement('span');
     recordsLabel.textContent = 'Show:';
     recordsLabel.style.cssText = 'font-weight: 500; color: #374151;';
@@ -186,9 +260,12 @@ function createAPTopPaginationControls() {
     recordsPerPageLabel.textContent = 'records per page';
     recordsPerPageLabel.style.cssText = 'color: #6b7280;';
 
-    leftControls.appendChild(recordsLabel);
-    leftControls.appendChild(recordsSelect);
-    leftControls.appendChild(recordsPerPageLabel);
+    recordsContainer.appendChild(recordsLabel);
+    recordsContainer.appendChild(recordsSelect);
+    recordsContainer.appendChild(recordsPerPageLabel);
+
+    leftControls.appendChild(searchContainer);
+    leftControls.appendChild(recordsContainer);
 
     // Right side - Page navigation
     const rightControls = document.createElement('div');
@@ -236,7 +313,8 @@ function createAPBottomPaginationControls() {
 
 // Function to update pagination controls for AP
 function updateAPPaginationControls() {
-    const totalPages = Math.ceil(allAPConstituencyData.length / apRecordsPerPage);
+    const dataToDisplay = filteredAPConstituencyData || allAPConstituencyData;
+    const totalPages = Math.ceil(dataToDisplay.length / apRecordsPerPage);
 
     // Update both top and bottom navigation
     const pageNavigations = document.querySelectorAll('.ap-page-navigation');
@@ -306,8 +384,8 @@ function updateAPPaginationControls() {
         const pageInfo = document.createElement('span');
         pageInfo.className = 'page-info';
         const startRecord = (apCurrentPage - 1) * apRecordsPerPage + 1;
-        const endRecord = Math.min(apCurrentPage * apRecordsPerPage, allAPConstituencyData.length);
-        pageInfo.textContent = `${startRecord}-${endRecord} of ${allAPConstituencyData.length}`;
+        const endRecord = Math.min(apCurrentPage * apRecordsPerPage, dataToDisplay.length);
+        pageInfo.textContent = `${startRecord}-${endRecord} of ${dataToDisplay.length}`;
 
         nav.appendChild(prevBtn);
         nav.appendChild(pageNumbers);
